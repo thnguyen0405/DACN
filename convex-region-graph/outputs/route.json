@@ -1,0 +1,29 @@
+{
+  "start_region": "C0",
+  "goal_region": "C6",
+  "sequence": [
+    "C0",
+    "C1",
+    "C3",
+    "C6"
+  ],
+  "edges": [
+    {
+      "source": "C0",
+      "target": "C1",
+      "weight": 0.12
+    },
+    {
+      "source": "C1",
+      "target": "C3",
+      "weight": 0.14
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "weight": 0.11
+    }
+  ],
+  "total_cost": 0.37,
+  "valid": true
+}

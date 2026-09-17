@@ -1,0 +1,469 @@
+{
+  "directed": true,
+  "vertices": [
+    {
+      "id": "C0",
+      "centroid": [
+        1.76190476,
+        5.57142857
+      ],
+      "polygon": [
+        [
+          0.0,
+          4.0
+        ],
+        [
+          3.0,
+          4.0
+        ],
+        [
+          4.0,
+          7.0
+        ],
+        [
+          0.0,
+          7.0
+        ]
+      ]
+    },
+    {
+      "id": "C1",
+      "centroid": [
+        5.74074074,
+        5.44444444
+      ],
+      "polygon": [
+        [
+          3.0,
+          4.0
+        ],
+        [
+          8.0,
+          4.0
+        ],
+        [
+          8.0,
+          7.0
+        ],
+        [
+          4.0,
+          7.0
+        ]
+      ]
+    },
+    {
+      "id": "C2",
+      "centroid": [
+        1.37878788,
+        3.03030303
+      ],
+      "polygon": [
+        [
+          0.0,
+          2.0
+        ],
+        [
+          2.5,
+          2.0
+        ],
+        [
+          3.0,
+          4.0
+        ],
+        [
+          0.0,
+          4.0
+        ]
+      ]
+    },
+    {
+      "id": "C3",
+      "centroid": [
+        5.37301587,
+        2.98412698
+      ],
+      "polygon": [
+        [
+          2.5,
+          2.0
+        ],
+        [
+          8.0,
+          2.0
+        ],
+        [
+          8.0,
+          4.0
+        ],
+        [
+          3.0,
+          4.0
+        ]
+      ]
+    },
+    {
+      "id": "C4",
+      "centroid": [
+        1.12962963,
+        1.03703704
+      ],
+      "polygon": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          0.0
+        ],
+        [
+          2.5,
+          2.0
+        ],
+        [
+          0.0,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "C5",
+      "centroid": [
+        3.75,
+        1.0
+      ],
+      "polygon": [
+        [
+          2.0,
+          0.0
+        ],
+        [
+          5.0,
+          0.0
+        ],
+        [
+          5.5,
+          2.0
+        ],
+        [
+          2.5,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "C6",
+      "centroid": [
+        6.62121212,
+        0.96969697
+      ],
+      "polygon": [
+        [
+          5.0,
+          0.0
+        ],
+        [
+          8.0,
+          0.0
+        ],
+        [
+          8.0,
+          2.0
+        ],
+        [
+          5.5,
+          2.0
+        ]
+      ]
+    },
+    {
+      "id": "C7",
+      "centroid": [
+        3.5,
+        -0.5
+      ],
+      "polygon": [
+        [
+          2.8,
+          -1.0
+        ],
+        [
+          4.2,
+          -1.0
+        ],
+        [
+          3.5,
+          0.5
+        ]
+      ]
+    }
+  ],
+  "undirected_edges": [
+    {
+      "source": "C0",
+      "target": "C1",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C0",
+      "target": "C2",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C0",
+      "target": "C3",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C1",
+      "target": "C2",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C1",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C4",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C5",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C4",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C5",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C4",
+      "target": "C5",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C6",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C7",
+      "relation": "overlap",
+      "intersection_area": 0.116666666667
+    }
+  ],
+  "directed_edges": [
+    {
+      "source": "C0",
+      "target": "C1",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C1",
+      "target": "C0",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C0",
+      "target": "C2",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C0",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C0",
+      "target": "C3",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C0",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C1",
+      "target": "C2",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C1",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C1",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C1",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C2",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C4",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C4",
+      "target": "C2",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C2",
+      "target": "C5",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C2",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C4",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C4",
+      "target": "C3",
+      "relation": "point_contact",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C5",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C6",
+      "target": "C3",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C4",
+      "target": "C5",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C4",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C6",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C6",
+      "target": "C5",
+      "relation": "shared_edge",
+      "intersection_area": 0.0
+    },
+    {
+      "source": "C5",
+      "target": "C7",
+      "relation": "overlap",
+      "intersection_area": 0.116666666667
+    },
+    {
+      "source": "C7",
+      "target": "C5",
+      "relation": "overlap",
+      "intersection_area": 0.116666666667
+    }
+  ],
+  "connected_components": [
+    [
+      "C0",
+      "C1",
+      "C2",
+      "C3",
+      "C4",
+      "C5",
+      "C6",
+      "C7"
+    ]
+  ]
+}

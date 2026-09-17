@@ -1,0 +1,32 @@
+{
+  "edge_weights": [
+    {"source": "C0", "target": "C1", "weight": 0.12, "reason": "Shared boundary and useful progress toward C6."},
+    {"source": "C1", "target": "C0", "weight": 0.75, "reason": "Moves away from the goal."},
+    {"source": "C0", "target": "C2", "weight": 0.32, "reason": "Useful downward progress through a shared boundary."},
+    {"source": "C2", "target": "C0", "weight": 0.72, "reason": "Moves away from the goal."},
+    {"source": "C0", "target": "C3", "weight": 0.70, "reason": "Progresses toward the goal but only through point contact."},
+    {"source": "C3", "target": "C0", "weight": 0.80, "reason": "Point contact and a substantial detour from the goal."},
+    {"source": "C1", "target": "C2", "weight": 0.45, "reason": "Some progress but the transition is only point contact."},
+    {"source": "C2", "target": "C1", "weight": 0.48, "reason": "Point contact with limited goalward progress."},
+    {"source": "C1", "target": "C3", "weight": 0.14, "reason": "Strong goalward progress through a shared boundary."},
+    {"source": "C3", "target": "C1", "weight": 0.68, "reason": "Moves upward and away from C6."},
+    {"source": "C2", "target": "C3", "weight": 0.22, "reason": "Moves toward the goal through a shared boundary."},
+    {"source": "C3", "target": "C2", "weight": 0.62, "reason": "Moves laterally away from the goal."},
+    {"source": "C2", "target": "C4", "weight": 0.35, "reason": "Downward progress but toward the left side."},
+    {"source": "C4", "target": "C2", "weight": 0.70, "reason": "Moves away from the goal."},
+    {"source": "C2", "target": "C5", "weight": 0.60, "reason": "Goalward movement through fragile point contact."},
+    {"source": "C5", "target": "C2", "weight": 0.66, "reason": "Moves away from the goal through point contact."},
+    {"source": "C3", "target": "C4", "weight": 0.55, "reason": "Moves left through point contact."},
+    {"source": "C4", "target": "C3", "weight": 0.58, "reason": "Moves toward C6 but only through point contact."},
+    {"source": "C3", "target": "C5", "weight": 0.24, "reason": "Moves into a useful lower central region."},
+    {"source": "C5", "target": "C3", "weight": 0.64, "reason": "Moves upward away from C6."},
+    {"source": "C3", "target": "C6", "weight": 0.11, "reason": "Direct strong progress to the goal through a shared boundary."},
+    {"source": "C6", "target": "C3", "weight": 0.78, "reason": "Leaves the goal region."},
+    {"source": "C4", "target": "C5", "weight": 0.31, "reason": "Moves right toward the goal through a shared boundary."},
+    {"source": "C5", "target": "C4", "weight": 0.59, "reason": "Moves left away from the goal."},
+    {"source": "C5", "target": "C6", "weight": 0.18, "reason": "Direct goalward transition through a shared boundary."},
+    {"source": "C6", "target": "C5", "weight": 0.71, "reason": "Leaves the goal region."},
+    {"source": "C5", "target": "C7", "weight": 0.84, "reason": "Detours away from the requested goal region."},
+    {"source": "C7", "target": "C5", "weight": 0.52, "reason": "Returns toward regions connected to the requested goal."}
+  ]
+}

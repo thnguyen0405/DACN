@@ -1,0 +1,32 @@
+[
+  {
+    "file": "/Users/nguyen/BK/SEM7/DACN/Motion_Planner/convex-region-graph/build_graph.py",
+    "lines": 339,
+    "sha256": "20a3b23e2144683d63d4beb4441ddbc82efe8d37dd9692c7c2b8b4d0f9b1f451",
+    "explained_rows": 339
+  },
+  {
+    "file": "/Users/nguyen/BK/SEM7/DACN/Motion_Planner/convex-region-graph/llm_planner.py",
+    "lines": 130,
+    "sha256": "4510d8d31539a4f03dbc2530cdc8dfc8bfdf2e44c6de1677cfdbd53585e51288",
+    "explained_rows": 130
+  },
+  {
+    "file": "/Users/nguyen/BK/SEM7/DACN/Motion_Planner/convex-region-graph/llm_region_prior.py",
+    "lines": 223,
+    "sha256": "511db10d5c7747dc88f689f69e690b67ed9dd49feb87bc2af3a6491832245d2f",
+    "explained_rows": 223
+  },
+  {
+    "file": "/Users/nguyen/BK/SEM7/DACN/Motion_Planner/convex-region-graph/llm_weight_provider.py",
+    "lines": 422,
+    "sha256": "694a722a7c2df4c8a4a96ff6ef8e042601139338b47ed04f0bf81f99c42a14c9",
+    "explained_rows": 422
+  },
+  {
+    "file": "/Users/nguyen/BK/SEM7/DACN/Motion_Planner/sampling-based-path-finding-main/src/path_finder/src/test_planner.cpp",
+    "lines": 321,
+    "sha256": "6c657aabe759c9a1bf8b4b0ec1ec6dd4f35f538f5f56be0eae2a261102187182",
+    "explained_rows": 321
+  }
+]

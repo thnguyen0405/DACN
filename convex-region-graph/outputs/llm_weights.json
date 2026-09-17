@@ -1,0 +1,178 @@
+{
+  "provider_metadata": {
+    "provider": "openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "dots-studio/dots-3-note-preview:free",
+    "temperature": 0.0
+  },
+  "edge_weights": [
+    {
+      "source": "C0",
+      "target": "C1",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C1",
+      "target": "C0",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C0",
+      "target": "C2",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C2",
+      "target": "C0",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C0",
+      "target": "C3",
+      "weight": 0.3,
+      "reason": "Point contact moving toward goal"
+    },
+    {
+      "source": "C3",
+      "target": "C0",
+      "weight": 0.7,
+      "reason": "Point contact moving away from goal"
+    },
+    {
+      "source": "C1",
+      "target": "C2",
+      "weight": 0.7,
+      "reason": "Point contact moving away from goal"
+    },
+    {
+      "source": "C2",
+      "target": "C1",
+      "weight": 0.3,
+      "reason": "Point contact moving toward goal"
+    },
+    {
+      "source": "C1",
+      "target": "C3",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C3",
+      "target": "C1",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C2",
+      "target": "C3",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C3",
+      "target": "C2",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C2",
+      "target": "C4",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C4",
+      "target": "C2",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C2",
+      "target": "C5",
+      "weight": 0.3,
+      "reason": "Point contact moving toward goal"
+    },
+    {
+      "source": "C5",
+      "target": "C2",
+      "weight": 0.7,
+      "reason": "Point contact moving away from goal"
+    },
+    {
+      "source": "C3",
+      "target": "C4",
+      "weight": 0.7,
+      "reason": "Point contact moving away from goal"
+    },
+    {
+      "source": "C4",
+      "target": "C3",
+      "weight": 0.3,
+      "reason": "Point contact moving toward goal"
+    },
+    {
+      "source": "C3",
+      "target": "C5",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C5",
+      "target": "C3",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C6",
+      "target": "C3",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C4",
+      "target": "C5",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C5",
+      "target": "C4",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C5",
+      "target": "C6",
+      "weight": 0.1,
+      "reason": "Shared edge moving toward goal"
+    },
+    {
+      "source": "C6",
+      "target": "C5",
+      "weight": 0.6,
+      "reason": "Shared edge moving away from goal"
+    },
+    {
+      "source": "C5",
+      "target": "C7",
+      "weight": 0.8,
+      "reason": "Overlap moving away from goal"
+    },
+    {
+      "source": "C7",
+      "target": "C5",
+      "weight": 0.5,
+      "reason": "Overlap moving toward goal"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "provider_metadata": {
+    "provider": "offline-test",
+    "requested_model": "mock",
+    "resolved_model": "mock",
+    "temperature": 0.0
+  },
+  "region_scores": [
+    {"id": "C0", "score": 0.70, "reason": "Contains the start."},
+    {"id": "C1", "score": 0.90, "reason": "Strong upper connector."},
+    {"id": "C2", "score": 0.45, "reason": "Alternative connector."},
+    {"id": "C3", "score": 1.00, "reason": "Central high-value connector."},
+    {"id": "C4", "score": 0.20, "reason": "Peripheral alternative."},
+    {"id": "C5", "score": 0.65, "reason": "Lower connector toward the goal."},
+    {"id": "C6", "score": 0.95, "reason": "Contains the goal."},
+    {"id": "C7", "score": 0.10, "reason": "Low-value detour."}
+  ]
+}
