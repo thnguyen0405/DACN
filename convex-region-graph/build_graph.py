@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Graph of Convex Regions from 2D convex polygons.
+"""Build a directed Graph of Convex Regions from 2D convex polygons.
 
 The implementation intentionally uses only the Python standard library so the
 demo is easy to run on a clean machine.
@@ -140,10 +140,11 @@ def convex_intersection(subject: Polygon, clip: Polygon, tol: float) -> Polygon:
 
 
 def intersection_relation(a: Polygon, b: Polygon, tol: float) -> tuple[str | None, float]:
+    """Return an adjacency relation, excluding positive-area polygon overlap."""
     clipped = convex_intersection(a, b, tol)
     area = polygon_area(clipped) if len(clipped) >= 3 else 0.0
     if area > tol:
-        return "overlap", area
+        return None, 0.0
 
     shared_length = max(
         (collinear_overlap_length(a1, a2, b1, b2, tol) for a1, a2 in edges(a) for b1, b2 in edges(b)),
@@ -177,9 +178,10 @@ def centroid(poly: Polygon) -> Point:
     return cx, cy
 
 
-def connected_components(vertex_ids: list[str], undirected_edges: list[dict]) -> list[list[str]]:
+def connected_components(vertex_ids: list[str], directed_edges: list[dict]) -> list[list[str]]:
+    """Compute weakly connected components from the directed graph."""
     adjacency = {v: set() for v in vertex_ids}
-    for edge in undirected_edges:
+    for edge in directed_edges:
         adjacency[edge["source"]].add(edge["target"])
         adjacency[edge["target"]].add(edge["source"])
     unseen, components = set(vertex_ids), []
@@ -209,24 +211,21 @@ def build_graph(data: dict, tol: float = 1e-9) -> dict:
         polygon = normalize_polygon(item["polygon"], tol)
         regions.append({"id": region_id, "polygon": polygon, "centroid": centroid(polygon)})
 
-    undirected = []
+    directed = []
+    connection_count = 0
     for i, left in enumerate(regions):
         for right in regions[i + 1 :]:
             relation, area = intersection_relation(left["polygon"], right["polygon"], tol)
             if relation:
-                undirected.append(
-                    {
-                        "source": left["id"],
-                        "target": right["id"],
-                        "relation": relation,
-                        "intersection_area": round(area, 12),
-                    }
-                )
-
-    directed = []
-    for edge in undirected:
-        directed.append({**edge})
-        directed.append({**edge, "source": edge["target"], "target": edge["source"]})
+                edge = {
+                    "source": left["id"],
+                    "target": right["id"],
+                    "relation": relation,
+                    "intersection_area": round(area, 12),
+                }
+                directed.append(edge)
+                directed.append({**edge, "source": right["id"], "target": left["id"]})
+                connection_count += 1
 
     vertices = [
         {
@@ -239,17 +238,31 @@ def build_graph(data: dict, tol: float = 1e-9) -> dict:
     return {
         "directed": True,
         "vertices": vertices,
-        "undirected_edges": undirected,
         "directed_edges": directed,
-        "connected_components": connected_components([r["id"] for r in regions], undirected),
+        "connected_components": connected_components([r["id"] for r in regions], directed),
+        "connection_count": connection_count,
     }
 
 
 COLORS = ["#ef767a", "#56c271", "#5b9cf0", "#ac72d6", "#f4a259", "#49bec7", "#ed6b9f", "#9bcf53"]
 
 
+def unique_connections(graph: dict) -> list[dict]:
+    """Return one representative edge for each bidirectional region connection."""
+    seen: set[tuple[str, str]] = set()
+    connections = []
+    for edge in graph["directed_edges"]:
+        key = tuple(sorted((edge["source"], edge["target"])))
+        if key in seen:
+            continue
+        seen.add(key)
+        connections.append(edge)
+    return connections
+
+
 def svg_visualization(graph: dict, width: int = 1200, height: int = 650) -> str:
     vertices = graph["vertices"]
+    connections = unique_connections(graph)
     points = [p for v in vertices for p in v["polygon"]]
     min_x, max_x = min(p[0] for p in points), max(p[0] for p in points)
     min_y, max_y = min(p[1] for p in points), max(p[1] for p in points)
@@ -282,7 +295,7 @@ def svg_visualization(graph: dict, width: int = 1200, height: int = 650) -> str:
         lines.append(f'<text x="{cx:.2f}" y="{cy+5:.2f}" text-anchor="middle" fill="white" font-family="Arial" font-size="13">{vertex["id"]}</text>')
 
     positions = {v["id"]: transform(tuple(v["centroid"]), 1) for v in vertices}
-    for edge in graph["undirected_edges"]:
+    for edge in connections:
         x1, y1 = positions[edge["source"]]
         x2, y2 = positions[edge["target"]]
         dx, dy = x2 - x1, y2 - y1
@@ -304,10 +317,10 @@ def svg_visualization(graph: dict, width: int = 1200, height: int = 650) -> str:
         lines.append(f'<text x="{cx:.2f}" y="{cy+5:.2f}" text-anchor="middle" fill="#0f172a" font-family="Arial" font-size="14" font-weight="700">{vertex["id"]}</text>')
 
     counts = {}
-    for edge in graph["undirected_edges"]:
+    for edge in connections:
         counts[edge["relation"]] = counts.get(edge["relation"], 0) + 1
     summary = ", ".join(f"{key}: {value}" for key, value in sorted(counts.items())) or "no intersections"
-    lines.append(f'<text x="{width/2}" y="{height-14}" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">{len(vertices)} regions · {len(graph["undirected_edges"])} connections · {summary}</text>')
+    lines.append(f'<text x="{width/2}" y="{height-14}" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">{len(vertices)} regions · {len(connections)} connections · {summary}</text>')
     lines.append("</svg>")
     return "\n".join(lines)
 
@@ -329,7 +342,7 @@ def main() -> None:
     args.svg.parent.mkdir(parents=True, exist_ok=True)
     args.output.write_text(json.dumps(graph, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     args.svg.write_text(svg_visualization(graph), encoding="utf-8")
-    print(f"Built {len(graph['vertices'])} vertices and {len(graph['undirected_edges'])} bidirectional connections")
+    print(f"Built {len(graph['vertices'])} vertices and {graph['connection_count']} bidirectional connections")
     print(f"Connected components: {graph['connected_components']}")
     print(f"JSON: {args.output}")
     print(f"SVG:  {args.svg}")
