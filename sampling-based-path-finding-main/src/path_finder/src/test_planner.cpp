@@ -187,6 +187,9 @@ public:
         nh_.param("run_brrt_star", run_brrt_star_, false);
 
         configureGuidance();
+        visualizeGuidanceRegions(start_.z());
+        vis_ptr_->visualize_a_ball(start_, 0.3, "start", visualization::Color::pink);
+        ROS_INFO_STREAM("[Planner] Initial start = " << start_.transpose());
     }
     ~TesterPathFinder(){};
 
@@ -213,11 +216,14 @@ public:
         // rrt_star_ptr_->setPreserveSamples(preserved_samples);
         // rrt_sharp_ptr_->setPreserveSamples(preserved_samples);
 
+        bool any_success = false;
+
         if (run_rrt_)
         {
             bool rrt_res = rrt_ptr_->plan(start_, goal_);
             if (rrt_res)
             {
+                any_success = true;
                 vector<Eigen::Vector3d> final_path = rrt_ptr_->getPath();
                 vis_ptr_->visualize_path(final_path, "rrt_final_path");
                 vis_ptr_->visualize_pointcloud(final_path, "rrt_final_wpts");
@@ -231,6 +237,7 @@ public:
             bool rrt_star_res = rrt_star_ptr_->plan(start_, goal_);
             if (rrt_star_res)
             {
+                any_success = true;
                 vector<vector<Eigen::Vector3d>> routes = rrt_star_ptr_->getAllPaths();
                 vis_ptr_->visualize_path_list(routes, "rrt_star_paths", visualization::blue);
                 vector<Eigen::Vector3d> final_path = rrt_star_ptr_->getPath();
@@ -246,6 +253,7 @@ public:
             bool rrt_sharp_res = rrt_sharp_ptr_->plan(start_, goal_);
             if (rrt_sharp_res)
             {
+                any_success = true;
                 vector<Eigen::Vector3d> final_path = rrt_sharp_ptr_->getPath();
                 vis_ptr_->visualize_path(final_path, "rrt_sharp_final_path");
                 vis_ptr_->visualize_pointcloud(final_path, "rrt_sharp_final_wpts");
@@ -259,6 +267,7 @@ public:
             bool brrt_res = brrt_ptr_->plan(start_, goal_);
             if (brrt_res)
             {
+                any_success = true;
                 vector<Eigen::Vector3d> final_path = brrt_ptr_->getPath();
                 vis_ptr_->visualize_path(final_path, "brrt_final_path");
                 vis_ptr_->visualize_pointcloud(final_path, "brrt_final_wpts");
@@ -272,6 +281,7 @@ public:
             bool brrt_star_res = brrt_star_ptr_->plan(start_, goal_);
             if (brrt_star_res)
             {
+                any_success = true;
                 vector<Eigen::Vector3d> final_path = brrt_star_ptr_->getPath();
                 vis_ptr_->visualize_path(final_path, "brrt_star_final_path");
                 vis_ptr_->visualize_pointcloud(final_path, "brrt_star_final_wpts");
@@ -279,8 +289,16 @@ public:
                 ROS_INFO_STREAM("[BRRT*] final path len: " << slns.back().first);
             }
         }
-        
-        start_ = goal_;
+
+        if (any_success)
+        {
+            start_ = goal_;
+            ROS_INFO_STREAM("[Planner] At least one planner succeeded; next start = " << start_.transpose());
+        }
+        else
+        {
+            ROS_WARN_STREAM("[Planner] All planners failed; keeping previous start = " << start_.transpose());
+        }
     }
 
     void executionCallback(const ros::TimerEvent &event)
