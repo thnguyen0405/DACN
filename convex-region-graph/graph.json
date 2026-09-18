@@ -4,466 +4,1343 @@
     {
       "id": "C0",
       "centroid": [
-        1.76190476,
-        5.57142857
+        1.33333333,
+        4.66666667
       ],
+      "area": 20.0,
       "polygon": [
         [
           0.0,
-          4.0
-        ],
-        [
-          3.0,
-          4.0
+          0.0
         ],
         [
           4.0,
-          7.0
+          4.0
         ],
         [
           0.0,
-          7.0
+          10.0
         ]
       ]
     },
     {
       "id": "C1",
       "centroid": [
-        5.74074074,
-        5.44444444
+        3.06666667,
+        1.02
       ],
+      "area": 6.25,
       "polygon": [
         [
-          3.0,
-          4.0
+          0.0,
+          0.0
         ],
         [
-          8.0,
-          4.0
+          7.0,
+          1.0
         ],
         [
-          8.0,
-          7.0
+          5.0,
+          1.5
         ],
         [
-          4.0,
-          7.0
+          2.0,
+          2.0
         ]
       ]
     },
     {
       "id": "C2",
       "centroid": [
-        1.37878788,
-        3.03030303
+        11.66666667,
+        1.66666667
       ],
+      "area": 7.75,
       "polygon": [
         [
-          0.0,
-          2.0
+          16.0,
+          0.0
         ],
         [
-          2.5,
-          2.0
+          10.0,
+          3.5
         ],
         [
-          3.0,
-          4.0
-        ],
-        [
-          0.0,
-          4.0
+          9.0,
+          1.5
         ]
       ]
     },
     {
       "id": "C3",
       "centroid": [
-        5.37301587,
-        2.98412698
+        10.66666667,
+        0.83333333
       ],
+      "area": 3.25,
       "polygon": [
         [
-          2.5,
-          2.0
+          16.0,
+          0.0
         ],
         [
-          8.0,
-          2.0
+          9.0,
+          1.5
         ],
         [
-          8.0,
-          4.0
-        ],
-        [
-          3.0,
-          4.0
+          7.0,
+          1.0
         ]
       ]
     },
     {
       "id": "C4",
       "centroid": [
-        1.12962963,
-        1.03703704
+        7.66666667,
+        0.33333333
       ],
+      "area": 8.0,
       "polygon": [
         [
           0.0,
           0.0
         ],
         [
-          2.0,
+          16.0,
           0.0
         ],
         [
-          2.5,
-          2.0
-        ],
-        [
-          0.0,
-          2.0
+          7.0,
+          1.0
         ]
       ]
     },
     {
       "id": "C5",
       "centroid": [
-        3.75,
-        1.0
+        5.33333333,
+        2.16666667
       ],
+      "area": 2.25,
       "polygon": [
         [
-          2.0,
-          0.0
+          4.0,
+          4.0
         ],
         [
           5.0,
-          0.0
+          1.5
         ],
         [
-          5.5,
-          2.0
-        ],
-        [
-          2.5,
-          2.0
+          7.0,
+          1.0
         ]
       ]
     },
     {
       "id": "C6",
       "centroid": [
-        6.62121212,
-        0.96969697
+        4.17741935,
+        4.79569892
       ],
+      "area": 7.75,
       "polygon": [
         [
-          5.0,
-          0.0
+          0.0,
+          10.0
         ],
         [
-          8.0,
-          0.0
+          4.0,
+          4.0
         ],
         [
-          8.0,
-          2.0
+          7.0,
+          1.0
         ],
         [
-          5.5,
-          2.0
+          6.5,
+          3.0
         ]
       ]
     },
     {
       "id": "C7",
       "centroid": [
-        3.5,
-        -0.5
+        5.0,
+        5.83333333
       ],
+      "area": 11.875,
       "polygon": [
         [
-          2.8,
-          -1.0
+          0.0,
+          10.0
         ],
         [
-          4.2,
-          -1.0
+          6.5,
+          3.0
         ],
         [
-          3.5,
-          0.5
+          8.5,
+          4.5
         ]
       ]
-    }
-  ],
-  "undirected_edges": [
-    {
-      "source": "C0",
-      "target": "C1",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
     },
     {
-      "source": "C0",
-      "target": "C2",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "id": "C8",
+      "centroid": [
+        11.5,
+        2.66666667
+      ],
+      "area": 0.375,
+      "polygon": [
+        [
+          8.5,
+          4.5
+        ],
+        [
+          10.0,
+          3.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ]
     },
     {
-      "source": "C0",
-      "target": "C3",
-      "relation": "point_contact",
-      "intersection_area": 0.0
+      "id": "C9",
+      "centroid": [
+        9.25193798,
+        4.98837209
+      ],
+      "area": 21.5,
+      "polygon": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          8.5,
+          4.5
+        ],
+        [
+          16.0,
+          0.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ]
     },
     {
-      "source": "C1",
-      "target": "C2",
-      "relation": "point_contact",
-      "intersection_area": 0.0
+      "id": "C10",
+      "centroid": [
+        15.58974359,
+        5.61538462
+      ],
+      "area": 6.5,
+      "polygon": [
+        [
+          15.0,
+          5.0
+        ],
+        [
+          16.0,
+          0.0
+        ],
+        [
+          16.0,
+          10.0
+        ],
+        [
+          15.0,
+          8.0
+        ]
+      ]
     },
     {
-      "source": "C1",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "id": "C11",
+      "centroid": [
+        14.33333333,
+        3.33333333
+      ],
+      "area": 7.5,
+      "polygon": [
+        [
+          16.0,
+          0.0
+        ],
+        [
+          15.0,
+          5.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ]
     },
     {
-      "source": "C2",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "id": "C12",
+      "centroid": [
+        8.0,
+        7.16666667
+      ],
+      "area": 9.0,
+      "polygon": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          5.0
+        ],
+        [
+          12.0,
+          6.5
+        ]
+      ]
     },
     {
-      "source": "C2",
-      "target": "C4",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "id": "C13",
+      "centroid": [
+        8.89705882,
+        8.06372549
+      ],
+      "area": 12.75,
+      "polygon": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          6.5
+        ],
+        [
+          13.5,
+          6.5
+        ],
+        [
+          13.5,
+          8.0
+        ]
+      ]
     },
     {
-      "source": "C2",
-      "target": "C5",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C4",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C5",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C6",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C4",
-      "target": "C5",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C5",
-      "target": "C6",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C5",
-      "target": "C7",
-      "relation": "overlap",
-      "intersection_area": 0.116666666667
+      "id": "C14",
+      "centroid": [
+        10.26190476,
+        9.27619048
+      ],
+      "area": 17.5,
+      "polygon": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          13.5,
+          8.0
+        ],
+        [
+          15.0,
+          8.0
+        ],
+        [
+          16.0,
+          10.0
+        ]
+      ]
     }
   ],
   "directed_edges": [
     {
       "source": "C0",
       "target": "C1",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0
+        ]
+      ],
+      "portal_width": 2.82842712,
+      "safe_portal": [
+        [
+          0.21213203,
+          0.21213203
+        ],
+        [
+          1.78786797,
+          1.78786797
+        ]
+      ],
+      "safe_portal_width": 2.22842712,
+      "required_clearance": 0.3
     },
     {
       "source": "C1",
       "target": "C0",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          2.0,
+          2.0
+        ]
+      ],
+      "portal_width": 2.82842712,
+      "safe_portal": [
+        [
+          0.21213203,
+          0.21213203
+        ],
+        [
+          1.78786797,
+          1.78786797
+        ]
+      ],
+      "safe_portal_width": 2.22842712,
+      "required_clearance": 0.3
     },
     {
       "source": "C0",
-      "target": "C2",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C2",
-      "target": "C0",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C0",
-      "target": "C3",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C0",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C1",
-      "target": "C2",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C2",
-      "target": "C1",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C1",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C1",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C2",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C2",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C2",
-      "target": "C4",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C4",
-      "target": "C2",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C2",
-      "target": "C5",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C5",
-      "target": "C2",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C4",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C4",
-      "target": "C3",
-      "relation": "point_contact",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
-      "target": "C5",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C5",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
-    },
-    {
-      "source": "C3",
       "target": "C6",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ],
+      "portal_width": 7.21110255,
+      "safe_portal": [
+        [
+          3.83358994,
+          4.24961509
+        ],
+        [
+          0.16641006,
+          9.75038491
+        ]
+      ],
+      "safe_portal_width": 6.61110255,
+      "required_clearance": 0.3
     },
     {
       "source": "C6",
-      "target": "C3",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "target": "C0",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ],
+      "portal_width": 7.21110255,
+      "safe_portal": [
+        [
+          3.83358994,
+          4.24961509
+        ],
+        [
+          0.16641006,
+          9.75038491
+        ]
+      ],
+      "safe_portal_width": 6.61110255,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C1",
+      "target": "C4",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 7.07106781,
+      "safe_portal": [
+        [
+          0.29698485,
+          0.04242641
+        ],
+        [
+          6.70301515,
+          0.95757359
+        ]
+      ],
+      "safe_portal_width": 6.47106781,
+      "required_clearance": 0.3
     },
     {
       "source": "C4",
+      "target": "C1",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 7.07106781,
+      "safe_portal": [
+        [
+          0.29698485,
+          0.04242641
+        ],
+        [
+          6.70301515,
+          0.95757359
+        ]
+      ],
+      "safe_portal_width": 6.47106781,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C1",
       "target": "C5",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          5.0,
+          1.5
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 2.06155281,
+      "safe_portal": [
+        [
+          5.29104275,
+          1.42723931
+        ],
+        [
+          6.70895725,
+          1.07276069
+        ]
+      ],
+      "safe_portal_width": 1.46155281,
+      "required_clearance": 0.3
     },
     {
       "source": "C5",
+      "target": "C1",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          5.0,
+          1.5
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 2.06155281,
+      "safe_portal": [
+        [
+          5.29104275,
+          1.42723931
+        ],
+        [
+          6.70895725,
+          1.07276069
+        ]
+      ],
+      "safe_portal_width": 1.46155281,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C2",
+      "target": "C3",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          9.0,
+          1.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 7.15891053,
+      "safe_portal": [
+        [
+          9.29334072,
+          1.43714127
+        ],
+        [
+          15.70665928,
+          0.06285873
+        ]
+      ],
+      "safe_portal_width": 6.55891053,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C3",
+      "target": "C2",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          9.0,
+          1.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 7.15891053,
+      "safe_portal": [
+        [
+          9.29334072,
+          1.43714127
+        ],
+        [
+          15.70665928,
+          0.06285873
+        ]
+      ],
+      "safe_portal_width": 6.55891053,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C2",
+      "target": "C8",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          10.0,
+          3.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 6.94622199,
+      "safe_portal": [
+        [
+          10.25913367,
+          3.34883869
+        ],
+        [
+          15.74086633,
+          0.15116131
+        ]
+      ],
+      "safe_portal_width": 6.34622199,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C8",
+      "target": "C2",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          10.0,
+          3.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 6.94622199,
+      "safe_portal": [
+        [
+          10.25913367,
+          3.34883869
+        ],
+        [
+          15.74086633,
+          0.15116131
+        ]
+      ],
+      "safe_portal_width": 6.34622199,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C3",
       "target": "C4",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          7.0,
+          1.0
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 9.05538514,
+      "safe_portal": [
+        [
+          7.29816512,
+          0.96687054
+        ],
+        [
+          15.70183488,
+          0.03312946
+        ]
+      ],
+      "safe_portal_width": 8.45538514,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C4",
+      "target": "C3",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          7.0,
+          1.0
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 9.05538514,
+      "safe_portal": [
+        [
+          7.29816512,
+          0.96687054
+        ],
+        [
+          15.70183488,
+          0.03312946
+        ]
+      ],
+      "safe_portal_width": 8.45538514,
+      "required_clearance": 0.3
     },
     {
       "source": "C5",
       "target": "C6",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 4.24264069,
+      "safe_portal": [
+        [
+          4.21213203,
+          3.78786797
+        ],
+        [
+          6.78786797,
+          1.21213203
+        ]
+      ],
+      "safe_portal_width": 3.64264069,
+      "required_clearance": 0.3
     },
     {
       "source": "C6",
       "target": "C5",
-      "relation": "shared_edge",
-      "intersection_area": 0.0
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.0,
+          4.0
+        ],
+        [
+          7.0,
+          1.0
+        ]
+      ],
+      "portal_width": 4.24264069,
+      "safe_portal": [
+        [
+          4.21213203,
+          3.78786797
+        ],
+        [
+          6.78786797,
+          1.21213203
+        ]
+      ],
+      "safe_portal_width": 3.64264069,
+      "required_clearance": 0.3
     },
     {
-      "source": "C5",
+      "source": "C6",
       "target": "C7",
-      "relation": "overlap",
-      "intersection_area": 0.116666666667
+      "relation": "safe_portal",
+      "portal": [
+        [
+          6.5,
+          3.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ],
+      "portal_width": 9.55248659,
+      "safe_portal": [
+        [
+          6.29586467,
+          3.21983805
+        ],
+        [
+          0.20413533,
+          9.78016195
+        ]
+      ],
+      "safe_portal_width": 8.95248659,
+      "required_clearance": 0.3
     },
     {
       "source": "C7",
-      "target": "C5",
-      "relation": "overlap",
-      "intersection_area": 0.116666666667
+      "target": "C6",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          6.5,
+          3.0
+        ],
+        [
+          0.0,
+          10.0
+        ]
+      ],
+      "portal_width": 9.55248659,
+      "safe_portal": [
+        [
+          6.29586467,
+          3.21983805
+        ],
+        [
+          0.20413533,
+          9.78016195
+        ]
+      ],
+      "safe_portal_width": 8.95248659,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C7",
+      "target": "C9",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          8.5,
+          4.5
+        ]
+      ],
+      "portal_width": 10.12422837,
+      "safe_portal": [
+        [
+          0.25187105,
+          9.83702462
+        ],
+        [
+          8.24812895,
+          4.66297538
+        ]
+      ],
+      "safe_portal_width": 9.52422837,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C9",
+      "target": "C7",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          8.5,
+          4.5
+        ]
+      ],
+      "portal_width": 10.12422837,
+      "safe_portal": [
+        [
+          0.25187105,
+          9.83702462
+        ],
+        [
+          8.24812895,
+          4.66297538
+        ]
+      ],
+      "safe_portal_width": 9.52422837,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C8",
+      "target": "C9",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          8.5,
+          4.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 8.74642784,
+      "safe_portal": [
+        [
+          8.75724788,
+          4.34565127
+        ],
+        [
+          15.74275212,
+          0.15434873
+        ]
+      ],
+      "safe_portal_width": 8.14642784,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C9",
+      "target": "C8",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          8.5,
+          4.5
+        ],
+        [
+          16.0,
+          0.0
+        ]
+      ],
+      "portal_width": 8.74642784,
+      "safe_portal": [
+        [
+          8.75724788,
+          4.34565127
+        ],
+        [
+          15.74275212,
+          0.15434873
+        ]
+      ],
+      "safe_portal_width": 8.14642784,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C9",
+      "target": "C11",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          16.0,
+          0.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ],
+      "portal_width": 6.40312424,
+      "safe_portal": [
+        [
+          15.81259149,
+          0.23426064
+        ],
+        [
+          12.18740851,
+          4.76573936
+        ]
+      ],
+      "safe_portal_width": 5.80312424,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C11",
+      "target": "C9",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          16.0,
+          0.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ],
+      "portal_width": 6.40312424,
+      "safe_portal": [
+        [
+          15.81259149,
+          0.23426064
+        ],
+        [
+          12.18740851,
+          4.76573936
+        ]
+      ],
+      "safe_portal_width": 5.80312424,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C9",
+      "target": "C12",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ],
+      "portal_width": 13.0,
+      "safe_portal": [
+        [
+          0.27692308,
+          9.88461538
+        ],
+        [
+          11.72307692,
+          5.11538462
+        ]
+      ],
+      "safe_portal_width": 12.4,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C12",
+      "target": "C9",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          5.0
+        ]
+      ],
+      "portal_width": 13.0,
+      "safe_portal": [
+        [
+          0.27692308,
+          9.88461538
+        ],
+        [
+          11.72307692,
+          5.11538462
+        ]
+      ],
+      "safe_portal_width": 12.4,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C10",
+      "target": "C11",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          16.0,
+          0.0
+        ],
+        [
+          15.0,
+          5.0
+        ]
+      ],
+      "portal_width": 5.09901951,
+      "safe_portal": [
+        [
+          15.94116516,
+          0.2941742
+        ],
+        [
+          15.05883484,
+          4.7058258
+        ]
+      ],
+      "safe_portal_width": 4.49901951,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C11",
+      "target": "C10",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          16.0,
+          0.0
+        ],
+        [
+          15.0,
+          5.0
+        ]
+      ],
+      "portal_width": 5.09901951,
+      "safe_portal": [
+        [
+          15.94116516,
+          0.2941742
+        ],
+        [
+          15.05883484,
+          4.7058258
+        ]
+      ],
+      "safe_portal_width": 4.49901951,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C10",
+      "target": "C14",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          15.0,
+          8.0
+        ],
+        [
+          16.0,
+          10.0
+        ]
+      ],
+      "portal_width": 2.23606798,
+      "safe_portal": [
+        [
+          15.13416408,
+          8.26832816
+        ],
+        [
+          15.86583592,
+          9.73167184
+        ]
+      ],
+      "safe_portal_width": 1.63606798,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C14",
+      "target": "C10",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          15.0,
+          8.0
+        ],
+        [
+          16.0,
+          10.0
+        ]
+      ],
+      "portal_width": 2.23606798,
+      "safe_portal": [
+        [
+          15.13416408,
+          8.26832816
+        ],
+        [
+          15.86583592,
+          9.73167184
+        ]
+      ],
+      "safe_portal_width": 1.63606798,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C12",
+      "target": "C13",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          6.5
+        ]
+      ],
+      "portal_width": 12.5,
+      "safe_portal": [
+        [
+          0.288,
+          9.916
+        ],
+        [
+          11.712,
+          6.584
+        ]
+      ],
+      "safe_portal_width": 11.9,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C13",
+      "target": "C12",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          12.0,
+          6.5
+        ]
+      ],
+      "portal_width": 12.5,
+      "safe_portal": [
+        [
+          0.288,
+          9.916
+        ],
+        [
+          11.712,
+          6.584
+        ]
+      ],
+      "safe_portal_width": 11.9,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C13",
+      "target": "C14",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          13.5,
+          8.0
+        ]
+      ],
+      "portal_width": 13.64734406,
+      "safe_portal": [
+        [
+          0.29676104,
+          9.9560354
+        ],
+        [
+          13.20323896,
+          8.0439646
+        ]
+      ],
+      "safe_portal_width": 13.04734406,
+      "required_clearance": 0.3
+    },
+    {
+      "source": "C14",
+      "target": "C13",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          10.0
+        ],
+        [
+          13.5,
+          8.0
+        ]
+      ],
+      "portal_width": 13.64734406,
+      "safe_portal": [
+        [
+          0.29676104,
+          9.9560354
+        ],
+        [
+          13.20323896,
+          8.0439646
+        ]
+      ],
+      "safe_portal_width": 13.04734406,
+      "required_clearance": 0.3
     }
   ],
   "connected_components": [
     [
       "C0",
       "C1",
-      "C2",
-      "C3",
+      "C6",
       "C4",
       "C5",
-      "C6",
-      "C7"
+      "C7",
+      "C3",
+      "C9",
+      "C2",
+      "C11",
+      "C12",
+      "C8",
+      "C10",
+      "C13",
+      "C14"
     ]
-  ]
+  ],
+  "pipeline": "map -> ACD -> convex regions -> graph",
+  "planning": {
+    "robot_radius": 0.22,
+    "safety_margin": 0.08,
+    "required_clearance": 0.3,
+    "start": [
+      1.0,
+      1.0
+    ],
+    "goal": [
+      15.0,
+      9.0
+    ]
+  }
 }
