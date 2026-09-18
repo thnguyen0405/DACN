@@ -21,11 +21,11 @@
   <arg name="initial_start_x" value="1.0" />
   <arg name="initial_start_y" value="1.0" />
   <arg name="initial_start_z" value="0.0" />
-  <arg name="run_rrt" value="true" />
-  <arg name="run_rrt_star" value="true" />
-  <arg name="run_rrt_sharp" value="true" />
-  <arg name="run_brrt" value="true" />
-  <arg name="run_brrt_star" value="true" />
+  <arg name="run_rrt" default="true" />
+  <arg name="run_rrt_star" default="true" />
+  <arg name="run_rrt_sharp" default="true" />
+  <arg name="run_brrt" default="true" />
+  <arg name="run_brrt_star" default="true" />
 
 
   <node pkg="path_finder" type="path_finder" name="path_finder_node" output="screen">
