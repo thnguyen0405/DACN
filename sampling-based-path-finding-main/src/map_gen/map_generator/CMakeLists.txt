@@ -33,3 +33,12 @@ target_link_libraries(random_forest
 add_dependencies(random_forest
    ${catkin_EXPORTED_TARGETS}
 )
+
+add_executable(example_map_publisher src/example_map_publisher.cpp)
+target_link_libraries(example_map_publisher
+  ${catkin_LIBRARIES}
+  ${PCL_LIBRARIES})
+
+add_dependencies(example_map_publisher
+  ${catkin_EXPORTED_TARGETS}
+)
