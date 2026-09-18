@@ -1,3 +1,10 @@
 .env
 __pycache__/
 *.py[cod]
+
+# Raw/intermediate LLM JSON artifacts are intentionally not kept
+outputs/llm_weights.json
+outputs/region_prior.json
+outputs/route.json
+llm_plan.json
+llm_response.json

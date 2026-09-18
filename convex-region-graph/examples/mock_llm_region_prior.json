@@ -1,0 +1,20 @@
+{
+  "region_scores": [
+    {"id": "C0", "score": 0.85, "reason": "Contains the start-side free space."},
+    {"id": "C1", "score": 0.42, "reason": "Useful lower corridor but not the shortest progress."},
+    {"id": "C2", "score": 0.36, "reason": "Low-level detour."},
+    {"id": "C3", "score": 0.35, "reason": "Low-level detour."},
+    {"id": "C4", "score": 0.32, "reason": "Low-level detour."},
+    {"id": "C5", "score": 0.45, "reason": "Alternative corridor."},
+    {"id": "C6", "score": 0.91, "reason": "Strong progress from start toward the upper passage."},
+    {"id": "C7", "score": 0.9, "reason": "Connects the start-side area to the central passage."},
+    {"id": "C8", "score": 0.42, "reason": "Alternative lower route."},
+    {"id": "C9", "score": 0.94, "reason": "Central high-clearance progress region."},
+    {"id": "C10", "score": 0.38, "reason": "Right-side detour."},
+    {"id": "C11", "score": 0.43, "reason": "Alternative route below the goal."},
+    {"id": "C12", "score": 0.96, "reason": "Upper corridor toward the goal."},
+    {"id": "C13", "score": 0.98, "reason": "Final approach toward the goal region."},
+    {"id": "C14", "score": 1.0, "reason": "Contains the goal."}
+  ],
+  "edge_costs": []
+}
