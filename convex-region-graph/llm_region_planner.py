@@ -464,6 +464,23 @@ def combined_svg(
     return "\n".join(lines)
 
 
+def export_sampling_prior(graph: dict[str, Any], plan: dict[str, Any]) -> dict[str, Any]:
+    """Build the small C++ sampler interface without exposing raw LLM JSON artifacts."""
+    probability = {item["id"]: item["probability"] for item in plan["sampling_prior"]}
+    return {
+        "start_region": plan["start_region"],
+        "goal_region": plan["goal_region"],
+        "regions": [
+            {
+                "id": vertex["id"],
+                "score": round(probability[vertex["id"]], 8),
+                "polygon": vertex["polygon"],
+            }
+            for vertex in graph["vertices"]
+        ],
+    }
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("graph", type=Path, help="Safe-portal graph.json produced by build_graph.py")
@@ -473,10 +490,14 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--goal-region", help="Override automatic goal-region lookup")
     parser.add_argument("--temperature", type=float, default=0.25, help="Softmax temperature for region scores")
     parser.add_argument("--exploration", type=float, default=0.12, help="Uniform probability mixed into the prior")
-    parser.add_argument("--output", type=Path, default=Path("llm_plan.json"), help="LLM prior and route JSON")
-    parser.add_argument("--svg", type=Path, default=Path("llm_route.svg"), help="Prior/route SVG")
+    parser.add_argument("--svg", type=Path, default=Path("outputs/llm_route.svg"), help="Visible LLM prior/route SVG")
+    parser.add_argument(
+        "--sampling-prior-output",
+        type=Path,
+        default=Path("outputs/sampling_prior.json"),
+        help="Internal C++ sampler interface; this is not a raw LLM output",
+    )
     parser.add_argument("--map", type=Path, help="Original map JSON; enables a combined map + graph + LLM SVG")
-    parser.add_argument("--raw-response-output", type=Path, default=Path("llm_response.json"), help="Save API response here")
     parser.add_argument("--prompt", type=Path, default=Path(__file__).parent / "prompts" / "region_prior_prompt.txt")
     parser.add_argument("--env-file", type=Path, default=Path(".env"))
     return parser.parse_args()
@@ -500,13 +521,9 @@ def main() -> int:
             if not api_key or not model:
                 raise PlanningError("OPENAI_API_KEY and OPENAI_MODEL must be set for --provider openai")
             response = call_openai(graph, start, goal, args.prompt, model, api_key)
-            args.raw_response_output.parent.mkdir(parents=True, exist_ok=True)
-            args.raw_response_output.write_text(json.dumps(response, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
             source = f"OpenAI model: {model}"
         plan = plan_regions(raw_graph, response, start, goal, args.temperature, args.exploration)
         plan["model_source"] = source
-        args.output.parent.mkdir(parents=True, exist_ok=True)
-        args.output.write_text(json.dumps(plan, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         args.svg.parent.mkdir(parents=True, exist_ok=True)
         if args.map:
             _regions_data, map_geometry = regions_from_map(load_json(args.map))
@@ -515,9 +532,15 @@ def main() -> int:
         else:
             args.svg.write_text(route_svg(graph, plan), encoding="utf-8")
             svg_description = "LLM route SVG"
+        args.sampling_prior_output.parent.mkdir(parents=True, exist_ok=True)
+        args.sampling_prior_output.write_text(
+            json.dumps(export_sampling_prior(graph, plan), indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
         print(f"Start region: {start}; goal region: {goal}")
         print("Sequence: " + (" -> ".join(plan["route"]["sequence"]) if plan["route"]["valid"] else plan["route"]["reason"]))
-        print(f"Plan JSON: {args.output}\n{svg_description}: {args.svg}")
+        print(f"{svg_description}: {args.svg}")
+        print(f"C++ sampling prior: {args.sampling_prior_output}")
         return 0 if plan["route"]["valid"] else 2
     except (OSError, PlanningError) as exc:
         print(f"Error: {exc}", file=sys.stderr)
