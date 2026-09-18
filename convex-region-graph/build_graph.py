@@ -12,7 +12,7 @@ import json
 import math
 from collections import deque
 from pathlib import Path
-from typing import Iterable
+from typing import Iterable, List, Tuple
 
 Point = tuple[float, float]
 Polygon = list[Point]
