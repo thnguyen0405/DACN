@@ -16,8 +16,8 @@
   <arg name="use_informed_sampling" value="true" />
   <arg name="use_GUILD_sampling" value="false" />
 <arg name="guidance_mode" default="none" />
-  <arg name="corridor_file" value="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
-  <arg name="sampling_prior_file" value="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json" />
+  <arg name="corridor_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
+  <arg name="sampling_prior_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json" />
   <arg name="initial_start_x" value="1.76190476" />
   <arg name="initial_start_y" value="5.57142857" />
   <arg name="initial_start_z" value="0.0" />
