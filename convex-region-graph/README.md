@@ -1,4 +1,6 @@
 # Demo
+cd "/Users/nguyen/BK/SEM7/DACN/DACN-github/convex-region-graph"
+bash run_demo.sh
 
 ## Main terminal
 
