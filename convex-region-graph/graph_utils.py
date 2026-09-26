@@ -73,6 +73,7 @@ def prepare_planning_graph(graph: dict[str, Any]) -> dict[str, Any]:
         clean_edges.append(dict(edge))
 
     return {
+        **graph,
         "directed": True,
         "vertices": clean_vertices,
         "directed_edges": clean_edges,

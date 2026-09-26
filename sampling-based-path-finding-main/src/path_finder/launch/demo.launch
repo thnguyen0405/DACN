@@ -1,0 +1,29 @@
+<launch>
+  <arg name="map_file" default="$(find path_finder)/../../../convex-region-graph/example_map.json"/>
+  <arg name="sampling_prior_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json"/>
+  <arg name="planner" default="all"/>
+  <arg name="guidance_mode" default="region_prior"/>
+  <arg name="step_mode" default="false"/>
+  <arg name="replay_interval" default="0.0"/>
+  <arg name="random_seed" default="42"/>
+  <arg name="search_time" default="1.0"/>
+  <arg name="rviz" default="true"/>
+  <include file="$(find path_finder)/launch/map.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+  </include>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="rviz" args="-d $(find path_finder)/launch/traj.rviz">
+    <env name="DISABLE_ROS1_EOL_WARNINGS" value="1"/>
+  </node>
+  <include file="$(find path_finder)/launch/test_planners.launch">
+    <arg name="map_file" value="$(arg map_file)"/>
+    <arg name="sampling_prior_file" value="$(arg sampling_prior_file)"/>
+    <arg name="planner" value="$(arg planner)"/>
+    <arg name="guidance_mode" value="$(arg guidance_mode)"/>
+    <arg name="step_mode" value="$(arg step_mode)"/>
+    <arg name="replay_interval" value="$(arg replay_interval)"/>
+    <arg name="random_seed" value="$(arg random_seed)"/>
+    <arg name="search_time" value="$(arg search_time)"/>
+    <arg name="auto_goal" value="true"/>
+    <arg name="planar" value="true"/>
+  </include>
+</launch>

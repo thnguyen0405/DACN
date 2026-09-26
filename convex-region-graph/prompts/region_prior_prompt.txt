@@ -12,3 +12,28 @@ respond. You may leave either array empty, but not both.
 
 Return JSON only in this shape:
 {"region_scores":[{"id":"C0","score":0.8,"reason":"brief reason"}],"edge_costs":[{"source":"C0","target":"C1","cost":0.2,"reason":"brief reason"}]}
+
+Scoring rubric (intrinsic-region-descriptors/v1):
+- Size: area A_i and diameter D_i. Large is not automatically useful; retain
+  narrow regions needed to connect start and goal.
+- Shape: aspect_ratio = lambda_max/lambda_min of UNIFORM-AREA covariance
+  (not its square root and not covariance of vertices). compactness = P²/(4πA).
+  Both are >= 1; larger values often indicate elongated or irregular regions.
+- Clearance: centroid_clearance is a point measurement; mean_clearance is an
+  area-weighted numerical estimate of distance to obstacles AND map exterior.
+  Artificial region edges are not obstacles. A mean is not minimum clearance.
+- Connectivity: degree counts geometric neighbors; safe_degree counts neighbors retained
+  after portal trimming for robot clearance. conductance is
+  sum(portal widths)/perimeter. safe_conductance uses trimmed widths of retained portals.
+  High connectivity offers alternatives, but a necessary bottleneck or a goal
+  in a dead end may deserve a high score despite a low degree.
+- Portals: traversability T_ij = W_ij * min(CL_i, CL_j). It is a heuristic
+  feature with units m², NOT proof that a disk robot can traverse an edge.
+  safe_traversability uses the trimmed width. Respect existing safe topology.
+- Corners: consider shape and available clearance/portal geometry; do not
+  invent corner angles or infer that sampling near every corner is beneficial.
+- Combine these with start/goal progress and detours. Explain tradeoffs using
+  supplied numeric descriptors. Never use one feature as a universal rule.
+- Null/missing features are unknown, not zero. Scores are sampling priorities,
+  not calibrated success probabilities or collision guarantees. Output scores
+  in [0,1]; the deterministic sampler applies softmax and exploration mixing.

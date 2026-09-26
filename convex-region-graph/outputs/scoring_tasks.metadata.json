@@ -1,0 +1,8 @@
+{
+  "graph": "graph.json",
+  "labels": null,
+  "label_source": null,
+  "supervised": false,
+  "examples": 1,
+  "note": "A single map is an example, not an adequate training/evaluation dataset."
+}

@@ -64,6 +64,24 @@ public:
     range_ = range;
   }
 
+  void setPlanar(bool enabled) { planar_ = enabled; }
+  void setClipGuidanceToInformed(bool enabled) { clip_guidance_to_informed_ = enabled; }
+
+  bool insideInformedSet(const Eigen::Vector3d &sample) const
+  {
+    const Eigen::Vector3d local = rotation_.transpose() * (sample - center_);
+    if (!local.allFinite() || !radii_.allFinite()) return false;
+    double squared_norm = 0.0;
+    for (int axis = 0; axis < 3; ++axis) {
+      if (radii_[axis] <= 1e-12) {
+        if (std::abs(local[axis]) > 1e-10) return false;
+      } else {
+        squared_norm += std::pow(local[axis] / radii_[axis], 2);
+      }
+    }
+    return squared_norm <= 1.0 + 1e-12;
+  }
+
   void samplingOnce(Eigen::Vector3d &sample)
   {
     if (corridor_sampling_)
@@ -72,7 +90,16 @@ public:
     }
     else if (region_prior_sampling_)
     {
-      regionPriorSamplingOnce(sample);
+      // Before the first solution: ordinary LLM region prior. Afterwards,
+      // sample the same prior conditioned on the improving informed ellipsoid.
+      // A bounded rejection loop keeps an empty/tiny intersection responsive.
+      for (int attempt = 0; attempt < 256; ++attempt) {
+        regionPriorSamplingOnce(sample);
+        if (!clip_guidance_to_informed_ || !informed_ || insideInformedSet(sample)) return;
+      }
+      // OccMap rejects non-finite states; do not silently escape either domain.
+      sample.setConstant(std::numeric_limits<double>::quiet_NaN());
+      return;
     }
     else if (informed_)
     {
@@ -86,6 +113,7 @@ public:
     {
       uniformSamplingOnce(sample);
     }
+    if (planar_) sample.z() = corridor_z_;
   }
 
   void uniformSamplingOnce(Eigen::Vector3d &sample)
@@ -508,6 +536,8 @@ private:
     sample << point.x(), point.y(), corridor_z_;
   }
 
+  bool planar_ = false;
+  bool clip_guidance_to_informed_ = false;
   Eigen::Vector3d range_, origin_;
   std::mt19937_64 gen_;
   std::uniform_real_distribution<double> uniform_rand_;

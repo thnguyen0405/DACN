@@ -1,5 +1,9 @@
 # C++ implementation and visualization of some sampling-based path planners
 
+## Current weekly demo
+
+See [the current demo guide](../docs/weekly-review/README.md) for the shared JSON map, automatic start/goal, single-planner launch, planar baseline and step replay. The older workflows below remain for reference; the current example uses C0 → C14.
+
 ## Build & Run
 ### Build
 1. git clone git@github.com:ZJU-FAST-Lab/sampling-based-path-finding.git
@@ -76,9 +80,8 @@ roslaunch path_finder test_planners.launch \
   sampling_prior_file:=$(realpath ../convex-region-graph/outputs/sampling_prior.json)
 ```
 
-The launch file enables `region_prior` by default and resolves the sibling
-artifact automatically. It initializes the demo at the C0 centroid; set the
-RViz goal inside any supplied region, such as C6 at x=6.5, y=1.0, z=0.0.
+`demo.launch` enables `region_prior`; `test_planners.launch` defaults to `none`. Both resolve the sibling
+artifact automatically. With `map_file` set, start and goal come from that JSON (currently (1,1,0) and (15,9,0)); `auto_goal:=false` enables manual goals.
 
 ### Hard corridor workflow
 

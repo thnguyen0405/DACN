@@ -1,37 +1,14 @@
-# Demo
-cd "/Users/nguyen/BK/SEM7/DACN/DACN-github/convex-region-graph"
+# Convex-region graph và LLM sampling prior
+
+```bash
 bash run_demo.sh
-
-## Main terminal
-
-```bash
-docker start motion-planner-vnc
 ```
 
-Open:
+Demo offline: map → phân rã lồi → graph và descriptor hình học → mock scoring
+→ sampling prior cho C++ → kiểm thử. Không gọi LLM thật hay train model.
 
-```text
-http://localhost:6080
-```
+Hướng dẫn ROS, chạy từng planner, phát lại từng bước và giải thích luồng map:
+[Demo tuần này](../docs/weekly-review/README.md).
 
-## Terminal 1
-
-```bash
-cd /workspace/sampling-based-path-finding-main
-source /opt/ros/noetic/setup.bash
-source devel/setup.bash
-roslaunch path_finder rviz.launch
-```
-
-## Terminal 2
-
-```bash
-cd /workspace/sampling-based-path-finding-main
-source /opt/ros/noetic/setup.bash
-source devel/setup.bash
-
-roslaunch path_finder test_planners.launch \
-  guidance_mode:=region_prior
-```
-
-Trong RViz chọn **3D Nav Goal** để đặt goal.
+Công thức, rubric và dữ liệu huấn luyện:
+[Tiêu chí chấm điểm](../docs/weekly-review/SCORING.md).

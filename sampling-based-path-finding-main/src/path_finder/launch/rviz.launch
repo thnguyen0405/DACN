@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <launch>
-    <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find path_finder)/launch/traj.rviz"/>
-    <include file="$(find path_finder)/launch/map.launch"/>
+    <arg name="map_file" default="$(find path_finder)/../../../convex-region-graph/example_map.json"/>
+    <node pkg="rviz" type="rviz" name="rviz" output="screen" args="-d $(find path_finder)/launch/traj.rviz">
+    <env name="DISABLE_ROS1_EOL_WARNINGS" value="1"/>
+  </node>
+    <include file="$(find path_finder)/launch/map.launch">
+      <arg name="map_file" value="$(arg map_file)"/>
+    </include>
 </launch>

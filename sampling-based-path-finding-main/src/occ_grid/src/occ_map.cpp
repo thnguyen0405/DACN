@@ -104,6 +104,16 @@ namespace env
     node_.param("occ_map/map_size_y", map_size_(1), 40.0);
     node_.param("occ_map/map_size_z", map_size_(2), 5.0);
     node_.param("occ_map/resolution", resolution_, 0.2);
+    std::string map_file;
+    node_.param<std::string>("map_file", map_file, "");
+    if (!map_file.empty()) {
+      geometry_.load(map_file); use_geometry_ = true;
+      origin_.x()=geometry_.minimum.first; origin_.y()=geometry_.minimum.second;
+      map_size_.x()=geometry_.maximum.first-origin_.x();
+      map_size_.y()=geometry_.maximum.second-origin_.y();
+    }
+    if (!std::isfinite(resolution_) || resolution_<=0 || !map_size_.allFinite() ||
+        (map_size_.array()<=0).any()) throw std::runtime_error("Invalid map dimensions/resolution");
     resolution_inv_ = 1 / resolution_;
 
     is_global_map_valid_ = false;
@@ -144,9 +154,24 @@ namespace env
 
     global_occ_vis_timer_ = node_.createTimer(ros::Duration(5), &OccMap::globalOccVisCallback, this);
     global_cloud_sub_ = node_.subscribe<sensor_msgs::PointCloud2>("/global_cloud", 1, &OccMap::globalCloudCallback, this);
-    glb_occ_pub_ = node_.advertise<sensor_msgs::PointCloud2>("/occ_map/glb_map", 1);
+    glb_occ_pub_ = node_.advertise<sensor_msgs::PointCloud2>("/occ_map/glb_map", 1, true);
 
     glb_cloud_ptr_ = boost::make_shared<pcl::PointCloud<pcl::PointXYZ>>();
+    if (use_geometry_) {
+      // Occupied cell centres are a visualization of the disk-robot forbidden
+      // space. Planning uses exact polygon distances, independent of resolution.
+      for(int x=0;x<grid_size_.x();++x) for(int y=0;y<grid_size_.y();++y) for(int z=0;z<grid_size_.z();++z) {
+        Eigen::Vector3d p; indexToPos(x,y,z,p);
+        bool occupied=!geometry_.valid({p.x(),p.y()});
+        occupancy_buffer_[idxToAddress(x,y,z)]=occupied;
+        if(occupied) glb_cloud_ptr_->points.emplace_back(p.x(),p.y(),p.z());
+      }
+      glb_cloud_ptr_->width=glb_cloud_ptr_->points.size(); glb_cloud_ptr_->height=1;
+      glb_cloud_ptr_->is_dense=true; glb_cloud_ptr_->header.frame_id="map";
+      is_global_map_valid_=true; global_cloud_sub_.shutdown();
+      sensor_msgs::PointCloud2 msg; pcl::toROSMsg(*glb_cloud_ptr_,msg); glb_occ_pub_.publish(msg);
+      ROS_INFO_STREAM("[Map] Shared JSON loaded; exact planar disk collision, clearance=" << geometry_.clearance);
+    }
     cout << "map initialized: " << endl;
   }
 

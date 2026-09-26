@@ -27,6 +27,9 @@
   <exec_depend>boost</exec_depend>
 
 
+  <depend>std_srvs</depend>
+  <exec_depend>tf2_ros</exec_depend>
+
   <export>
 
   </export>

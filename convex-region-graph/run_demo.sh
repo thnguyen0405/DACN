@@ -14,10 +14,12 @@ echo "[2/3] LLM/mock prior -> Dijkstra route -> SVG + C++ sampling prior"
 python3 llm_region_planner.py graph.json \
   --response examples/mock_llm_region_prior.json \
   --svg outputs/llm_route.svg \
+  --map example_map.json \
   --sampling-prior-output outputs/sampling_prior.json
 
 echo "[3/3] Tests"
-python3 -m unittest -v test_build_graph.py test_llm_region_planner.py
+python3 -m unittest discover -v
+python3 export_scoring_dataset.py graph.json --output outputs/scoring_tasks.jsonl
 
 echo
 echo "Done."

@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  std_srvs
   occ_grid
   self_msgs_and_srvs
 )
@@ -45,8 +46,16 @@ target_link_libraries(${PROJECT_NAME}
 if(CATKIN_ENABLE_TESTING)
   catkin_add_gtest(convex_corridor_sampler_test
     test/convex_corridor_sampler_test.cpp
+    test/test_main.cpp
   )
   if(TARGET convex_corridor_sampler_test)
     target_link_libraries(convex_corridor_sampler_test ${catkin_LIBRARIES})
+  endif()
+endif()
+
+if(CATKIN_ENABLE_TESTING)
+  catkin_add_gtest(map_geometry_test test/map_geometry_test.cpp test/test_main.cpp)
+  if(TARGET map_geometry_test)
+    target_link_libraries(map_geometry_test ${catkin_LIBRARIES})
   endif()
 endif()

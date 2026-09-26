@@ -211,3 +211,54 @@ TEST(GuidanceModes, DefaultNoneModeRetainsUniformMapSampling)
     EXPECT_LE(sample.z(), 4.0);
   }
 }
+
+TEST(PlanarBaseline, SamplesUseStartAltitude) {
+  BiasSampler sampler(42);
+  sampler.setSamplingRange(Eigen::Vector3d(0,0,-.5),Eigen::Vector3d(16,10,2));
+  sampler.setPlanar(true);sampler.setGuidanceZ(.15);
+  for(int i=0;i<100;++i) {
+    Eigen::Vector3d p;sampler.samplingOnce(p);
+    EXPECT_DOUBLE_EQ(p.z(),.15); EXPECT_GE(p.x(),0); EXPECT_LT(p.x(),16);
+  }
+}
+
+TEST(InformedRegionPrior, SamplesRespectPriorAndRotatedEllipse) {
+  BiasSampler sampler(42U);
+  sampler.setRegionPrior({scoredSquare("region", 1, -3, -3, 3, 3)});
+  sampler.setRegionPriorZ(0);
+  sampler.setClipGuidanceToInformed(true);
+  const Eigen::Matrix3d rotation = Eigen::AngleAxisd(0.7, Eigen::Vector3d::UnitZ()).toRotationMatrix();
+  const Eigen::Vector3d center(.2,.3,0), radii(2,.5,1);
+  sampler.setInformedTransRot(center, rotation);
+  sampler.setInformedSacling(radii);
+  for(int i=0;i<1000;++i) {
+    Eigen::Vector3d p; sampler.samplingOnce(p);
+    ASSERT_TRUE(p.allFinite());
+    EXPECT_TRUE(sampler.isInsideRegionPrior(p.head<2>()));
+    EXPECT_LE((rotation.transpose()*(p-center)).cwiseQuotient(radii).squaredNorm(),1+1e-12);
+  }
+}
+
+TEST(InformedRegionPrior, DisjointDomainRejectsAndResetAllowsPriorAgain) {
+  BiasSampler sampler(9U);
+  sampler.setRegionPrior({scoredSquare("region", 1, 5, 5, 6, 6)});
+  sampler.setRegionPriorZ(0);
+  sampler.setClipGuidanceToInformed(true);
+  sampler.setInformedTransRot(Eigen::Vector3d::Zero(),Eigen::Matrix3d::Identity());
+  sampler.setInformedSacling(Eigen::Vector3d::Ones());
+  Eigen::Vector3d p; sampler.samplingOnce(p);
+  EXPECT_FALSE(p.allFinite());
+  sampler.reset(); sampler.samplingOnce(p);
+  EXPECT_TRUE(p.allFinite());
+  EXPECT_TRUE(sampler.isInsideRegionPrior(p.head<2>()));
+}
+
+TEST(InformedRegionPrior, OrdinaryPriorIsNotClippedByDefault) {
+  BiasSampler sampler(9U);
+  sampler.setRegionPrior({scoredSquare("region", 1, 5, 5, 6, 6)});
+  sampler.setInformedTransRot(Eigen::Vector3d::Zero(),Eigen::Matrix3d::Identity());
+  sampler.setInformedSacling(Eigen::Vector3d::Ones());
+  Eigen::Vector3d p; sampler.samplingOnce(p);
+  EXPECT_TRUE(p.allFinite());
+  EXPECT_GT(p.x(),5);
+}

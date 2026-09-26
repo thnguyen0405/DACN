@@ -208,7 +208,7 @@ namespace visualization
             auto got = publisher_map_.find(topic);
             if (got == publisher_map_.end())
             {
-                ros::Publisher pub = nh_.advertise<visualization_msgs::Marker>(topic, 10);
+                ros::Publisher pub = nh_.advertise<visualization_msgs::Marker>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker marker;
@@ -228,7 +228,7 @@ namespace visualization
             auto got = publisher_map_.find(topic);
             if (got == publisher_map_.end())
             {
-                ros::Publisher pub = nh_.advertise<sensor_msgs::PointCloud2>(topic, 10);
+                ros::Publisher pub = nh_.advertise<sensor_msgs::PointCloud2>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             pcl::PointCloud<pcl::PointXYZ> point_cloud;
@@ -250,7 +250,7 @@ namespace visualization
             auto got = publisher_map_.find(topic);
             if (got == publisher_map_.end())
             {
-                ros::Publisher pub = nh_.advertise<nav_msgs::Path>(topic, 10);
+                ros::Publisher pub = nh_.advertise<nav_msgs::Path>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             nav_msgs::Path path_msg;
@@ -278,7 +278,7 @@ namespace visualization
             if (got == publisher_map_.end())
             {
                 ros::Publisher pub =
-                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10);
+                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker marker;
@@ -313,7 +313,7 @@ namespace visualization
             if (got == publisher_map_.end())
             {
                 ros::Publisher pub =
-                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10);
+                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker marker;
@@ -344,7 +344,7 @@ namespace visualization
             auto got = publisher_map_.find(topic);
             if (got == publisher_map_.end())
             {
-                ros::Publisher pub = nh_.advertise<visualization_msgs::Marker>(topic, 10);
+                ros::Publisher pub = nh_.advertise<visualization_msgs::Marker>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker marker;
@@ -375,7 +375,7 @@ namespace visualization
             if (got == publisher_map_.end())
             {
                 ros::Publisher pub =
-                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10);
+                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker clear_previous_msg;
@@ -434,7 +434,7 @@ namespace visualization
             if (got == publisher_map_.end())
             {
                 ros::Publisher pub =
-                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10);
+                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker clear_previous_msg;
@@ -480,7 +480,7 @@ namespace visualization
             if (got == publisher_map_.end())
             {
                 ros::Publisher pub =
-                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10);
+                    nh_.advertise<visualization_msgs::MarkerArray>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
             visualization_msgs::Marker clear_previous_msg;
@@ -515,7 +515,7 @@ namespace visualization
         void registe(const TOPIC& topic) {
             auto got = publisher_map_.find(topic);
             if (got == publisher_map_.end()) {
-                ros::Publisher pub = nh_.advertise<TOPIC_TYPE>(topic, 10);
+                ros::Publisher pub = nh_.advertise<TOPIC_TYPE>(topic, 10, true);
                 publisher_map_[topic] = pub;
             }
         }

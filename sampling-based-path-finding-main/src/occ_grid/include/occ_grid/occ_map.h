@@ -22,6 +22,8 @@ OF SUCH DAMAGE.
 #define _OCC_MAP_H
 
 #include "raycast.h"
+#include "map_geometry.h"
+#include <functional>
 
 #include <pcl/point_types.h>
 #include <pcl_conversions/pcl_conversions.h>
@@ -44,40 +46,40 @@ namespace env
     ~OccMap(){};
     void init(const ros::NodeHandle &nh);
 
+    const MapGeometry2D &geometry() const { return geometry_; }
+    bool usesGeometry() const { return use_geometry_; }
     bool mapValid() { return is_global_map_valid_; }
     double getResolution() { return resolution_; }
     Eigen::Vector3d getOrigin() { return origin_; }
     Eigen::Vector3d getMapSize() { return map_size_; };
     bool isStateValid(const Eigen::Vector3d &pos) const
     {
+      if (!pos.allFinite()) return false;
+      if (use_geometry_)
+        return pos.z() >= min_range_.z() && pos.z() < max_range_.z() &&
+               geometry_.valid({pos.x(), pos.y()});
       Eigen::Vector3i idx = posToIndex(pos);
       if (!isInMap(idx))
         return false;
       return (occupancy_buffer_[idxToAddress(idx)] == false);
     };
-    bool isSegmentValid(const Eigen::Vector3d &p0, const Eigen::Vector3d &p1, double max_dist = DBL_MAX) const
+    std::function<void(const Eigen::Vector3d &,const Eigen::Vector3d &,bool)> segment_observer;
+    bool isSegmentValid(const Eigen::Vector3d &p0, const Eigen::Vector3d &p1, double max_dist = DBL_MAX) const {
+      bool result=checkSegment(p0,p1,max_dist);
+      if(segment_observer) segment_observer(p0,p1,result);
+      return result;
+    }
+    bool checkSegment(const Eigen::Vector3d &p0, const Eigen::Vector3d &p1, double max_dist) const
     {
-      Eigen::Vector3d dp = p1 - p0;
-      double dist = dp.norm();
-      if (dist > max_dist)
-      {
-        return false;
-      }
+      if (!isStateValid(p0) || !isStateValid(p1) || (p1-p0).norm()>max_dist) return false;
+      if (use_geometry_)
+        return geometry_.segmentValid({p0.x(),p0.y()},{p1.x(),p1.y()});
+      // Legacy cloud mode: align ray traversal with the occupancy-grid origin.
       RayCaster raycaster;
-      bool need_ray = raycaster.setInput(p0 / resolution_, p1 / resolution_); //(ray start, ray end)
-      if (!need_ray)
-        return true;
-      Eigen::Vector3d half = Eigen::Vector3d(0.5, 0.5, 0.5);
-      Eigen::Vector3d ray_pt;
-      if (!raycaster.step(ray_pt)) // skip the ray start point
-        return true;
-      while (raycaster.step(ray_pt))
-      {
-        Eigen::Vector3d tmp = (ray_pt + half) * resolution_;
-        if (!this->isStateValid(tmp))
-        {
-          return false;
-        }
+      if (!raycaster.setInput((p0-origin_)/resolution_, (p1-origin_)/resolution_)) return true;
+      Eigen::Vector3d cell;
+      while (raycaster.step(cell)) {
+        if (!isStateValid(origin_+(cell+Eigen::Vector3d::Constant(0.5))*resolution_)) return false;
       }
       return true;
     }
@@ -85,6 +87,8 @@ namespace env
     typedef shared_ptr<OccMap> Ptr;
 
   private:
+    MapGeometry2D geometry_;
+    bool use_geometry_ = false;
     std::vector<bool> occupancy_buffer_;
 
     // map property

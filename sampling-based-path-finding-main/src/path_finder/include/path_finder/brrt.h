@@ -24,6 +24,7 @@ OF SUCH DAMAGE.
 #include "occ_grid/occ_map.h"
 #include "visualization/visualization.hpp"
 #include "sampler.h"
+#include "planner_trace.h"
 #include "node.h"
 #include "kdtree.h"
 
@@ -48,6 +49,9 @@ namespace path_plan
       ROS_WARN_STREAM("[BRRT] param: max_tree_node_nums: " << max_tree_node_nums_);
 
       sampler_.setSamplingRange(mapPtr->getOrigin(), mapPtr->getMapSize());
+      bool planar; int seed;
+      nh_.param("planar", planar, true); nh_.param("random_seed", seed, 42);
+      sampler_.setPlanar(planar); sampler_.setRandomSeed(static_cast<std::uint64_t>(seed));
 
       valid_tree_node_nums_ = 0;
       nodes_pool_.resize(max_tree_node_nums_);
@@ -62,6 +66,8 @@ namespace path_plan
     {
       reset();
       sampler_.setGuidanceZ(s.z());
+      bool planar; nh_.param("planar", planar, true);
+      if (planar && std::abs(s.z()-g.z())>1e-9) { ROS_ERROR("Planar start and goal must share z"); return false; }
       std::string corridor_error;
       if (!sampler_.validateGuidanceEndpoints(s, g, &corridor_error))
       {
@@ -187,6 +193,7 @@ namespace path_plan
       new_node_ptr->parent = parent;
       parent->children.push_back(new_node_ptr);
       new_node_ptr->x = state;
+      PlannerTrace::instance().record("add_node", parent->x, state);
       new_node_ptr->cost_from_start = cost_from_start;
       new_node_ptr->cost_from_parent = cost_from_parent;
       return new_node_ptr;
@@ -196,6 +203,7 @@ namespace path_plan
     {
       if (node->parent)
         node->parent->children.remove(node); //DON'T FORGET THIS, remove it form its parent's children list
+      PlannerTrace::instance().record("rewire", parent->x, node->x);
       node->parent = parent;
       node->cost_from_parent = cost_from_parent;
       node->cost_from_start = parent->cost_from_start + cost_from_parent;
@@ -297,10 +305,12 @@ namespace path_plan
         /* random sampling */
         Eigen::Vector3d x_rand;
         sampler_.samplingOnce(x_rand);
+        PlannerTrace::instance().record("sample", x_rand, x_rand);
         
         // samplingOnce(x_rand);
         if (!map_ptr_->isStateValid(x_rand))
         {
+          PlannerTrace::instance().record("sample_reject", x_rand, x_rand);
           continue;
         }
 
@@ -315,7 +325,9 @@ namespace path_plan
         kd_res_free(p_nearestA);
 
         /* Extend treeA */
+        PlannerTrace::instance().record("nearest", nearest_nodeA->x, x_rand);
         Eigen::Vector3d x_new = steer(nearest_nodeA->x, x_rand, steer_length_);
+        PlannerTrace::instance().record("steer", nearest_nodeA->x, x_new);
         if ( (!map_ptr_->isStateValid(x_new)) || (!map_ptr_->isSegmentValid(nearest_nodeA->x, x_new)) ) 
         {
           /* Steer Trapped */
@@ -417,7 +429,7 @@ namespace path_plan
           tree_nodes.push_back(node_p);
         }
         vis_ptr_->visualize_balls(tree_nodes, "tree_vertice", visualization::Color::blue, 1.0);
-        vis_ptr_->visualize_pairline(edges, "tree_edges", visualization::Color::red, 0.06);
+        vis_ptr_->visualize_pairline(edges, "tree_edges", visualization::Color::red, 0.02);
     }
 
     void sampleWholeTree(const RRTNode3DPtr &root, vector<Eigen::Vector3d> &vertice, vector<std::pair<Eigen::Vector3d, Eigen::Vector3d>> &edges)

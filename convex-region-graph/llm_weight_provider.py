@@ -67,10 +67,12 @@ def graph_prompt_data(
     """Build the compact, topology-constrained data sent to the model."""
 
     return {
+        "planning": graph.get("planning", {}),
+        "descriptor_metadata": graph.get("descriptor_metadata", {}),
         "start_region": start_region,
         "goal_region": goal_region,
         "regions": [
-            {"id": vertex["id"], "centroid": vertex["centroid"]}
+            {"id": vertex["id"], "centroid": vertex["centroid"], "descriptors": vertex.get("descriptors", {})}
             for vertex in graph["vertices"]
         ],
         "edges": [
@@ -78,6 +80,9 @@ def graph_prompt_data(
                 "source": edge["source"],
                 "target": edge["target"],
                 "relation": edge["relation"],
+                "portal_width": edge.get("portal_width"),
+                "safe_portal_width": edge.get("safe_portal_width"),
+                "traversability": edge.get("traversability"),
             }
             for edge in graph["directed_edges"]
         ],

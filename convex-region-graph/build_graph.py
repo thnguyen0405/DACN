@@ -632,10 +632,14 @@ def build_pipeline(data: dict, tol: float = 1e-9) -> tuple[dict, dict, dict | No
         )
         graph["pipeline"] = "map -> ACD -> convex regions -> graph"
         graph["planning"] = map_geometry["planning"]
+        from region_descriptors import enrich_graph
+        enrich_graph(graph, map_geometry)
         return graph, regions_data, map_geometry
     if "regions" in data:
         graph = build_graph(data, tol)
         graph["pipeline"] = "convex regions -> graph"
+        from region_descriptors import enrich_graph
+        enrich_graph(graph)
         return graph, data, None
     raise ValueError("Input must contain either 'map' or 'regions'")
 

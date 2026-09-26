@@ -24,6 +24,7 @@ OF SUCH DAMAGE.
 #include "occ_grid/occ_map.h"
 #include "visualization/visualization.hpp"
 #include "sampler.h"
+#include "planner_trace.h"
 #include "node.h"
 #include "kdtree.h"
 
@@ -37,7 +38,7 @@ namespace path_plan
   {
   public:
     RRTStar(){};
-    RRTStar(const ros::NodeHandle &nh, const env::OccMap::Ptr &mapPtr) : nh_(nh), map_ptr_(mapPtr)
+    RRTStar(const ros::NodeHandle &nh, const env::OccMap::Ptr &mapPtr, bool informed_prior = false) : nh_(nh), map_ptr_(mapPtr)
     {
       nh_.param("RRT_Star/steer_length", steer_length_, 0.0);
       nh_.param("RRT_Star/search_radius", search_radius_, 0.0);
@@ -45,6 +46,12 @@ namespace path_plan
       nh_.param("RRT_Star/max_tree_node_nums", max_tree_node_nums_, 0);
       nh_.param("RRT_Star/use_informed_sampling", use_informed_sampling_, true);
       nh_.param("RRT_Star/use_GUILD_sampling", use_GUILD_sampling_, true);
+      if (informed_prior) {
+        use_informed_sampling_ = true;
+        use_GUILD_sampling_ = false;
+        sampler_.setClipGuidanceToInformed(true);
+        ROS_INFO("[Informed RRT*] Region-prior samples are clipped to the informed set after the first solution");
+      }
       ROS_WARN_STREAM("[RRT*] param: steer_length: " << steer_length_);
       ROS_WARN_STREAM("[RRT*] param: search_radius: " << search_radius_);
       ROS_WARN_STREAM("[RRT*] param: search_time: " << search_time_);
@@ -53,6 +60,9 @@ namespace path_plan
       ROS_WARN_STREAM("[RRT*] param: use_GUILD_sampling: " << use_GUILD_sampling_);
 
       sampler_.setSamplingRange(mapPtr->getOrigin(), mapPtr->getMapSize());
+      bool planar; int seed;
+      nh_.param("planar", planar, true); nh_.param("random_seed", seed, 42);
+      sampler_.setPlanar(planar); sampler_.setRandomSeed(static_cast<std::uint64_t>(seed));
 
       valid_tree_node_nums_ = 0;
       nodes_pool_.resize(max_tree_node_nums_);
@@ -67,6 +77,8 @@ namespace path_plan
     {
       reset();
       sampler_.setGuidanceZ(s.z());
+      bool planar; nh_.param("planar", planar, true);
+      if (planar && std::abs(s.z()-g.z())>1e-9) { ROS_ERROR("Planar start and goal must share z"); return false; }
       std::string corridor_error;
       if (!sampler_.validateGuidanceEndpoints(s, g, &corridor_error))
       {
@@ -213,6 +225,7 @@ namespace path_plan
       new_node_ptr->parent = parent;
       parent->children.push_back(new_node_ptr);
       new_node_ptr->x = state;
+      PlannerTrace::instance().record("add_node", parent->x, state);
       new_node_ptr->cost_from_start = cost_from_start;
       new_node_ptr->cost_from_parent = cost_from_parent;
       return new_node_ptr;
@@ -222,6 +235,7 @@ namespace path_plan
     {
       if (node->parent)
         node->parent->children.remove(node); // DON'T FORGET THIS, remove it form its parent's children list
+      PlannerTrace::instance().record("rewire", parent->x, node->x);
       node->parent = parent;
       node->cost_from_parent = cost_from_parent;
       node->cost_from_start = parent->cost_from_start + cost_from_parent;
@@ -274,9 +288,11 @@ namespace path_plan
         /* biased random sampling */
         Eigen::Vector3d x_rand;
         sampler_.samplingOnce(x_rand);
+        PlannerTrace::instance().record("sample", x_rand, x_rand);
         // samplingOnce(x_rand);
         if (!map_ptr_->isStateValid(x_rand))
         {
+          PlannerTrace::instance().record("sample_reject", x_rand, x_rand);
           continue;
         }
 
@@ -289,7 +305,9 @@ namespace path_plan
         RRTNode3DPtr nearest_node = (RRTNode3DPtr)kd_res_item_data(p_nearest);
         kd_res_free(p_nearest);
 
+        PlannerTrace::instance().record("nearest", nearest_node->x, x_rand);
         Eigen::Vector3d x_new = steer(nearest_node->x, x_rand, steer_length_);
+        PlannerTrace::instance().record("steer", nearest_node->x, x_new);
         if (!map_ptr_->isSegmentValid(nearest_node->x, x_new))
         {
           continue;
@@ -471,14 +489,14 @@ namespace path_plan
       std::vector<visualization::BALL> balls;
       balls.reserve(vertice.size());
       visualization::BALL node_p;
-      node_p.radius = 0.2;
+      node_p.radius = 0.03;
       for (size_t i = 0; i < vertice.size(); ++i)
       {
         node_p.center = vertice[i];
         balls.push_back(node_p);
       }
       vis_ptr_->visualize_balls(balls, "tree_vertice", visualization::Color::blue, 1.0);
-      vis_ptr_->visualize_pairline(edges, "tree_edges", visualization::Color::green, 0.1);
+      vis_ptr_->visualize_pairline(edges, "tree_edges", visualization::Color::green, 0.02);
 
       if (goal_found)
       {

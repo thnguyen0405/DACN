@@ -1,0 +1,250 @@
+{
+  "map": "convex-region-graph/example_map.json",
+  "prior": "convex-region-graph/outputs/sampling_prior.json",
+  "planar": true,
+  "informed": false,
+  "search_time": 0.5,
+  "results": [
+    {
+      "planner": "rrt",
+      "mode": "none",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.0493668,
+      "path_length": 19.5119
+    },
+    {
+      "planner": "rrt",
+      "mode": "none",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.0461657,
+      "path_length": 19.5904
+    },
+    {
+      "planner": "rrt",
+      "mode": "none",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.0461512,
+      "path_length": 18.1744
+    },
+    {
+      "planner": "rrt",
+      "mode": "region_prior",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.0377661,
+      "path_length": 20.0268
+    },
+    {
+      "planner": "rrt",
+      "mode": "region_prior",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.0444675,
+      "path_length": 19.1499
+    },
+    {
+      "planner": "rrt",
+      "mode": "region_prior",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.0424699,
+      "path_length": 18.6585
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "none",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.504153,
+      "path_length": 16.4869
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "none",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.50589,
+      "path_length": 16.4992
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "none",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.504351,
+      "path_length": 16.4852
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "region_prior",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.503711,
+      "path_length": 16.4882
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "region_prior",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.505786,
+      "path_length": 16.5028
+    },
+    {
+      "planner": "rrt_star",
+      "mode": "region_prior",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.507286,
+      "path_length": 16.4937
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "none",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.505518,
+      "path_length": 16.4861
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "none",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.504829,
+      "path_length": 16.4815
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "none",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.50527,
+      "path_length": 16.4759
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "region_prior",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.505551,
+      "path_length": 16.4786
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "region_prior",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.505063,
+      "path_length": 16.4866
+    },
+    {
+      "planner": "rrt_sharp",
+      "mode": "region_prior",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.504673,
+      "path_length": 16.4881
+    },
+    {
+      "planner": "brrt",
+      "mode": "none",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.0362935,
+      "path_length": 17.1665
+    },
+    {
+      "planner": "brrt",
+      "mode": "none",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.0607549,
+      "path_length": 17.7528
+    },
+    {
+      "planner": "brrt",
+      "mode": "none",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.0645241,
+      "path_length": 20.0209
+    },
+    {
+      "planner": "brrt",
+      "mode": "region_prior",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.0613501,
+      "path_length": 17.4853
+    },
+    {
+      "planner": "brrt",
+      "mode": "region_prior",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.0446636,
+      "path_length": 20.4107
+    },
+    {
+      "planner": "brrt",
+      "mode": "region_prior",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.0563108,
+      "path_length": 18.2753
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "none",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.504009,
+      "path_length": 16.4868
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "none",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.505952,
+      "path_length": 16.5015
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "none",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.504706,
+      "path_length": 16.476
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "region_prior",
+      "seed": 42,
+      "success": true,
+      "wall_seconds": 0.504375,
+      "path_length": 16.4882
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "region_prior",
+      "seed": 43,
+      "success": true,
+      "wall_seconds": 0.503463,
+      "path_length": 16.5029
+    },
+    {
+      "planner": "brrt_star",
+      "mode": "region_prior",
+      "seed": 44,
+      "success": true,
+      "wall_seconds": 0.503654,
+      "path_length": 16.4937
+    }
+  ],
+  "prior_source": "offline mock_llm_region_prior.json; no live LLM call"
+}

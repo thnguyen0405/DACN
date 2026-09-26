@@ -116,7 +116,7 @@ def prepare_safe_portal_graph(raw_graph: dict[str, Any]) -> dict[str, Any]:
     planning = raw_graph.get("planning")
     if planning is not None and not isinstance(planning, dict):
         raise PlanningError("Graph planning metadata must be an object")
-    return {"directed": True, "vertices": vertices, "directed_edges": edges, "planning": planning or {}}
+    return {**raw_graph, "directed": True, "vertices": vertices, "directed_edges": edges, "planning": planning or {}}
 
 
 def resolve_region(graph: dict[str, Any], role: str, explicit_id: str | None) -> str:
@@ -308,18 +308,45 @@ def compact_llm_input(graph: dict[str, Any], start: str, goal: str) -> dict[str,
     return {
         "start_region": start,
         "goal_region": goal,
+        "planning": graph.get("planning", {}),
+        "descriptor_metadata": graph.get("descriptor_metadata", {}),
+        "map_metrics": graph.get("map_metrics", {}),
         "regions": [
-            {"id": vertex["id"], "centroid": vertex["centroid"], "area": vertex.get("area")}
+            {"id": vertex["id"], "centroid": vertex["centroid"], "area": vertex.get("area"),
+             "descriptors": vertex.get("descriptors", {})}
             for vertex in graph["vertices"]
         ],
         "safe_portals": [
             {
                 "source": edge["source"], "target": edge["target"],
                 "width": edge["safe_portal_width"], "clearance": edge.get("required_clearance", 0.0),
+                "portal": edge.get("portal"), "safe_portal": edge.get("safe_portal"),
+                "portal_width": edge.get("portal_width"),
+                "traversability": edge.get("traversability"),
+                "safe_traversability": edge.get("safe_traversability"),
             }
             for edge in graph["directed_edges"]
         ],
     }
+
+
+def response_text(payload: dict[str, Any]) -> str:
+    """Read raw Responses REST output (output_text is an SDK convenience)."""
+    if payload.get("status") in ("incomplete", "failed", "cancelled"):
+        raise PlanningError("OpenAI response did not complete")
+    parts = []
+    for item in payload.get("output", []):
+        if item.get("type") != "message":
+            continue
+        for content in item.get("content", []):
+            if content.get("type") == "refusal":
+                raise PlanningError("OpenAI refused this scoring request")
+            if content.get("type") == "output_text" and isinstance(content.get("text"), str):
+                parts.append(content["text"])
+    text = "".join(parts) or payload.get("output_text")
+    if not isinstance(text, str) or not text.strip():
+        raise PlanningError("OpenAI response contains no text output")
+    return text
 
 
 def call_openai(graph: dict[str, Any], start: str, goal: str, prompt_path: Path, model: str, api_key: str) -> dict[str, Any]:
@@ -350,12 +377,10 @@ def call_openai(graph: dict[str, Any], start: str, goal: str, prompt_path: Path,
         with urllib.request.urlopen(request, timeout=60) as http_response:
             payload = json.loads(http_response.read().decode("utf-8"))
     except urllib.error.HTTPError as exc:
-        raise PlanningError(f"OpenAI API returned HTTP {exc.code}: {exc.read().decode('utf-8', errors='replace')}") from exc
+        raise PlanningError(f"OpenAI API returned HTTP {exc.code}") from exc
     except (urllib.error.URLError, TimeoutError, json.JSONDecodeError) as exc:
         raise PlanningError(f"OpenAI API request failed: {exc}") from exc
-    output_text = payload.get("output_text")
-    if not isinstance(output_text, str):
-        raise PlanningError("OpenAI response did not contain output_text")
+    output_text = response_text(payload)
     try:
         response = json.loads(output_text)
     except json.JSONDecodeError as exc:

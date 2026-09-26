@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
 )
 
+find_package(Boost REQUIRED)
 find_package(Eigen3 REQUIRED)
 find_package(PCL 1.7 REQUIRED)
 
@@ -18,7 +19,7 @@ catkin_package(
  INCLUDE_DIRS include
  LIBRARIES occ_grid
  CATKIN_DEPENDS roscpp std_msgs 
-#  DEPENDS system_lib
+ DEPENDS Boost
 ) 
 
 include_directories( 
@@ -26,6 +27,7 @@ include_directories(
     ${catkin_INCLUDE_DIRS}
     ${PCL_INCLUDE_DIRS}
     ${EIGEN3_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS}
 )
 
 link_directories(${PCL_LIBRARY_DIRS})
