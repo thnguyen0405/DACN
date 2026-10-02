@@ -49,6 +49,7 @@ public:
     GUILD_informed_ = false;
     corridor_sampling_ = false;
     region_prior_sampling_ = false;
+    sequence_guided_sampling_ = false;
     corridor_z_ = 0.0;
     corridor_total_area_ = 0.0;
   };
@@ -84,7 +85,16 @@ public:
 
   void samplingOnce(Eigen::Vector3d &sample)
   {
-    if (corridor_sampling_)
+    if (sequence_guided_sampling_)
+    {
+      if (uniform_rand_(gen_) >= sequence_guided_probability_)
+        uniformSamplingOnce(sample);
+      else if (!sequence_portals_.empty() && uniform_rand_(gen_) < sequence_portal_probability_)
+        sequencePortalSamplingOnce(sample);
+      else
+        regionPriorSamplingOnce(sample);
+    }
+    else if (corridor_sampling_)
     {
       corridorSamplingOnce(sample);
     }
@@ -188,6 +198,7 @@ public:
     corridor_cumulative_areas_ = cumulative_areas;
     corridor_total_area_ = total_area;
     region_prior_sampling_ = false;
+    sequence_guided_sampling_ = false;
     prior_regions_.clear();
     corridor_sampling_ = true;
   }
@@ -235,7 +246,7 @@ public:
     {
       if (!seen_ids.insert(region.id).second)
         throw std::invalid_argument("Duplicate region-prior id '" + region.id + "'");
-      if (!std::isfinite(region.score) || region.score <= 0.0 || region.score > 1.0)
+      if (!std::isfinite(region.score) || region.score < 0.0 || region.score > 1.0)
         throw std::invalid_argument("Region-prior score for '" + region.id +
                                     "' must be in (0, 1]");
       path_plan::ConvexRegion2D geometry{region.id, region.polygon};
@@ -263,9 +274,12 @@ public:
     }
 
     prior_regions_ = prepared_regions;
+    if (std::all_of(scores.begin(), scores.end(), [](double value) { return value <= 0.0; }))
+      throw std::invalid_argument("Region prior must contain at least one positive score");
     prior_region_distribution_ =
         std::discrete_distribution<std::size_t>(scores.begin(), scores.end());
     corridor_sampling_ = false;
+    sequence_guided_sampling_ = false;
     corridor_regions_.clear();
     corridor_triangles_.clear();
     corridor_cumulative_areas_.clear();
@@ -276,6 +290,7 @@ public:
   void clearRegionPrior()
   {
     region_prior_sampling_ = false;
+    sequence_guided_sampling_ = false;
     prior_regions_.clear();
     prior_region_distribution_ = std::discrete_distribution<std::size_t>();
   }
@@ -284,6 +299,23 @@ public:
   {
     return region_prior_sampling_;
   }
+
+  void setSequenceGuidance(const path_plan::SequenceSamplingStrategy &strategy)
+  {
+    if (strategy.sequence.empty() || strategy.regions.size() != strategy.sequence.size())
+      throw std::invalid_argument("Sequence guidance needs ordered regions");
+    if (!std::isfinite(strategy.guided_probability) || strategy.guided_probability < 0.0 || strategy.guided_probability > 1.0 ||
+        !std::isfinite(strategy.portal_probability) || strategy.portal_probability < 0.0 || strategy.portal_probability > 1.0)
+      throw std::invalid_argument("Sequence guidance probabilities must be in [0, 1]");
+    setRegionPrior(strategy.regions);
+    sequence_regions_ = strategy.sequence;
+    sequence_portals_ = strategy.portals;
+    sequence_guided_probability_ = strategy.guided_probability;
+    sequence_portal_probability_ = strategy.portal_probability;
+    sequence_guided_sampling_ = true;
+  }
+
+  bool sequenceGuidedSamplingEnabled() const { return sequence_guided_sampling_; }
 
   bool isInsideCorridor(const Eigen::Vector2d &point, double epsilon = 1e-9) const
   {
@@ -338,6 +370,15 @@ public:
   {
     if (corridor_sampling_)
       return validateCorridorEndpoints(start, goal, error, epsilon);
+    if (sequence_guided_sampling_)
+    {
+      if (prior_regions_.empty()) return false;
+      if (!pointInConvexPolygon(start.head<2>(), prior_regions_.front().polygon, epsilon))
+      { if (error) *error = "start is not inside the first sequence region"; return false; }
+      if (!pointInConvexPolygon(goal.head<2>(), prior_regions_.back().polygon, epsilon))
+      { if (error) *error = "goal is not inside the final sequence region"; return false; }
+      return true;
+    }
     if (!region_prior_sampling_)
       return true;
 
@@ -536,6 +577,16 @@ private:
     sample << point.x(), point.y(), corridor_z_;
   }
 
+  void sequencePortalSamplingOnce(Eigen::Vector3d &sample)
+  {
+    const std::size_t index = std::min(
+        static_cast<std::size_t>(uniform_rand_(gen_) * sequence_portals_.size()),
+        sequence_portals_.size() - 1);
+    const auto &portal = sequence_portals_[index];
+    const Eigen::Vector2d point = portal.start + uniform_rand_(gen_) * (portal.end - portal.start);
+    sample << point.x(), point.y(), corridor_z_;
+  }
+
   bool planar_ = false;
   bool clip_guidance_to_informed_ = false;
   Eigen::Vector3d range_, origin_;
@@ -569,6 +620,11 @@ private:
   bool region_prior_sampling_;
   std::vector<PriorRegion> prior_regions_;
   std::discrete_distribution<std::size_t> prior_region_distribution_;
+  bool sequence_guided_sampling_;
+  double sequence_guided_probability_ = 0.8;
+  double sequence_portal_probability_ = 0.2;
+  std::vector<std::string> sequence_regions_;
+  std::vector<path_plan::SafePortal2D> sequence_portals_;
 };
 
 #endif

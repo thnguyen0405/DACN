@@ -71,6 +71,8 @@ namespace path_plan
     bool plan(const Eigen::Vector3d &s, const Eigen::Vector3d &g)
     {
       reset();
+      last_iterations_ = 0;
+      last_planning_time_ = 0.0;
       sampler_.setGuidanceZ(s.z());
       bool planar; nh_.param("planar", planar, true);
       if (planar && std::abs(s.z()-g.z())>1e-9) { ROS_ERROR("Planar start and goal must share z"); return false; }
@@ -126,6 +128,14 @@ namespace path_plan
       return solution_cost_time_pair_list_;
     }
 
+    int getIterationCount() const { return last_iterations_; }
+    int getNodesAdded() const { return std::max(0, valid_tree_node_nums_ - 2); }
+    double getTimeToFirstSolution() const
+    {
+      return solution_cost_time_pair_list_.empty() ? -1.0 : solution_cost_time_pair_list_.front().second;
+    }
+    double getPlanningTime() const { return last_planning_time_; }
+
     void setVisualizer(const std::shared_ptr<visualization::Visualization> &visPtr)
     {
       vis_ptr_ = visPtr;
@@ -144,6 +154,11 @@ namespace path_plan
     void setRegionPrior(const std::vector<ScoredConvexRegion2D> &regions)
     {
       sampler_.setRegionPrior(regions);
+    }
+
+    void setSequenceGuidance(const SequenceSamplingStrategy &strategy)
+    {
+      sampler_.setSequenceGuidance(strategy);
     }
 
     void clearRegionPrior()
@@ -173,6 +188,8 @@ namespace path_plan
     double search_time_;
     int max_tree_node_nums_;
     int valid_tree_node_nums_;
+    int last_iterations_ = 0;
+    double last_planning_time_ = 0.0;
     double first_path_use_time_;
     double final_path_use_time_;
 
@@ -287,6 +304,7 @@ namespace path_plan
       int idx = 0;
       for (idx = 0; (ros::Time::now() - rrt_start_time).toSec() < search_time_ && valid_tree_node_nums_ < max_tree_node_nums_; ++idx)
       {
+        last_iterations_ = idx + 1;
         /* biased random sampling */
         Eigen::Vector3d x_rand;
         sampler_.samplingOnce(x_rand);
@@ -528,6 +546,8 @@ namespace path_plan
         /* end of rewire */
       }
       /* end of sample once */
+
+      last_planning_time_ = (ros::Time::now() - rrt_start_time).toSec();
 
       vector<Eigen::Vector3d> vertice;
       vector<std::pair<Eigen::Vector3d, Eigen::Vector3d>> edges;

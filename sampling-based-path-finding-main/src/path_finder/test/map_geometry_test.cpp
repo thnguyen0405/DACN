@@ -40,3 +40,21 @@ TEST(MapGeometry, RejectMalformedGeometry) {
   m=room();m.boundary={{0,0},{4,4},{0,4},{4,0}};
   EXPECT_THROW(m.validateGeometry(),std::runtime_error);
 }
+
+TEST(MapGeometry, PointRobotConfigurationSpaceBoundaries) {
+  auto m=room();
+  EXPECT_FALSE(m.valid({3.75,5.0}));       // inside radius+margin inflated obstacle
+  EXPECT_TRUE(m.valid({3.69,5.0}));
+  EXPECT_FALSE(m.segmentValid({1,3.75},{9,3.75}));
+  EXPECT_FALSE(m.valid({0.29,2.0}));       // workspace exterior is inflated inward
+  EXPECT_TRUE(m.valid({0.31,2.0}));
+}
+
+TEST(MapGeometry, CorridorNarrowerThanDiameterIsBlocked) {
+  MapGeometry2D m;
+  m.boundary={{0,0},{5,0},{5,5},{0,5}};
+  m.obstacles={{{0.1,2.0},{4.9,2.0},{4.9,2.4},{0.1,2.4}},
+               {{0.1,2.9},{4.9,2.9},{4.9,3.3},{0.1,3.3}}};
+  m.clearance=.3;
+  EXPECT_FALSE(m.valid({2.5,2.65}));       // 0.5 m gap < 2 * 0.3 m
+}

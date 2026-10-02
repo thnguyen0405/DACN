@@ -18,6 +18,7 @@
 <arg name="guidance_mode" default="none" />
   <arg name="corridor_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
   <arg name="sampling_prior_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json" />
+  <arg name="sequence_strategy_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
   <arg name="initial_start_x" default="1.0" />
   <arg name="initial_start_y" default="1.0" />
   <arg name="initial_start_z" default="0.0" />
@@ -58,6 +59,7 @@
     <param name="guidance_mode" value="$(arg guidance_mode)" type="str"/>
     <param name="corridor_file" value="$(arg corridor_file)" type="str"/>
     <param name="sampling_prior_file" value="$(arg sampling_prior_file)" type="str"/>
+    <param name="sequence_strategy_file" value="$(arg sequence_strategy_file)" type="str"/>
     <param name="initial_start_x" value="$(arg initial_start_x)" type="double"/>
     <param name="initial_start_y" value="$(arg initial_start_y)" type="double"/>
     <param name="initial_start_z" value="$(arg initial_start_z)" type="double"/>

@@ -212,6 +212,44 @@ TEST(GuidanceModes, DefaultNoneModeRetainsUniformMapSampling)
   }
 }
 
+TEST(SequenceGuidedSampling, PreservesBiasAndGlobalExploration)
+{
+  BiasSampler sampler(20260930U);
+  sampler.setSamplingRange(Eigen::Vector3d(0.0, 0.0, 0.0), Eigen::Vector3d(10.0, 1.0, 1.0));
+  sampler.setPlanar(true);
+  sampler.setGuidanceZ(0.0);
+  path_plan::SequenceSamplingStrategy strategy;
+  strategy.start_region = "low";
+  strategy.goal_region = "high";
+  strategy.sequence = {"low", "high"};
+  strategy.regions = {scoredSquare("low", 0.1, 0.0, 0.0, 1.0, 1.0),
+                      scoredSquare("high", 0.9, 2.0, 0.0, 3.0, 1.0)};
+  strategy.guided_probability = 0.8;
+  strategy.portal_probability = 0.0;
+  sampler.setSequenceGuidance(strategy);
+
+  int low = 0, high = 0, outside = 0;
+  for (int i = 0; i < 30000; ++i)
+  {
+    Eigen::Vector3d sample; sampler.samplingOnce(sample);
+    if (sample.x() <= 1.0) ++low;
+    else if (sample.x() >= 2.0 && sample.x() <= 3.0) ++high;
+    else ++outside;
+  }
+  EXPECT_TRUE(sampler.sequenceGuidedSamplingEnabled());
+  EXPECT_GT(high, low * 4);       // sequence score changes the guided distribution
+  EXPECT_GT(outside, 3000);       // configurable global exploration remains active
+  EXPECT_LT(outside, 8000);
+}
+
+TEST(SequenceGuidedSampling, InvalidSequenceIsRejected)
+{
+  BiasSampler sampler(1U);
+  path_plan::SequenceSamplingStrategy strategy;
+  strategy.guided_probability = 0.8;
+  EXPECT_THROW(sampler.setSequenceGuidance(strategy), std::invalid_argument);
+}
+
 TEST(PlanarBaseline, SamplesUseStartAltitude) {
   BiasSampler sampler(42);
   sampler.setSamplingRange(Eigen::Vector3d(0,0,-.5),Eigen::Vector3d(16,10,2));

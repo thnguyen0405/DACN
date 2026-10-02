@@ -30,6 +30,11 @@ and BRRT*:
   regions remain available. A region is selected with probability
   `score_i / sum(scores)`, then a point is sampled uniformly by area inside
   that polygon. Start and goal may lie in any supplied region.
+- `sequence_guided`: samples from ordered Dijkstra regions (weighted by score)
+  and their consecutive safe portals with a configurable guided probability;
+  remaining draws use the original global workspace sampler. The demo artifact
+  uses 80% guided / 20% global exploration and 20% portal draws within guided
+  sampling. These are experiment settings, not claimed optima.
 
 Both guided modes set every sample z to the current planner start z. Neither
 mode falls back to global-map sampling when its configured file is missing or
@@ -109,6 +114,21 @@ roslaunch path_finder test_planners.launch \
 Use `guidance_mode:=none` for the original planner comparison. Older direct
 node configurations that omit `guidance_mode` and set
 `use_convex_corridor:=true` are still recognized for compatibility.
+
+Run the three-mode benchmark (same map, budgets and seeds):
+
+```bash
+python3 scripts/benchmark.py \
+  --map ../convex-region-graph/example_map.json \
+  --prior ../convex-region-graph/outputs/sampling_prior.json \
+  --sequence-strategy ../convex-region-graph/outputs/sampling_corridor.json \
+  --repeats 10 --search-time 1.0 \
+  --output benchmark.json
+```
+
+The script writes per-run and aggregate JSON plus `benchmark.csv`; failed and
+timed-out runs keep path metrics null. Provider/API time is deliberately not
+included in planner time.
 
 Run the non-ROS adapter tests from `convex-region-graph` with:
 

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import http.client
+import math
 import os
 import urllib.error
 import urllib.request
@@ -11,6 +12,7 @@ import warnings
 from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
+
 
 
 NEUTRAL_MISSING_WEIGHT = 0.5
@@ -66,16 +68,39 @@ def graph_prompt_data(
 ) -> dict[str, Any]:
     """Build the compact, topology-constrained data sent to the model."""
 
+    planning = graph.get("planning", {})
     return {
-        "planning": graph.get("planning", {}),
-        "descriptor_metadata": graph.get("descriptor_metadata", {}),
+        "schema": "gcr-llm-input/v2",
         "start_region": start_region,
         "goal_region": goal_region,
+        "start": {"coordinates": planning.get("start"), "region_id": start_region},
+        "goal": {"coordinates": planning.get("goal"), "region_id": goal_region},
+        "robot": {
+            "radius": planning.get("robot_radius"),
+            "safety_margin": planning.get("safety_margin"),
+            "required_clearance": planning.get("required_clearance"),
+            "model": "point in configuration space; obstacles/workspace exterior expanded by required_clearance",
+        },
+        "descriptor_metadata": graph.get("descriptor_metadata", {}),
         "regions": [
-            {"id": vertex["id"], "centroid": vertex["centroid"], "descriptors": vertex.get("descriptors", {})}
+            {
+                "id": vertex["id"],
+                "centroid": vertex["centroid"],
+                "area": vertex.get("area"),
+                "diameter": vertex.get("descriptors", {}).get("diameter"),
+                "aspect_ratio": vertex.get("descriptors", {}).get("aspect_ratio"),
+                "compactness": vertex.get("descriptors", {}).get("compactness"),
+                "mean_clearance": vertex.get("descriptors", {}).get("mean_clearance"),
+                "centroid_clearance": vertex.get("descriptors", {}).get("centroid_clearance"),
+                "degree": vertex.get("descriptors", {}).get("degree"),
+                "safe_degree": vertex.get("descriptors", {}).get("safe_degree"),
+                "conductance": vertex.get("descriptors", {}).get("conductance"),
+                "safe_conductance": vertex.get("descriptors", {}).get("safe_conductance"),
+                "descriptors": vertex.get("descriptors", {}),
+            }
             for vertex in graph["vertices"]
         ],
-        "edges": [
+        "directed_edges": [
             {
                 "source": edge["source"],
                 "target": edge["target"],
@@ -83,6 +108,9 @@ def graph_prompt_data(
                 "portal_width": edge.get("portal_width"),
                 "safe_portal_width": edge.get("safe_portal_width"),
                 "traversability": edge.get("traversability"),
+                "safe_traversability": edge.get("safe_traversability"),
+                "portal": edge.get("portal"),
+                "safe_portal": edge.get("safe_portal"),
             }
             for edge in graph["directed_edges"]
         ],
@@ -367,8 +395,10 @@ def parse_weight_response(response: str | dict[str, Any]) -> dict[str, Any]:
             raise LLMProviderError(f"LLM returned invalid JSON: {exc}") from exc
     if not isinstance(response, dict):
         raise LLMProviderError("LLM response must be a JSON object")
+    if "edge_weights" not in response and isinstance(response.get("edge_costs"), list):
+        response = {**response, "edge_weights": response["edge_costs"]}
     if not isinstance(response.get("edge_weights"), list):
-        raise LLMProviderError("LLM response field 'edge_weights' must be a list")
+        raise LLMProviderError("LLM response field 'edge_costs' (or legacy 'edge_weights') must be a list")
     return response
 
 
@@ -389,7 +419,8 @@ def validate_edge_weights(
     for index, item in enumerate(parsed["edge_weights"]):
         if not isinstance(item, dict):
             raise LLMProviderError(f"edge_weights[{index}] must be an object")
-        source, target, weight = item.get("source"), item.get("target"), item.get("weight")
+        source, target = item.get("source"), item.get("target")
+        weight = item.get("cost", item.get("weight"))
         if not isinstance(source, str) or not isinstance(target, str):
             raise LLMProviderError(f"edge_weights[{index}] needs string source and target")
         if source not in region_ids or target not in region_ids:
@@ -400,7 +431,7 @@ def validate_edge_weights(
         if isinstance(weight, bool) or not isinstance(weight, (int, float)):
             raise LLMProviderError(f"Weight for {source}->{target} must be numeric")
         numeric_weight = float(weight)
-        if not 0.0 < numeric_weight <= 1.0:
+        if not math.isfinite(numeric_weight) or not 0.0 < numeric_weight <= 1.0:
             raise LLMProviderError(
                 f"Weight for {source}->{target}: Weight must be greater than 0 "
                 "and less than or equal to 1."

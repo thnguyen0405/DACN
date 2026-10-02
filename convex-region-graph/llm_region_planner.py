@@ -20,6 +20,12 @@ from pathlib import Path
 from typing import Any
 
 from build_graph import regions_from_map
+from llm_weight_provider import graph_prompt_data
+from scoring import (
+    NEUTRAL_REGION_SCORE,
+    deterministic_edge_cost_records,
+    deterministic_scoring,
+)
 
 
 class PlanningError(ValueError):
@@ -153,7 +159,7 @@ def parse_response(response: dict[str, Any]) -> tuple[list[Any], list[Any]]:
 
 
 def validate_model_response(
-    response: dict[str, Any], graph: dict[str, Any]
+    response: dict[str, Any], graph: dict[str, Any], goal_region: str
 ) -> tuple[dict[str, float], dict[tuple[str, str], float], list[str], list[tuple[str, str]]]:
     """Reject invented IDs/edges; fill only omitted values with deterministic defaults."""
     raw_scores, raw_costs = parse_response(response)
@@ -161,6 +167,7 @@ def validate_model_response(
     valid_edges = {(edge["source"], edge["target"]) for edge in graph["directed_edges"]}
     scores: dict[str, float] = {}
     costs: dict[tuple[str, str], float] = {}
+    require_reasons = response.get("scoring_mode") == "llm"
 
     for index, item in enumerate(raw_scores):
         if not isinstance(item, dict) or not isinstance(item.get("id"), str) or not is_number(item.get("score")):
@@ -170,8 +177,10 @@ def validate_model_response(
             raise PlanningError(f"LLM score references unknown region: {region_id}")
         if region_id in scores:
             raise PlanningError(f"Duplicate LLM score for region: {region_id}")
-        if not 0.0 <= score <= 1.0:
+        if not math.isfinite(score) or not 0.0 <= score <= 1.0:
             raise PlanningError(f"Score for {region_id} must be between 0 and 1")
+        if require_reasons and (not isinstance(item.get("reason"), str) or not item["reason"].strip()):
+            raise PlanningError(f"LLM score for {region_id} needs a non-empty reason")
         scores[region_id] = score
 
     for index, item in enumerate(raw_costs):
@@ -188,17 +197,23 @@ def validate_model_response(
             raise PlanningError(f"LLM cost references nonexistent safe portal: {key[0]}->{key[1]}")
         if key in costs:
             raise PlanningError(f"Duplicate LLM cost for edge: {key[0]}->{key[1]}")
-        if not 0.0 <= cost <= 1.0:
-            raise PlanningError(f"Cost for {key[0]}->{key[1]} must be between 0 and 1")
+        if not math.isfinite(cost) or not 0.0 < cost <= 1.0:
+            raise PlanningError(f"Cost for {key[0]}->{key[1]} must be in (0, 1]")
+        if require_reasons and (not isinstance(item.get("reason"), str) or not item["reason"].strip()):
+            raise PlanningError(f"LLM cost for {key[0]}->{key[1]} needs a non-empty reason")
         costs[key] = cost
 
     missing_scores = sorted(ids - scores.keys())
     for region_id in missing_scores:
-        scores[region_id] = 0.5
+        scores[region_id] = NEUTRAL_REGION_SCORE
     missing_costs = sorted(valid_edges - costs.keys())
-    for source, target in missing_costs:
-        # High region importance means an attractive destination, hence lower cost.
-        costs[(source, target)] = 1.0 - (scores[source] + scores[target]) / 2.0
+    heuristic_costs = {
+        (item["source"], item["target"]): item["cost"]
+        for item in deterministic_edge_cost_records(graph, scores, goal_region)
+    }
+    for key in missing_costs:
+        # This is a geometry-aware deterministic fallback, not LLM reasoning.
+        costs[key] = heuristic_costs[key]
     return scores, costs, missing_scores, missing_costs
 
 
@@ -268,20 +283,36 @@ def plan_regions(
     graph = prepare_safe_portal_graph(raw_graph)
     start = resolve_region(graph, "start", start_region)
     goal = resolve_region(graph, "goal", goal_region)
-    scores, costs, missing_scores, missing_costs = validate_model_response(response, graph)
+    scores, costs, missing_scores, missing_costs = validate_model_response(response, graph, goal)
     prior = sampling_prior(scores, temperature, exploration)
     route = dijkstra(graph, costs, start, goal)
+    region_reasons = {
+        item["id"]: item.get("reason", "No reason supplied by offline input.")
+        for item in response.get("region_scores", []) if isinstance(item, dict) and isinstance(item.get("id"), str)
+    }
+    edge_reasons = {
+        (item["source"], item["target"]): item.get("reason", "No reason supplied by offline input.")
+        for item in response.get("edge_costs", [])
+        if isinstance(item, dict) and isinstance(item.get("source"), str) and isinstance(item.get("target"), str)
+    }
+    heuristic_reasons = {
+        (item["source"], item["target"]): item["reason"]
+        for item in deterministic_edge_cost_records(graph, scores, goal)
+    }
     return {
         "schema": "llm_region_prior/v1",
+        "scoring_mode": response.get("scoring_mode", "llm"),
         "start_region": start,
         "goal_region": goal,
         "sampling_prior": [
-            {"id": region_id, "score": round(scores[region_id], 8), "probability": round(prior[region_id], 8)}
+            {"id": region_id, "score": round(scores[region_id], 8), "probability": round(prior[region_id], 8),
+             "reason": region_reasons.get(region_id, "Neutral deterministic fallback for omitted region score.")}
             for region_id in sorted(scores)
         ],
         "prior_parameters": {"temperature": temperature, "exploration": exploration},
         "edge_costs": [
-            {"source": source, "target": target, "cost": round(cost, 8)}
+            {"source": source, "target": target, "cost": round(cost, 8),
+             "reason": edge_reasons.get((source, target), heuristic_reasons[(source, target)])}
             for (source, target), cost in sorted(costs.items())
         ],
         "model_completion": {
@@ -305,29 +336,9 @@ def load_dotenv(path: Path) -> None:
 
 
 def compact_llm_input(graph: dict[str, Any], start: str, goal: str) -> dict[str, Any]:
-    return {
-        "start_region": start,
-        "goal_region": goal,
-        "planning": graph.get("planning", {}),
-        "descriptor_metadata": graph.get("descriptor_metadata", {}),
-        "map_metrics": graph.get("map_metrics", {}),
-        "regions": [
-            {"id": vertex["id"], "centroid": vertex["centroid"], "area": vertex.get("area"),
-             "descriptors": vertex.get("descriptors", {})}
-            for vertex in graph["vertices"]
-        ],
-        "safe_portals": [
-            {
-                "source": edge["source"], "target": edge["target"],
-                "width": edge["safe_portal_width"], "clearance": edge.get("required_clearance", 0.0),
-                "portal": edge.get("portal"), "safe_portal": edge.get("safe_portal"),
-                "portal_width": edge.get("portal_width"),
-                "traversability": edge.get("traversability"),
-                "safe_traversability": edge.get("safe_traversability"),
-            }
-            for edge in graph["directed_edges"]
-        ],
-    }
+    result = graph_prompt_data(graph, start, goal)
+    result["map_metrics"] = graph.get("map_metrics", {})
+    return result
 
 
 def response_text(payload: dict[str, Any]) -> str:
@@ -511,11 +522,13 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("graph", type=Path, help="Safe-portal graph.json produced by build_graph.py")
     parser.add_argument("--response", type=Path, help="Offline LLM JSON response; no network call")
     parser.add_argument("--provider", choices=["openai"], help="Call a model when --response is absent")
+    parser.add_argument("--heuristic", action="store_true", help="Use the deterministic non-AI scoring baseline")
     parser.add_argument("--start-region", help="Override automatic start-region lookup")
     parser.add_argument("--goal-region", help="Override automatic goal-region lookup")
     parser.add_argument("--temperature", type=float, default=0.25, help="Softmax temperature for region scores")
     parser.add_argument("--exploration", type=float, default=0.12, help="Uniform probability mixed into the prior")
     parser.add_argument("--svg", type=Path, default=Path("outputs/llm_route.svg"), help="Visible LLM prior/route SVG")
+    parser.add_argument("--plan-output", type=Path, default=Path("outputs/region_plan.json"), help="Validated scores, costs and route")
     parser.add_argument(
         "--sampling-prior-output",
         type=Path,
@@ -535,9 +548,15 @@ def main() -> int:
         graph = prepare_safe_portal_graph(raw_graph)
         start = resolve_region(graph, "start", args.start_region)
         goal = resolve_region(graph, "goal", args.goal_region)
-        if args.response:
+        if args.heuristic:
+            if args.response or args.provider:
+                raise PlanningError("--heuristic cannot be combined with --response or --provider")
+            response = deterministic_scoring(graph, start, goal)
+            source = "deterministic heuristic baseline (not LLM)"
+        elif args.response:
             response = load_json(args.response)
-            source = f"offline response: {args.response}"
+            response = {**response, "scoring_mode": "offline_mock"}
+            source = f"offline mock response (no model call): {args.response}"
         else:
             if args.provider != "openai":
                 raise PlanningError("Provide --response for offline use, or choose --provider openai")
@@ -546,9 +565,12 @@ def main() -> int:
             if not api_key or not model:
                 raise PlanningError("OPENAI_API_KEY and OPENAI_MODEL must be set for --provider openai")
             response = call_openai(graph, start, goal, args.prompt, model, api_key)
+            response = {**response, "scoring_mode": "llm"}
             source = f"OpenAI model: {model}"
         plan = plan_regions(raw_graph, response, start, goal, args.temperature, args.exploration)
         plan["model_source"] = source
+        args.plan_output.parent.mkdir(parents=True, exist_ok=True)
+        args.plan_output.write_text(json.dumps(plan, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
         args.svg.parent.mkdir(parents=True, exist_ok=True)
         if args.map:
             _regions_data, map_geometry = regions_from_map(load_json(args.map))
@@ -565,6 +587,7 @@ def main() -> int:
         print(f"Start region: {start}; goal region: {goal}")
         print("Sequence: " + (" -> ".join(plan["route"]["sequence"]) if plan["route"]["valid"] else plan["route"]["reason"]))
         print(f"{svg_description}: {args.svg}")
+        print(f"Validated plan: {args.plan_output}")
         print(f"C++ sampling prior: {args.sampling_prior_output}")
         return 0 if plan["route"]["valid"] else 2
     except (OSError, PlanningError) as exc:

@@ -1,5 +1,17 @@
 # Kết quả xác minh
 
+## Xác minh cho cập nhật 30/09/2026
+
+- Python: `81 tests`, tất cả pass trên Windows/Python 3.12.
+- Offline integration: build 15 regions/34 directed edges; mock plan chọn
+  `C0→C6→C7→C9→C12→C13→C14`; xuất thành công prior và sequence strategy.
+- JSON artifacts và XML launch parse thành công.
+- Không gọi API thật.
+- ROS/catkin/C++ tests và benchmark mới chưa chạy trong môi trường hiện tại vì
+  không có `catkin_make`, `roslaunch`, Docker hoặc WSL khả dụng. Các kết quả ROS
+  ở phần dưới là kết quả lịch sử có sẵn trong repo, không phải kết quả được tạo
+  lại trong lần cập nhật này.
+
 ## Benchmark ROS đã chạy
 
 ROS Noetic trong container Linux ARM64; map demo 16 × 10 m, robot radius + margin = 0,30 m. Start (1,1,0), goal (15,9,0).

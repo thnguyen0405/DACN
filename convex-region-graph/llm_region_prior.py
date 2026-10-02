@@ -21,7 +21,7 @@ from llm_weight_provider import (
 )
 
 
-MISSING_REGION_SCORE = 0.1
+MISSING_REGION_SCORE = 0.5
 
 
 class MissingRegionScoreWarning(UserWarning):
@@ -80,8 +80,8 @@ def validate_region_scores(
 ) -> tuple[dict[str, float], list[str]]:
     """Validate region IDs and scores, then fill individually omitted regions."""
 
-    if not math.isfinite(missing_score) or not 0.0 < missing_score <= 1.0:
-        raise ValueError("Missing-region fallback score must be in (0, 1]")
+    if not math.isfinite(missing_score) or not 0.0 <= missing_score <= 1.0:
+        raise ValueError("Missing-region fallback score must be in [0, 1]")
     parsed = parse_region_score_response(response)
     region_order = [vertex["id"] for vertex in graph["vertices"]]
     known = set(region_order)
@@ -100,9 +100,9 @@ def validate_region_scores(
         if isinstance(score, bool) or not isinstance(score, (int, float)):
             raise LLMProviderError(f"Score for {region_id} must be numeric")
         numeric_score = float(score)
-        if not math.isfinite(numeric_score) or not 0.0 < numeric_score <= 1.0:
+        if not math.isfinite(numeric_score) or not 0.0 <= numeric_score <= 1.0:
             raise LLMProviderError(
-                f"Score for {region_id} must be greater than 0 and less than or equal to 1"
+                f"Score for {region_id} must be between 0 and 1"
             )
         scores[region_id] = numeric_score
 

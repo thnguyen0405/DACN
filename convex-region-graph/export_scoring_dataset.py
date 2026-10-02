@@ -23,7 +23,7 @@ def make_record(raw_graph, prompt, labels=None, label_source=None):
     if labels is not None:
         if not label_source:
             raise ValueError('Label provenance is required')
-        _,_,missing,_=validate_model_response(labels,graph)
+        _,_,missing,_=validate_model_response(labels,graph,goal)
         if missing:
             raise ValueError('Supervised labels must explicitly score every region: '+', '.join(missing))
         # The prompt contract uses these two fields; exclude provider metadata.

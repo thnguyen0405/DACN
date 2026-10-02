@@ -65,12 +65,18 @@ class RegionPriorValidationTests(unittest.TestCase):
             )
 
     def test_invalid_scores_are_rejected(self):
-        for score in (0.0, -0.1, 1.1, True, "0.5", math.inf, math.nan):
+        for score in (-0.1, 1.1, True, "0.5", math.inf, math.nan):
             with self.subTest(score=score):
                 with self.assertRaises(LLMProviderError):
                     validate_region_scores(
                         {"region_scores": [{"id": "A", "score": score}]}, self.graph
                     )
+
+    def test_zero_score_is_valid(self):
+        scores, _ = validate_region_scores(
+            {"region_scores": [{"id": "A", "score": 0.0}]}, self.graph
+        )
+        self.assertEqual(scores["A"], 0.0)
 
     def test_completely_empty_response_is_rejected(self):
         with self.assertRaisesRegex(LLMProviderError, "no usable"):

@@ -32,8 +32,12 @@ Scoring rubric (intrinsic-region-descriptors/v1):
   safe_traversability uses the trimmed width. Respect existing safe topology.
 - Corners: consider shape and available clearance/portal geometry; do not
   invent corner angles or infer that sampling near every corner is beneficial.
-- Combine these with start/goal progress and detours. Explain tradeoffs using
-  supplied numeric descriptors. Never use one feature as a universal rule.
+- Combine these with start/goal progress and detours. Every reason must name
+  the supplied numeric features that materially raised or lowered that record.
+  Never use one feature as a universal rule.
 - Null/missing features are unknown, not zero. Scores are sampling priorities,
   not calibrated success probabilities or collision guarantees. Output scores
   in [0,1]; the deterministic sampler applies softmax and exploration mixing.
+- Edge cost must be in (0,1]. Use relative travel length, portal width, safe
+  width/clearance, goal progress, detour and destination score where known;
+  never derive it only from the average of two region scores.

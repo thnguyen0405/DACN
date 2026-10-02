@@ -21,6 +21,7 @@ from llm_weight_provider import (
 )
 from route_visualization import route_svg
 from weighted_search import dijkstra_region_path
+from scoring import NEUTRAL_REGION_SCORE, deterministic_edge_cost_records
 
 
 def plan_route(
@@ -38,6 +39,17 @@ def plan_route(
             raise LLMProviderError("A weight response or LLM provider is required")
         weight_response = provider.get_edge_weights(graph, start_region, goal_region)
     weights, missing = validate_edge_weights(weight_response, graph)
+    if missing:
+        heuristic = {
+            (item["source"], item["target"]): item["cost"]
+            for item in deterministic_edge_cost_records(
+                graph,
+                {vertex["id"]: NEUTRAL_REGION_SCORE for vertex in graph["vertices"]},
+                goal_region,
+            )
+        }
+        for edge in missing:
+            weights[edge] = heuristic[edge]
     route = dijkstra_region_path(graph, weights, start_region, goal_region)
     return route, graph, weights, missing
 

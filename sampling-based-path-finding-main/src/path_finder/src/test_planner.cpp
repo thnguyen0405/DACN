@@ -59,6 +59,7 @@ private:
     bool auto_goal_=false, advance_start_=false;
     path_plan::ConvexCorridor corridor_;
     path_plan::ConvexSamplingPrior sampling_prior_;
+    path_plan::SequenceSamplingStrategy sequence_strategy_;
 
     void configureGuidance()
     {
@@ -109,8 +110,25 @@ private:
             return;
         }
 
+        if (guidance_mode_ == "sequence_guided")
+        {
+            std::string strategy_file;
+            nh_.param<std::string>("sequence_strategy_file", strategy_file, "");
+            sequence_strategy_ = path_plan::loadSequenceSamplingStrategy(strategy_file);
+            rrt_ptr_->setSequenceGuidance(sequence_strategy_);
+            rrt_star_ptr_->setSequenceGuidance(sequence_strategy_);
+            if(informed_rrt_star_ptr_) informed_rrt_star_ptr_->setSequenceGuidance(sequence_strategy_);
+            rrt_sharp_ptr_->setSequenceGuidance(sequence_strategy_);
+            brrt_ptr_->setSequenceGuidance(sequence_strategy_);
+            brrt_star_ptr_->setSequenceGuidance(sequence_strategy_);
+            ROS_INFO_STREAM("[Guidance] Sequence-guided mode enabled from " << strategy_file
+                            << "; guided=" << sequence_strategy_.guided_probability
+                            << ", global=" << (1.0-sequence_strategy_.guided_probability));
+            return;
+        }
+
         throw std::runtime_error("Invalid guidance_mode '" + guidance_mode_ +
-                                 "'; expected none, corridor, or region_prior");
+                                 "'; expected none, corridor, region_prior, or sequence_guided");
     }
 
     template <typename Regions>
@@ -138,6 +156,8 @@ private:
             visualizeRegionBoundaries(corridor_.regions, z, visualization::orange);
         else if (guidance_mode_ == "region_prior")
             visualizeRegionBoundaries(sampling_prior_.regions, z, visualization::yellow);
+        else if (guidance_mode_ == "sequence_guided")
+            visualizeRegionBoundaries(sequence_strategy_.regions, z, visualization::orange);
     }
 
     std::shared_ptr<visualization::Visualization> plannerVisualizer(const std::string &name)
@@ -146,6 +166,26 @@ private:
         // Internal tree/intermediate topics must not overwrite another method.
         ros::NodeHandle scoped(nh_, "details/" + name);
         return std::make_shared<visualization::Visualization>(scoped);
+    }
+
+    template <typename Planner>
+    void logResult(const std::string &name, const std::shared_ptr<Planner> &planner,
+                   bool success, double planning_seconds, double path_length)
+    {
+        (void)planning_seconds; // external wall time is intentionally not reported
+        planning_seconds = planner->getPlanningTime();
+        const double straight = (goal_ - start_).norm();
+        const double ratio = success && straight > 0.0 ? path_length / straight : -1.0;
+        ROS_INFO_STREAM("[RESULT] planner=" << name << " guidance=" << guidance_mode_
+                        << " success=" << success
+                        << " planning_time_ms=" << planning_seconds * 1000.0
+                        << " time_to_first_solution_ms=" <<
+                           (planner->getTimeToFirstSolution() < 0.0 ? -1.0 : planner->getTimeToFirstSolution() * 1000.0)
+                        << " path_length=" << (success ? path_length : -1.0)
+                        << " straight_line_distance=" << straight
+                        << " path_length_ratio=" << ratio
+                        << " iterations=" << planner->getIterationCount()
+                        << " nodes_added=" << planner->getNodesAdded());
     }
 
 public:
@@ -296,8 +336,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=rrt guidance="<<guidance_mode_<<" success="<<rrt_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(rrt_res ? length : -1.0));
+            logResult("rrt", rrt_ptr_, rrt_res, elapsed, length);
             if (rrt_res)
             {
                 any_success = true;
@@ -323,8 +362,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=rrt_star guidance="<<guidance_mode_<<" success="<<rrt_star_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(rrt_star_res ? length : -1.0));
+            logResult("rrt_star", rrt_star_ptr_, rrt_star_res, elapsed, length);
             if (rrt_star_res)
             {
                 any_success = true;
@@ -352,8 +390,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=rrt_sharp guidance="<<guidance_mode_<<" success="<<rrt_sharp_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(rrt_sharp_res ? length : -1.0));
+            logResult("rrt_sharp", rrt_sharp_ptr_, rrt_sharp_res, elapsed, length);
             if (rrt_sharp_res)
             {
                 any_success = true;
@@ -379,8 +416,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=brrt guidance="<<guidance_mode_<<" success="<<brrt_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(brrt_res ? length : -1.0));
+            logResult("brrt", brrt_ptr_, brrt_res, elapsed, length);
             if (brrt_res)
             {
                 any_success = true;
@@ -406,8 +442,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=brrt_star guidance="<<guidance_mode_<<" success="<<brrt_star_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(brrt_star_res ? length : -1.0));
+            logResult("brrt_star", brrt_star_ptr_, brrt_star_res, elapsed, length);
             if (brrt_star_res)
             {
                 any_success = true;
@@ -433,8 +468,7 @@ public:
                 length+=(path[i]-path[i-1]).norm();
               }
             }
-            ROS_INFO_STREAM("[RESULT] planner=informed_rrt_star guidance="<<guidance_mode_<<" success="<<informed_rrt_star_res
-                            <<" wall_seconds="<<elapsed<<" path_length="<<(informed_rrt_star_res ? length : -1.0));
+            logResult("informed_rrt_star", informed_rrt_star_ptr_, informed_rrt_star_res, elapsed, length);
             if (informed_rrt_star_res)
             {
                 any_success = true;
