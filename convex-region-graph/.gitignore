@@ -1,6 +1,7 @@
 .env
 __pycache__/
 *.py[cod]
+outputs/openrouter_invalid_response.txt
 
 # Raw/intermediate LLM JSON artifacts are intentionally not kept
 outputs/llm_weights.json

@@ -69,3 +69,15 @@ Giữ Terminal này mở. Truy cập http://localhost:6080, vào **Displays → 
 Nhấn **Control + C** trong Terminal để dừng demo.
 
 **Không chạy lại `run_demo.sh` sau bước 3: script đó ghi đè prior bằng điểm mock.**
+
+## Khi OpenRouter trả về phản hồi rỗng
+
+Nếu `message.content` là `null` hoặc chuỗi rỗng, chương trình thử lại tối đa một lần với model đã cấu hình. Nếu vẫn thất bại, chương trình dừng, in model thực tế, `finish_reason`, thông tin sử dụng token và lưu phản hồi tại `outputs/openrouter_invalid_response.txt` (API key được che; file chẩn đoán không đưa lên Git).
+
+- `finish_reason=length`: model hết ngân sách token, có thể trong khi reasoning. Không tự thử lại cùng ngân sách và không sử dụng điểm bị cắt dở. Có thể đặt `OPENROUTER_MAX_TOKENS=8192` trong `.env` rồi chạy lại; chọn giới hạn phù hợp với model. Biến này là tùy chọn, chương trình không tự tăng ngân sách.
+- `empty final content`: nhà cung cấp chưa trả lời bằng JSON. Thử lại sau hoặc chủ động chọn model khác phù hợp; chương trình không tự chuyển sang model trả phí.
+- Lỗi xác thực, giới hạn lượt gọi, từ chối nội dung hoặc tool calls được báo riêng. Reasoning không được dùng thay cho kết quả chấm điểm.
+
+Phản hồi text có thể là một chuỗi hoặc danh sách các khối `type=text`; cả hai đều phải ghép/đọc thành JSON object và vượt qua kiểm tra ID, điểm vùng. Nếu bước 3 báo lỗi, không chạy bước 4 với file prior cũ.
+
+Tham khảo: [định dạng phản hồi OpenRouter](https://openrouter.ai/docs/api/reference/overview), [lỗi và phản hồi rỗng](https://openrouter.ai/docs/api/reference/errors-and-debugging).

@@ -135,6 +135,7 @@ class OpenRouterWeightProvider(LLMWeightProvider):
         temperature: float | None = None,
         timeout: float = 60.0,
         debug_response_path: Path = Path("outputs/openrouter_invalid_response.txt"),
+        max_tokens: int | None = None,
     ) -> None:
         self.prompt_path = prompt_path
         self.api_key = api_key or os.environ.get("OPENROUTER_API_KEY")
@@ -167,6 +168,15 @@ class OpenRouterWeightProvider(LLMWeightProvider):
             )
         self.timeout = timeout
         self.debug_response_path = debug_response_path
+        configured_max_tokens = max_tokens if max_tokens is not None else os.environ.get("OPENROUTER_MAX_TOKENS")
+        self.max_tokens = None
+        if configured_max_tokens is not None:
+            try:
+                self.max_tokens = int(configured_max_tokens)
+            except (TypeError, ValueError) as exc:
+                raise LLMProviderError("OPENROUTER_MAX_TOKENS must be a positive integer.") from exc
+            if isinstance(configured_max_tokens, (bool, float)) or self.max_tokens <= 0:
+                raise LLMProviderError("OPENROUTER_MAX_TOKENS must be a positive integer.")
         if not self.api_key:
             raise LLMProviderError(
                 "OPENROUTER_API_KEY is not set. Create a key at "
@@ -201,6 +211,8 @@ class OpenRouterWeightProvider(LLMWeightProvider):
             "stream": False,
             "temperature": self.temperature,
         }
+        if self.max_tokens is not None:
+            request_body["max_tokens"] = self.max_tokens
         request = urllib.request.Request(
             f"{self.base_url}/chat/completions",
             data=json.dumps(request_body).encode("utf-8"),
@@ -214,31 +226,92 @@ class OpenRouterWeightProvider(LLMWeightProvider):
         for attempt in range(2):
             try:
                 payload = self._request_http_json(request)
-                break
+                return self._parse_model_json(payload)
             except _RetryableOpenRouterError as exc:
                 if attempt == 0:
                     print(exc.retry_message)
                     continue
                 raise exc.error from exc
 
-        try:
-            model_text = payload["choices"][0]["message"]["content"]
-        except (KeyError, IndexError, TypeError) as exc:
-            raise LLMProviderError(
-                "OpenRouter response did not contain choices[0].message.content"
-            ) from exc
+        raise AssertionError("OpenRouter retry loop exhausted unexpectedly")
+
+    def _parse_model_json(self, payload: dict[str, Any]) -> tuple[dict[str, Any], str | None]:
+        """Read final assistant output, never reasoning or partial/tool output."""
+        choices = payload.get("choices")
+        choice = choices[0] if isinstance(choices, list) and choices and isinstance(choices[0], dict) else {}
+        api_error = payload.get("error") or choice.get("error")
+        if api_error:
+            code = api_error.get("code") if isinstance(api_error, dict) else None
+            detail = json.dumps(api_error, ensure_ascii=False)
+            if isinstance(code, (int, str)) and str(code).isdigit():
+                error = self._http_error(int(code), detail)
+                retryable = 500 <= int(code) <= 599
+            else:
+                error = LLMProviderError(f"OpenRouter provider error: {self._redact_text(detail)}")
+                retryable = False
+            error = self._model_response_error(payload, str(error))
+            if retryable:
+                raise _RetryableOpenRouterError(error, "Retrying OpenRouter request once after a provider error...")
+            raise error
+
+        message = choice.get("message")
+        if not isinstance(message, dict) or "content" not in message:
+            raise self._model_response_error(payload, "OpenRouter response did not contain choices[0].message.content")
+        finish_reason = choice.get("finish_reason")
+        if message.get("refusal") or finish_reason == "content_filter":
+            raise self._model_response_error(payload, "OpenRouter model refused or filtered the response.")
+        if finish_reason == "length":
+            raise self._model_response_error(
+                payload, "OpenRouter output reached the token limit (finish_reason=length). "
+                "Set a larger OPENROUTER_MAX_TOKENS within the model's supported limit, "
+                "or manually choose another suitable model. Reasoning may have consumed the output budget; "
+                "partial scores were not used."
+            )
+        if finish_reason == "tool_calls" or message.get("tool_calls"):
+            raise self._model_response_error(payload, "OpenRouter returned tool calls instead of final JSON scores.")
+        if finish_reason == "error":
+            raise self._model_response_error(payload, "OpenRouter generation failed (finish_reason=error).")
+
+        model_text = message["content"]
+        # Some compatible providers return text blocks instead of a single string.
+        if isinstance(model_text, list):
+            if not all(isinstance(part, dict) and part.get("type") == "text" and isinstance(part.get("text"), str) for part in model_text):
+                raise self._model_response_error(payload, "OpenRouter content contains unsupported non-text blocks.")
+            model_text = "".join(part["text"] for part in model_text)
+        if model_text is None or (isinstance(model_text, str) and not model_text.strip()):
+            error = self._model_response_error(
+                payload, "OpenRouter returned empty final content (null or blank), so no JSON scores are available. "
+                "Try again later or manually choose another suitable model."
+            )
+            raise _RetryableOpenRouterError(error, "Retrying OpenRouter request once because final content was empty...")
         if not isinstance(model_text, str):
-            raise LLMProviderError("OpenRouter model content must be a JSON string")
+            raise self._model_response_error(payload, "OpenRouter model content must be a JSON string or text blocks.")
         try:
             result = json.loads(model_text)
         except json.JSONDecodeError as exc:
-            raise LLMProviderError(f"LLM model content returned invalid JSON: {exc}") from exc
+            raise self._model_response_error(payload, f"LLM model content returned invalid JSON: {exc}") from exc
         if not isinstance(result, dict):
-            raise LLMProviderError("LLM model content must decode to a JSON object")
+            raise self._model_response_error(payload, "LLM model content must decode to a JSON object")
         resolved_model = payload.get("model")
         if not isinstance(resolved_model, str):
             resolved_model = None
         return result, resolved_model
+
+    def _model_response_error(self, payload: dict[str, Any], detail: str) -> LLMProviderError:
+        saved_path = self._save_debug_response(json.dumps(payload, ensure_ascii=False, indent=2).encode("utf-8"))
+        choices = payload.get("choices")
+        choice = choices[0] if isinstance(choices, list) and choices and isinstance(choices[0], dict) else {}
+        context = {
+            "requested_model": self.model,
+            "resolved_model": payload.get("model"),
+            "finish_reason": choice.get("finish_reason"),
+            "native_finish_reason": choice.get("native_finish_reason"),
+            "usage": payload.get("usage"),
+        }
+        return LLMProviderError(self._redact_text(
+            f"{detail}\nResponse context: {json.dumps(context, ensure_ascii=False)}\n"
+            f"Raw response saved to {saved_path}"
+        ))
 
     def _request_http_json(self, request: urllib.request.Request) -> dict[str, Any]:
         try:
