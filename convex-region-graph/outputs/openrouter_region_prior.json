@@ -1,0 +1,87 @@
+{
+  "provider_metadata": {
+    "provider": "openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "temperature": 0.0
+  },
+  "start_region": "C0",
+  "goal_region": "C14",
+  "region_scores": [
+    {
+      "id": "C0",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C1",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C2",
+      "score": 0.676,
+      "reason": "centroid shows good progress toward goal, mean_clearance 1.051, safe_conductance 0.790"
+    },
+    {
+      "id": "C3",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C4",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C5",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C6",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C7",
+      "score": 0.683,
+      "reason": "centroid shows moderate progress toward goal, mean_clearance 1.700, safe_conductance 0.833"
+    },
+    {
+      "id": "C8",
+      "score": 0.696,
+      "reason": "centroid shows good progress toward goal, mean_clearance 1.038, safe_conductance 0.828"
+    },
+    {
+      "id": "C9",
+      "score": 0.796,
+      "reason": "centroid shows strong progress toward goal, mean_clearance 1.572, safe_conductance 0.937"
+    },
+    {
+      "id": "C10",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C11",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    },
+    {
+      "id": "C12",
+      "score": 0.806,
+      "reason": "centroid shows strong progress toward goal, mean_clearance 1.715, safe_conductance 0.900"
+    },
+    {
+      "id": "C13",
+      "score": 0.752,
+      "reason": "centroid shows good progress toward goal, mean_clearance 1.281, safe_conductance 0.856"
+    },
+    {
+      "id": "C14",
+      "score": 0.5,
+      "reason": "Fallback score for a region omitted by the LLM."
+    }
+  ]
+}
