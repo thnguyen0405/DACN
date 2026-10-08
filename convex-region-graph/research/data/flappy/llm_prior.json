@@ -1,0 +1,84 @@
+{
+  "scores": {
+    "C0": 0.187,
+    "C1": 0.36,
+    "C2": 0.467,
+    "C3": 0.161,
+    "C4": 0.003,
+    "C5": 0.392,
+    "C6": 0.288,
+    "C7": 0.19,
+    "C8": 0.72,
+    "C9": 0.398,
+    "C10": 0.261,
+    "C11": 0.499,
+    "C12": 0.174,
+    "C13": 0.477,
+    "C14": 0.33,
+    "C15": 0.243,
+    "C16": 0.01,
+    "C17": 0.555,
+    "C18": 0.653,
+    "C19": 0.334,
+    "C20": 0.38,
+    "C21": 0.296,
+    "C22": 0.635,
+    "C23": 0.047,
+    "C24": 0.359,
+    "C25": 0.602,
+    "C26": 0.152,
+    "C27": 0.575,
+    "C28": 0.094,
+    "C29": 0.263,
+    "C30": 0.117,
+    "C31": 0.688,
+    "C32": 0.04,
+    "C33": 0.336,
+    "C34": 0.375,
+    "C35": 0.666,
+    "C36": 0.102,
+    "C37": 0.487,
+    "C38": 0.341,
+    "C39": 0.563,
+    "C40": 0.181,
+    "C41": 1.0,
+    "C42": 0.113,
+    "C43": 0.589,
+    "C44": 0.205
+  },
+  "metadata": {
+    "source": "live_openrouter",
+    "requested_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "resolved_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "latency_seconds": 91.21219662501244,
+    "http_attempts_with_json": 1,
+    "usage_per_attempt": [
+      {
+        "prompt_tokens": 11814,
+        "completion_tokens": 11052,
+        "total_tokens": 22866,
+        "cost": 0,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0,
+          "upstream_inference_prompt_cost": 0,
+          "upstream_inference_completions_cost": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 8800,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    ],
+    "missing_region_ids": [],
+    "runtime_refresh": false,
+    "reported_cost_usd": 0
+  }
+}

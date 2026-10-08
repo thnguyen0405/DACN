@@ -1,0 +1,18 @@
+{
+  "source_graph_vertices": 18,
+  "source_graph_edges": 70,
+  "zero_shared_length_edges": 24,
+  "unverified_fields": [
+    "d_shape",
+    "d_corridor",
+    "d_distance",
+    "d_trav",
+    "cost"
+  ],
+  "policy": "original graph retained as source data, not used as robot-safe graph; recomputed from .poly",
+  "original_graph_sha256": "d0533555a7f6caa93f38a9d564c9b5231823003190fe7d1201ee069723c846bf",
+  "rebuilt_vertices": 16,
+  "rebuilt_directed_edges": 38,
+  "safe_grid_components": 1,
+  "preparation_seconds": 0.5234329169907141
+}

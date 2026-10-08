@@ -13,3 +13,7 @@ venv/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
+
+# Provider diagnostic payloads, regardless of command working directory
+**/openrouter_invalid_response*.txt
+.venv-research/

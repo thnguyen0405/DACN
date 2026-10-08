@@ -1,0 +1,1107 @@
+{
+  "directed": true,
+  "vertices": [
+    {
+      "id": "C0",
+      "centroid": [
+        8.63472387,
+        3.474204
+      ],
+      "area": 39.5859375,
+      "polygon": [
+        [
+          4.375,
+          1.875
+        ],
+        [
+          14.375,
+          0.0
+        ],
+        [
+          8.5625,
+          7.875
+        ],
+        [
+          6.375,
+          6.25
+        ],
+        [
+          4.375,
+          4.375
+        ]
+      ],
+      "descriptors": {
+        "area": 39.5859375,
+        "perimeter": 27.92854291917258,
+        "diameter": 10.915155747858114,
+        "aspect_ratio": 2.5695114925217757,
+        "compactness": 1.5679989160287928,
+        "covariance_eigenvalues": [
+          2.243863689567686,
+          5.765633537996482
+        ],
+        "degree": 3,
+        "safe_degree": 3,
+        "conductance": 0.8129143835145426,
+        "safe_conductance": 0.78068928633696,
+        "mean_clearance": 1.8523277846437047,
+        "centroid_clearance": 3.474204
+      }
+    },
+    {
+      "id": "C1",
+      "centroid": [
+        10.71357023,
+        7.87658517
+      ],
+      "area": 33.47265625,
+      "polygon": [
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.5625,
+          7.875
+        ],
+        [
+          14.375,
+          0.0
+        ],
+        [
+          11.25,
+          12.5
+        ],
+        [
+          8.75,
+          12.5
+        ]
+      ],
+      "descriptors": {
+        "area": 33.47265625,
+        "perimeter": 30.789806065997844,
+        "diameter": 13.707320124663317,
+        "aspect_ratio": 9.629641536357983,
+        "compactness": 2.2537921679034594,
+        "covariance_eigenvalues": [
+          0.9903190557113994,
+          9.536417513125308
+        ],
+        "degree": 3,
+        "safe_degree": 3,
+        "conductance": 0.8343256370338465,
+        "safe_conductance": 0.8050951833494973,
+        "mean_clearance": 1.707039735741583,
+        "centroid_clearance": 2.1510708140728845
+      }
+    },
+    {
+      "id": "C2",
+      "centroid": [
+        13.21759259,
+        11.38888889
+      ],
+      "area": 35.15625,
+      "polygon": [
+        [
+          11.25,
+          12.5
+        ],
+        [
+          14.375,
+          0.0
+        ],
+        [
+          14.375,
+          20.0
+        ],
+        [
+          11.25,
+          15.0
+        ]
+      ],
+      "descriptors": {
+        "area": 35.15625,
+        "perimeter": 41.28094328759057,
+        "diameter": 20.0,
+        "aspect_ratio": 29.12779022611435,
+        "compactness": 3.8573301953505097,
+        "covariance_eigenvalues": [
+          0.6144611422480413,
+          17.897895253499556
+        ],
+        "degree": 2,
+        "safe_degree": 2,
+        "conductance": 0.4549543152817511,
+        "safe_conductance": 0.44041976374763125,
+        "mean_clearance": 0.8719439341864321,
+        "centroid_clearance": 1.1574074099999994
+      }
+    },
+    {
+      "id": "C3",
+      "centroid": [
+        4.88530782,
+        14.00220611
+      ],
+      "area": 46.16601562,
+      "polygon": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.75,
+          12.5
+        ],
+        [
+          8.75,
+          15.0
+        ]
+      ],
+      "descriptors": {
+        "area": 46.166015625,
+        "perimeter": 31.263976914959493,
+        "diameter": 12.731757783197102,
+        "aspect_ratio": 3.4872900056807166,
+        "compactness": 1.6848303783939456,
+        "covariance_eigenvalues": [
+          2.2581931315787807,
+          7.874974338651521
+        ],
+        "degree": 3,
+        "safe_degree": 3,
+        "conductance": 0.8260565239931557,
+        "safe_conductance": 0.7972693994689222,
+        "mean_clearance": 2.2580704374910887,
+        "centroid_clearance": 3.8646921799999996
+      }
+    },
+    {
+      "id": "C4",
+      "centroid": [
+        8.26388889,
+        18.08641975
+      ],
+      "area": 42.1875,
+      "polygon": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          8.75,
+          15.0
+        ],
+        [
+          11.25,
+          15.0
+        ],
+        [
+          14.375,
+          20.0
+        ]
+      ],
+      "descriptors": {
+        "area": 42.1875,
+        "perimeter": 32.84906039290856,
+        "diameter": 14.375,
+        "aspect_ratio": 5.902800119132482,
+        "compactness": 2.035411617595977,
+        "covariance_eigenvalues": [
+          1.6167727671558088,
+          9.54348648257746
+        ],
+        "degree": 2,
+        "safe_degree": 2,
+        "conductance": 0.4862866761436207,
+        "safe_conductance": 0.46802131373349554,
+        "mean_clearance": 1.3027634603940608,
+        "centroid_clearance": 1.913580249999999
+      }
+    },
+    {
+      "id": "C5",
+      "centroid": [
+        0.69444444,
+        7.4537037
+      ],
+      "area": 21.09375,
+      "polygon": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.875,
+          1.875
+        ],
+        [
+          1.875,
+          4.375
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ],
+      "descriptors": {
+        "area": 21.09375,
+        "perimeter": 40.88874831946727,
+        "diameter": 20.0,
+        "aspect_ratio": 102.13317644482076,
+        "compactness": 6.307307052742981,
+        "covariance_eigenvalues": [
+          0.19688653857131122,
+          20.108647583513736
+        ],
+        "degree": 2,
+        "safe_degree": 2,
+        "conductance": 0.44972636911735264,
+        "safe_conductance": 0.4350524056401775,
+        "mean_clearance": 0.5509440058361286,
+        "centroid_clearance": 0.69444444
+      }
+    },
+    {
+      "id": "C6",
+      "centroid": [
+        2.20833333,
+        10.85416667
+      ],
+      "area": 26.03515625,
+      "polygon": [
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          0.0,
+          20.0
+        ],
+        [
+          1.875,
+          4.375
+        ]
+      ],
+      "descriptors": {
+        "area": 26.03515625,
+        "perimeter": 33.243872034443335,
+        "diameter": 15.737097890017715,
+        "aspect_ratio": 20.95506396048148,
+        "compactness": 3.377949490201084,
+        "covariance_eigenvalues": [
+          0.5472727388878722,
+          11.468135247223241
+        ],
+        "degree": 3,
+        "safe_degree": 3,
+        "conductance": 1.0,
+        "safe_conductance": 0.9729273412101075,
+        "mean_clearance": 1.6889250636036899,
+        "centroid_clearance": 2.20833333
+      }
+    },
+    {
+      "id": "C7",
+      "centroid": [
+        4.2977208,
+        5.90877255
+      ],
+      "area": 8.2265625,
+      "polygon": [
+        [
+          1.875,
+          4.375
+        ],
+        [
+          4.375,
+          4.375
+        ],
+        [
+          6.375,
+          6.25
+        ],
+        [
+          4.75,
+          8.1875
+        ]
+      ],
+      "descriptors": {
+        "area": 8.2265625,
+        "perimeter": 12.545221426679166,
+        "diameter": 4.875,
+        "aspect_ratio": 3.32816138870658,
+        "compactness": 1.5223986729643586,
+        "covariance_eigenvalues": [
+          0.38844263424555775,
+          1.2927997770235375
+        ],
+        "degree": 2,
+        "safe_degree": 2,
+        "conductance": 0.5991508743063181,
+        "safe_conductance": 0.5513238981410992,
+        "mean_clearance": 0.8446456382331847,
+        "centroid_clearance": 1.5337725500000001
+      }
+    },
+    {
+      "id": "C8",
+      "centroid": [
+        5.63271605,
+        0.71759259
+      ],
+      "area": 15.8203125,
+      "polygon": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          14.375,
+          0.0
+        ],
+        [
+          4.375,
+          1.875
+        ],
+        [
+          1.875,
+          1.875
+        ]
+      ],
+      "descriptors": {
+        "area": 15.8203125,
+        "perimeter": 29.70091330201187,
+        "diameter": 14.375,
+        "aspect_ratio": 46.5252781880768,
+        "compactness": 4.437258052347261,
+        "covariance_eigenvalues": [
+          0.21595576515098713,
+          10.047402049968657
+        ],
+        "degree": 2,
+        "safe_degree": 2,
+        "conductance": 0.4318356533885802,
+        "safe_conductance": 0.41163425433021433,
+        "mean_clearance": 0.5268056924732414,
+        "centroid_clearance": 0.71759259
+      }
+    }
+  ],
+  "directed_edges": [
+    {
+      "source": "C0",
+      "target": "C1",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          14.375,
+          0.0
+        ],
+        [
+          8.5625,
+          7.875
+        ]
+      ],
+      "portal_width": 9.78778735,
+      "safe_portal": [
+        [
+          14.28592216,
+          0.12068611
+        ],
+        [
+          8.65157784,
+          7.75431389
+        ]
+      ],
+      "safe_portal_width": 9.48778735,
+      "required_clearance": 0.15,
+      "traversability": 16.70814193143881,
+      "safe_traversability": 16.19603001071633
+    },
+    {
+      "source": "C1",
+      "target": "C0",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          14.375,
+          0.0
+        ],
+        [
+          8.5625,
+          7.875
+        ]
+      ],
+      "portal_width": 9.78778735,
+      "safe_portal": [
+        [
+          14.28592216,
+          0.12068611
+        ],
+        [
+          8.65157784,
+          7.75431389
+        ]
+      ],
+      "safe_portal_width": 9.48778735,
+      "required_clearance": 0.15,
+      "traversability": 16.70814193143881,
+      "safe_traversability": 16.19603001071633
+    },
+    {
+      "source": "C0",
+      "target": "C7",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.375,
+          4.375
+        ],
+        [
+          6.375,
+          6.25
+        ]
+      ],
+      "portal_width": 2.74146402,
+      "safe_portal": [
+        [
+          4.48443058,
+          4.47759117
+        ],
+        [
+          6.26556942,
+          6.14740883
+        ]
+      ],
+      "safe_portal_width": 2.44146402,
+      "required_clearance": 0.15,
+      "traversability": 2.315565626866212,
+      "safe_traversability": 2.062171935396257
+    },
+    {
+      "source": "C7",
+      "target": "C0",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.375,
+          4.375
+        ],
+        [
+          6.375,
+          6.25
+        ]
+      ],
+      "portal_width": 2.74146402,
+      "safe_portal": [
+        [
+          4.48443058,
+          4.47759117
+        ],
+        [
+          6.26556942,
+          6.14740883
+        ]
+      ],
+      "safe_portal_width": 2.44146402,
+      "required_clearance": 0.15,
+      "traversability": 2.315565626866212,
+      "safe_traversability": 2.062171935396257
+    },
+    {
+      "source": "C0",
+      "target": "C8",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.375,
+          1.875
+        ],
+        [
+          14.375,
+          0.0
+        ]
+      ],
+      "portal_width": 10.17426287,
+      "safe_portal": [
+        [
+          4.52243083,
+          1.84735672
+        ],
+        [
+          14.22756917,
+          0.02764328
+        ]
+      ],
+      "safe_portal_width": 9.87426287,
+      "required_clearance": 0.15,
+      "traversability": 5.359859596635138,
+      "safe_traversability": 5.201817888893166
+    },
+    {
+      "source": "C8",
+      "target": "C0",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.375,
+          1.875
+        ],
+        [
+          14.375,
+          0.0
+        ]
+      ],
+      "portal_width": 10.17426287,
+      "safe_portal": [
+        [
+          4.52243083,
+          1.84735672
+        ],
+        [
+          14.22756917,
+          0.02764328
+        ]
+      ],
+      "safe_portal_width": 9.87426287,
+      "required_clearance": 0.15,
+      "traversability": 5.359859596635138,
+      "safe_traversability": 5.201817888893166
+    },
+    {
+      "source": "C1",
+      "target": "C2",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          14.375,
+          0.0
+        ],
+        [
+          11.25,
+          12.5
+        ]
+      ],
+      "portal_width": 12.88470508,
+      "safe_portal": [
+        [
+          14.33861966,
+          0.14552138
+        ],
+        [
+          11.28638034,
+          12.35447862
+        ]
+      ],
+      "safe_portal_width": 12.58470508,
+      "required_clearance": 0.15,
+      "traversability": 11.234740438287108,
+      "safe_traversability": 10.97315725803118
+    },
+    {
+      "source": "C2",
+      "target": "C1",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          14.375,
+          0.0
+        ],
+        [
+          11.25,
+          12.5
+        ]
+      ],
+      "portal_width": 12.88470508,
+      "safe_portal": [
+        [
+          14.33861966,
+          0.14552138
+        ],
+        [
+          11.28638034,
+          12.35447862
+        ]
+      ],
+      "safe_portal_width": 12.58470508,
+      "required_clearance": 0.15,
+      "traversability": 11.234740438287108,
+      "safe_traversability": 10.97315725803118
+    },
+    {
+      "source": "C1",
+      "target": "C3",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.75,
+          12.5
+        ]
+      ],
+      "portal_width": 3.01623213,
+      "safe_portal": [
+        [
+          7.14642093,
+          10.1243273
+        ],
+        [
+          8.66607907,
+          12.3756727
+        ]
+      ],
+      "safe_portal_width": 2.71623213,
+      "required_clearance": 0.15,
+      "traversability": 5.148828098130472,
+      "safe_traversability": 4.636716177407997
+    },
+    {
+      "source": "C3",
+      "target": "C1",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.75,
+          12.5
+        ]
+      ],
+      "portal_width": 3.01623213,
+      "safe_portal": [
+        [
+          7.14642093,
+          10.1243273
+        ],
+        [
+          8.66607907,
+          12.3756727
+        ]
+      ],
+      "safe_portal_width": 2.71623213,
+      "required_clearance": 0.15,
+      "traversability": 5.148828098130472,
+      "safe_traversability": 4.636716177407997
+    },
+    {
+      "source": "C2",
+      "target": "C4",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          11.25,
+          15.0
+        ],
+        [
+          14.375,
+          20.0
+        ]
+      ],
+      "portal_width": 5.89623821,
+      "safe_portal": [
+        [
+          11.32949984,
+          15.12719975
+        ],
+        [
+          14.29550016,
+          19.87280025
+        ]
+      ],
+      "safe_portal_width": 5.59623821,
+      "required_clearance": 0.15,
+      "traversability": 5.141189141727766,
+      "safe_traversability": 4.879605961471837
+    },
+    {
+      "source": "C4",
+      "target": "C2",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          11.25,
+          15.0
+        ],
+        [
+          14.375,
+          20.0
+        ]
+      ],
+      "portal_width": 5.89623821,
+      "safe_portal": [
+        [
+          11.32949984,
+          15.12719975
+        ],
+        [
+          14.29550016,
+          19.87280025
+        ]
+      ],
+      "safe_portal_width": 5.59623821,
+      "required_clearance": 0.15,
+      "traversability": 5.141189141727766,
+      "safe_traversability": 4.879605961471837
+    },
+    {
+      "source": "C3",
+      "target": "C4",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          8.75,
+          15.0
+        ]
+      ],
+      "portal_width": 10.07782219,
+      "safe_portal": [
+        [
+          0.13023647,
+          19.92557916
+        ],
+        [
+          8.61976353,
+          15.07442084
+        ]
+      ],
+      "safe_portal_width": 9.77782219,
+      "required_clearance": 0.15,
+      "traversability": 13.129018509480451,
+      "safe_traversability": 12.738189471362233
+    },
+    {
+      "source": "C4",
+      "target": "C3",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          8.75,
+          15.0
+        ]
+      ],
+      "portal_width": 10.07782219,
+      "safe_portal": [
+        [
+          0.13023647,
+          19.92557916
+        ],
+        [
+          8.61976353,
+          15.07442084
+        ]
+      ],
+      "safe_portal_width": 9.77782219,
+      "required_clearance": 0.15,
+      "traversability": 13.129018509480451,
+      "safe_traversability": 12.738189471362233
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ],
+      "portal_width": 12.73175778,
+      "safe_portal": [
+        [
+          4.69403758,
+          8.32666971
+        ],
+        [
+          0.05596242,
+          19.86083029
+        ]
+      ],
+      "safe_portal_width": 12.43175778,
+      "required_clearance": 0.15,
+      "traversability": 21.502984818373275,
+      "safe_traversability": 20.996307299292166
+    },
+    {
+      "source": "C6",
+      "target": "C3",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ],
+      "portal_width": 12.73175778,
+      "safe_portal": [
+        [
+          4.69403758,
+          8.32666971
+        ],
+        [
+          0.05596242,
+          19.86083029
+        ]
+      ],
+      "safe_portal_width": 12.43175778,
+      "required_clearance": 0.15,
+      "traversability": 21.502984818373275,
+      "safe_traversability": 20.996307299292166
+    },
+    {
+      "source": "C5",
+      "target": "C6",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          1.875,
+          4.375
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ],
+      "portal_width": 15.73709789,
+      "safe_portal": [
+        [
+          1.85712822,
+          4.52393153
+        ],
+        [
+          0.01787178,
+          19.85106847
+        ]
+      ],
+      "safe_portal_width": 15.43709789,
+      "required_clearance": 0.15,
+      "traversability": 8.670259751751887,
+      "safe_traversability": 8.504976550001048
+    },
+    {
+      "source": "C6",
+      "target": "C5",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          1.875,
+          4.375
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ],
+      "portal_width": 15.73709789,
+      "safe_portal": [
+        [
+          1.85712822,
+          4.52393153
+        ],
+        [
+          0.01787178,
+          19.85106847
+        ]
+      ],
+      "safe_portal_width": 15.43709789,
+      "required_clearance": 0.15,
+      "traversability": 8.670259751751887,
+      "safe_traversability": 8.504976550001048
+    },
+    {
+      "source": "C5",
+      "target": "C8",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.875,
+          1.875
+        ]
+      ],
+      "portal_width": 2.65165043,
+      "safe_portal": [
+        [
+          0.10606602,
+          0.10606602
+        ],
+        [
+          1.76893398,
+          1.76893398
+        ]
+      ],
+      "safe_portal_width": 2.35165043,
+      "required_clearance": 0.15,
+      "traversability": 1.3969045409731182,
+      "safe_traversability": 1.2388628332311458
+    },
+    {
+      "source": "C8",
+      "target": "C5",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.875,
+          1.875
+        ]
+      ],
+      "portal_width": 2.65165043,
+      "safe_portal": [
+        [
+          0.10606602,
+          0.10606602
+        ],
+        [
+          1.76893398,
+          1.76893398
+        ]
+      ],
+      "safe_portal_width": 2.35165043,
+      "required_clearance": 0.15,
+      "traversability": 1.3969045409731182,
+      "safe_traversability": 1.2388628332311458
+    },
+    {
+      "source": "C6",
+      "target": "C7",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          1.875,
+          4.375
+        ],
+        [
+          4.75,
+          8.1875
+        ]
+      ],
+      "portal_width": 4.77501636,
+      "safe_portal": [
+        [
+          1.96531383,
+          4.49476399
+        ],
+        [
+          4.65968617,
+          8.06773601
+        ]
+      ],
+      "safe_portal_width": 4.47501636,
+      "required_clearance": 0.15,
+      "traversability": 4.0331967409660985,
+      "safe_traversability": 3.779803049496143
+    },
+    {
+      "source": "C7",
+      "target": "C6",
+      "relation": "safe_portal",
+      "portal": [
+        [
+          1.875,
+          4.375
+        ],
+        [
+          4.75,
+          8.1875
+        ]
+      ],
+      "portal_width": 4.77501636,
+      "safe_portal": [
+        [
+          1.96531383,
+          4.49476399
+        ],
+        [
+          4.65968617,
+          8.06773601
+        ]
+      ],
+      "safe_portal_width": 4.47501636,
+      "required_clearance": 0.15,
+      "traversability": 4.0331967409660985,
+      "safe_traversability": 3.779803049496143
+    }
+  ],
+  "connected_components": [
+    [
+      "C0",
+      "C1",
+      "C7",
+      "C8",
+      "C2",
+      "C3",
+      "C6",
+      "C5",
+      "C4"
+    ]
+  ],
+  "pipeline": "map -> ACD -> convex regions -> graph",
+  "planning": {
+    "robot_radius": 0.1,
+    "safety_margin": 0.05,
+    "required_clearance": 0.15000000000000002,
+    "start": [
+      14.150000000000002,
+      19.850000000000005
+    ],
+    "goal": [
+      0.15000000000000002,
+      0.15000000000000002
+    ],
+    "start_region": "C4",
+    "goal_region": "C5"
+  },
+  "descriptor_metadata": {
+    "schema": "intrinsic-region-descriptors/v1",
+    "length_unit": "m",
+    "area_unit": "m^2",
+    "covariance": "uniform area, exact polygon moments; aspect ratio = lambda_max/lambda_min",
+    "clearance_obstacles": "obstacle polygons and workspace exterior; NOT region boundaries",
+    "mean_clearance_method": "area-weighted triangle quadrature, 12^2 samples per fan triangle",
+    "missing_clearance": "null when original map geometry is unavailable",
+    "conductance": "sum of all geometric shared-boundary portal widths / perimeter; safe_degree and safe_conductance use only traversable graph edges",
+    "traversability": "original portal width * min(mean clearances), units m^2; not a safety certificate"
+  },
+  "map_metrics": {
+    "boundary_area": 287.5,
+    "obstacle_area": 19.755859375,
+    "obstacle_area_ratio": 0.06871603260869565
+  }
+}

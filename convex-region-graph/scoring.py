@@ -37,6 +37,16 @@ def _required_bottlenecks(graph: dict[str, Any], start: str, goal: str) -> set[s
     for edge in graph["directed_edges"]:
         adjacency[edge["source"]].add(edge["target"])
 
+    # A bottleneck must destroy a route that existed before its removal.
+    reachable, queue = {start}, [start]
+    while queue:
+        for neighbor in adjacency[queue.pop()]:
+            if neighbor not in reachable:
+                reachable.add(neighbor)
+                queue.append(neighbor)
+    if goal not in reachable:
+        return set()
+
     required: set[str] = set()
     for removed in adjacency:
         if removed in (start, goal):

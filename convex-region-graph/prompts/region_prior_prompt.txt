@@ -8,7 +8,9 @@ portals. A high region score is more promising; a low edge cost is preferred.
 Use geometry, start-to-goal progress, detours, connectivity and safe portal
 width. Never create an ID, a portal, a path, or a geometric claim not present in
 the data. The deterministic planner will validate every ID and edge after you
-respond. You may leave either array empty, but not both.
+respond. Provide one region_scores record for every supplied region. The
+edge_costs array is optional for region-prior sampling; do not leave
+region_scores empty.
 
 Return JSON only in this shape:
 {"region_scores":[{"id":"C0","score":0.8,"reason":"brief reason"}],"edge_costs":[{"source":"C0","target":"C1","cost":0.2,"reason":"brief reason"}]}
@@ -37,7 +39,9 @@ Scoring rubric (intrinsic-region-descriptors/v1):
   Never use one feature as a universal rule.
 - Null/missing features are unknown, not zero. Scores are sampling priorities,
   not calibrated success probabilities or collision guarantees. Output scores
-  in [0,1]; the deterministic sampler applies softmax and exploration mixing.
+  in [0,1]. In region_prior mode the C++ sampler selects regions in proportion
+  to their scores, then samples uniformly by area inside the selected region.
+  Other guidance modes may apply additional normalization or exploration mixing.
 - Edge cost must be in (0,1]. Use relative travel length, portal width, safe
   width/clearance, goal progress, detour and destination score where known;
   never derive it only from the average of two region scores.

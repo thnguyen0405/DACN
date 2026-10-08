@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-08",
+  "timezone": "Asia/Ho_Chi_Minh",
+  "docker_version": "29.6.1",
+  "container": "motion-planner-vnc",
+  "image_tag": "tiryoh/ros-desktop-vnc:noetic",
+  "image_id": "sha256:8b5f7c1132b7eb5945d7bfccde8078f5ca6002521014c641d0e943fae131edab",
+  "ros": "noetic",
+  "os": "Ubuntu 20.04.6 LTS",
+  "architecture": "aarch64",
+  "logical_processors": 10,
+  "compiler": "GCC 9.4.0",
+  "build": "Release, -O3",
+  "master_port": 11339,
+  "cpp_planner_sources_modified_for_benchmark": false,
+  "parser_python_tests": 79
+}

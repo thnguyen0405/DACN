@@ -78,6 +78,11 @@ class BenchmarkCalculationTests(unittest.TestCase):
         spec = importlib.util.spec_from_file_location("benchmark_module", path)
         cls.module = importlib.util.module_from_spec(spec); spec.loader.exec_module(cls.module)
 
+    def test_ansi_color_does_not_corrupt_last_metric(self):
+        line = "\x1b[0m[INFO] [RESULT] planner=rrt guidance=none success=1 planning_time_ms=12 time_to_first_solution_ms=2 path_length=5 straight_line_distance=4 path_length_ratio=1.25 iterations=30 nodes_added=20\x1b[0m\n"
+        self.assertEqual(self.module.parse_result(line)["nodes_added"], 20)
+        self.assertIsNone(self.module.parse_result(line.replace("nodes_added=20", "nodes_added=broken")))
+
     def test_parse_and_summary(self):
         text = "[RESULT] planner=rrt guidance=none success=1 planning_time_ms=12.5 time_to_first_solution_ms=8 path_length=5 straight_line_distance=4 path_length_ratio=1.25 iterations=10 nodes_added=8"
         row = self.module.parse_result(text)

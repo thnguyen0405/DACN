@@ -1,0 +1,48 @@
+{
+  "scores": {
+    "C0": 0.91,
+    "C1": 0.73,
+    "C2": 0.44,
+    "C3": 0.76,
+    "C4": 0.44,
+    "C5": 0.63,
+    "C6": 0.77,
+    "C7": 0.7,
+    "C8": 0.67
+  },
+  "metadata": {
+    "source": "live_openrouter",
+    "requested_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "resolved_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "latency_seconds": 91.59530091700435,
+    "http_attempts_with_json": 1,
+    "usage_per_attempt": [
+      {
+        "prompt_tokens": 3262,
+        "completion_tokens": 9759,
+        "total_tokens": 13021,
+        "cost": 0,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0,
+          "upstream_inference_prompt_cost": 0,
+          "upstream_inference_completions_cost": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 9196,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    ],
+    "missing_region_ids": [],
+    "runtime_refresh": false,
+    "reported_cost_usd": 0
+  }
+}

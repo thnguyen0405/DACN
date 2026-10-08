@@ -1,0 +1,128 @@
+Scanning dependencies of target gtest
+[  9%] Building CXX object gtest/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.o
+[ 36%] Built target occ_grid
+[ 45%] Linking CXX shared library ../lib/libgtest.so
+[ 45%] Built target gtest
+Scanning dependencies of target map_geometry_test
+[ 54%] Building CXX object path_finder/CMakeFiles/map_geometry_test.dir/test/map_geometry_test.cpp.o
+Scanning dependencies of target convex_corridor_sampler_test
+[ 63%] Building CXX object path_finder/CMakeFiles/convex_corridor_sampler_test.dir/test/convex_corridor_sampler_test.cpp.o
+[ 72%] Building CXX object path_finder/CMakeFiles/map_geometry_test.dir/test/test_main.cpp.o
+[ 81%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/path_finder/map_geometry_test
+[ 81%] Built target map_geometry_test
+[ 90%] Building CXX object path_finder/CMakeFiles/convex_corridor_sampler_test.dir/test/test_main.cpp.o
+Scanning dependencies of target run_tests_path_finder_gtest_map_geometry_test
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from MapGeometry
+[ RUN      ] MapGeometry.DiskClearanceAndCrossing
+[       OK ] MapGeometry.DiskClearanceAndCrossing (0 ms)
+[ RUN      ] MapGeometry.ConcaveBoundaryAndEmptyObstacles
+[       OK ] MapGeometry.ConcaveBoundaryAndEmptyObstacles (0 ms)
+[ RUN      ] MapGeometry.ZeroLengthAndBoundaryContact
+[       OK ] MapGeometry.ZeroLengthAndBoundaryContact (0 ms)
+[ RUN      ] MapGeometry.RejectMalformedGeometry
+[       OK ] MapGeometry.RejectMalformedGeometry (0 ms)
+[ RUN      ] MapGeometry.PointRobotConfigurationSpaceBoundaries
+[       OK ] MapGeometry.PointRobotConfigurationSpaceBoundaries (0 ms)
+[ RUN      ] MapGeometry.CorridorNarrowerThanDiameterIsBlocked
+[       OK ] MapGeometry.CorridorNarrowerThanDiameterIsBlocked (0 ms)
+[----------] 6 tests from MapGeometry (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 6 tests.
+-- run_tests.py: execute commands
+  /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/path_finder/map_geometry_test --gtest_output=xml:/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build/test_results/path_finder/gtest-map_geometry_test.xml
+-- run_tests.py: verify result "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build/test_results/path_finder/gtest-map_geometry_test.xml"
+[ 90%] Built target run_tests_path_finder_gtest_map_geometry_test
+[100%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/path_finder/convex_corridor_sampler_test
+[100%] Built target convex_corridor_sampler_test
+Scanning dependencies of target run_tests_path_finder_gtest_convex_corridor_sampler_test
+[==========] Running 18 tests from 9 test suites.
+[----------] Global test environment set-up.
+[----------] 2 tests from ConvexCorridorGeometry
+[ RUN      ] ConvexCorridorGeometry.PointInsideBoundaryAndOutside
+[       OK ] ConvexCorridorGeometry.PointInsideBoundaryAndOutside (0 ms)
+[ RUN      ] ConvexCorridorGeometry.TriangleArea
+[       OK ] ConvexCorridorGeometry.TriangleArea (0 ms)
+[----------] 2 tests from ConvexCorridorGeometry (0 ms total)
+
+[----------] 3 tests from ConvexCorridorSampling
+[ RUN      ] ConvexCorridorSampling.EverySampleIsInsideAndHasFixedZ
+[       OK ] ConvexCorridorSampling.EverySampleIsInsideAndHasFixedZ (0 ms)
+[ RUN      ] ConvexCorridorSampling.CorridorTakesPrecedenceOverInformedMode
+[       OK ] ConvexCorridorSampling.CorridorTakesPrecedenceOverInformedMode (0 ms)
+[ RUN      ] ConvexCorridorSampling.RegionsAreWeightedByArea
+[       OK ] ConvexCorridorSampling.RegionsAreWeightedByArea (1 ms)
+[----------] 3 tests from ConvexCorridorSampling (1 ms total)
+
+[----------] 2 tests from ConvexCorridorValidation
+[ RUN      ] ConvexCorridorValidation.StartAndGoalMustMatchSequenceEnds
+[       OK ] ConvexCorridorValidation.StartAndGoalMustMatchSequenceEnds (0 ms)
+[ RUN      ] ConvexCorridorValidation.InvalidCorridorIsRejected
+[       OK ] ConvexCorridorValidation.InvalidCorridorIsRejected (0 ms)
+[----------] 2 tests from ConvexCorridorValidation (0 ms total)
+
+[----------] 2 tests from RegionPriorSampling
+[ RUN      ] RegionPriorSampling.SamplesStayInsideProvidedRegionsWithFixedZ
+[       OK ] RegionPriorSampling.SamplesStayInsideProvidedRegionsWithFixedZ (1 ms)
+[ RUN      ] RegionPriorSampling.RegionChoiceIsProportionalToScoresNotArea
+[       OK ] RegionPriorSampling.RegionChoiceIsProportionalToScoresNotArea (0 ms)
+[----------] 2 tests from RegionPriorSampling (1 ms total)
+
+[----------] 1 test from RegionPriorValidation
+[ RUN      ] RegionPriorValidation.EndpointsMayBeInAnyProvidedRegion
+[       OK ] RegionPriorValidation.EndpointsMayBeInAnyProvidedRegion (0 ms)
+[----------] 1 test from RegionPriorValidation (0 ms total)
+
+[----------] 2 tests from GuidanceModes
+[ RUN      ] GuidanceModes.CorridorAndRegionPriorDoNotMix
+[       OK ] GuidanceModes.CorridorAndRegionPriorDoNotMix (0 ms)
+[ RUN      ] GuidanceModes.DefaultNoneModeRetainsUniformMapSampling
+[       OK ] GuidanceModes.DefaultNoneModeRetainsUniformMapSampling (0 ms)
+[----------] 2 tests from GuidanceModes (0 ms total)
+
+[----------] 2 tests from SequenceGuidedSampling
+[ RUN      ] SequenceGuidedSampling.PreservesBiasAndGlobalExploration
+[       OK ] SequenceGuidedSampling.PreservesBiasAndGlobalExploration (1 ms)
+[ RUN      ] SequenceGuidedSampling.InvalidSequenceIsRejected
+[       OK ] SequenceGuidedSampling.InvalidSequenceIsRejected (0 ms)
+[----------] 2 tests from SequenceGuidedSampling (1 ms total)
+
+[----------] 1 test from PlanarBaseline
+[ RUN      ] PlanarBaseline.SamplesUseStartAltitude
+[       OK ] PlanarBaseline.SamplesUseStartAltitude (0 ms)
+[----------] 1 test from PlanarBaseline (0 ms total)
+
+[----------] 3 tests from InformedRegionPrior
+[ RUN      ] InformedRegionPrior.SamplesRespectPriorAndRotatedEllipse
+[       OK ] InformedRegionPrior.SamplesRespectPriorAndRotatedEllipse (1 ms)
+[ RUN      ] InformedRegionPrior.DisjointDomainRejectsAndResetAllowsPriorAgain
+[       OK ] InformedRegionPrior.DisjointDomainRejectsAndResetAllowsPriorAgain (0 ms)
+[ RUN      ] InformedRegionPrior.OrdinaryPriorIsNotClippedByDefault
+[       OK ] InformedRegionPrior.OrdinaryPriorIsNotClippedByDefault (0 ms)
+[----------] 3 tests from InformedRegionPrior (1 ms total)
+
+[----------] Global test environment tear-down
+[==========] 18 tests from 9 test suites ran. (4 ms total)
+[  PASSED  ] 18 tests.
+-- run_tests.py: execute commands
+  /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/path_finder/convex_corridor_sampler_test --gtest_output=xml:/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build/test_results/path_finder/gtest-convex_corridor_sampler_test.xml
+-- run_tests.py: verify result "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build/test_results/path_finder/gtest-convex_corridor_sampler_test.xml"
+[100%] Built target run_tests_path_finder_gtest_convex_corridor_sampler_test
+Scanning dependencies of target run_tests_path_finder_gtest
+[100%] Built target run_tests_path_finder_gtest
+Scanning dependencies of target run_tests_path_finder
+[100%] Built target run_tests_path_finder
+Base path: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main
+Source space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src
+Build space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build
+Devel space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel
+Install space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/install
+####
+#### Running command: "make cmake_check_build_system" in "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build"
+####
+####
+#### Running command: "make run_tests_path_finder -j2" in "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build"
+####

@@ -1,0 +1,155 @@
+{
+  "schema": "sequence-guided-sampling/v1",
+  "sequence": [
+    "C4",
+    "C3",
+    "C6",
+    "C5"
+  ],
+  "start_region": "C4",
+  "goal_region": "C5",
+  "guided_probability": 0.8,
+  "global_exploration_probability": 0.2,
+  "portal_probability_within_guidance": 0.2,
+  "regions": [
+    {
+      "id": "C4",
+      "score": 0.44,
+      "sequence_index": 0,
+      "polygon": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          8.75,
+          15.0
+        ],
+        [
+          11.25,
+          15.0
+        ],
+        [
+          14.375,
+          20.0
+        ]
+      ]
+    },
+    {
+      "id": "C3",
+      "score": 0.76,
+      "sequence_index": 1,
+      "polygon": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.75,
+          12.5
+        ],
+        [
+          8.75,
+          15.0
+        ]
+      ]
+    },
+    {
+      "id": "C6",
+      "score": 0.77,
+      "sequence_index": 2,
+      "polygon": [
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          0.0,
+          20.0
+        ],
+        [
+          1.875,
+          4.375
+        ]
+      ]
+    },
+    {
+      "id": "C5",
+      "score": 0.63,
+      "sequence_index": 3,
+      "polygon": [
+        [
+          0.0,
+          0.0
+        ],
+        [
+          1.875,
+          1.875
+        ],
+        [
+          1.875,
+          4.375
+        ],
+        [
+          0.0,
+          20.0
+        ]
+      ]
+    }
+  ],
+  "portals": [
+    {
+      "source": "C4",
+      "target": "C3",
+      "segment": [
+        [
+          0.13023647,
+          19.92557916
+        ],
+        [
+          8.61976353,
+          15.07442084
+        ]
+      ],
+      "safe_portal_width": 9.77782219
+    },
+    {
+      "source": "C3",
+      "target": "C6",
+      "segment": [
+        [
+          4.69403758,
+          8.32666971
+        ],
+        [
+          0.05596242,
+          19.86083029
+        ]
+      ],
+      "safe_portal_width": 12.43175778
+    },
+    {
+      "source": "C6",
+      "target": "C5",
+      "segment": [
+        [
+          1.85712822,
+          4.52393153
+        ],
+        [
+          0.01787178,
+          19.85106847
+        ]
+      ],
+      "safe_portal_width": 15.43709789
+    }
+  ]
+}

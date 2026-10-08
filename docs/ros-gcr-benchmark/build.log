@@ -1,0 +1,645 @@
+CMake Warning (dev) in CMakeLists.txt:
+  No project() command is present.  The top-level CMakeLists.txt file must
+  contain a literal, direct call to the project() command.  Add a line of
+  code such as
+
+    project(ProjectName)
+
+  near the top of the file, but after cmake_minimum_required().
+
+  CMake is pretending there is a "project(Project)" command on the first
+  line.
+This warning is for project developers.  Use -Wno-dev to suppress it.
+
+-- The C compiler identification is GNU 9.4.0
+-- The CXX compiler identification is GNU 9.4.0
+-- Check for working C compiler: /usr/bin/cc
+-- Check for working C compiler: /usr/bin/cc -- works
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Check for working CXX compiler: /usr/bin/c++
+-- Check for working CXX compiler: /usr/bin/c++ -- works
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Using CATKIN_DEVEL_PREFIX: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel
+-- Using CMAKE_PREFIX_PATH: /opt/ros/noetic
+-- This workspace overlays: /opt/ros/noetic
+-- Found PythonInterp: /usr/bin/python3 (found suitable version "3.8.10", minimum required is "3") 
+-- Using PYTHON_EXECUTABLE: /usr/bin/python3
+-- Using Debian Python package layout
+-- Found PY_em: /usr/lib/python3/dist-packages/em.py  
+-- Using empy: /usr/lib/python3/dist-packages/em.py
+-- Using CATKIN_ENABLE_TESTING: ON
+-- Call enable_testing()
+-- Using CATKIN_TEST_RESULTS_DIR: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build/test_results
+-- Forcing gtest/gmock from source, though one was otherwise available.
+-- Found gtest sources under '/usr/src/googletest': gtests will be built
+-- Found gmock sources under '/usr/src/googletest': gmock will be built
+-- Found PythonInterp: /usr/bin/python3 (found version "3.8.10") 
+-- Found Threads: TRUE  
+-- Using Python nosetests: /usr/bin/nosetests3
+-- catkin 0.8.12
+-- BUILD_SHARED_LIBS is on
+-- BUILD_SHARED_LIBS is on
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- ~~  traversing 6 packages in topological order:
+-- ~~  - self_msgs_and_srvs
+-- ~~  - map_generator
+-- ~~  - occ_grid
+-- ~~  - path_finder
+-- ~~  - mockamap
+-- ~~  - rviz_plugins
+-- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-- +++ processing catkin package: 'self_msgs_and_srvs'
+-- ==> add_subdirectory(self_msgs_and_srvs)
+-- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+-- self_msgs_and_srvs: 2 messages, 2 services
+-- +++ processing catkin package: 'map_generator'
+-- ==> add_subdirectory(map_gen/map_generator)
+-- Checking for module 'eigen3'
+--   Found eigen3, version 3.3.7
+-- Found Eigen: /usr/include/eigen3 (Required is at least version "3.1") 
+-- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+-- Found Boost: /usr/include (found suitable version "1.71.0", minimum required is "1.55.0") found components: system filesystem date_time iostreams regex 
+-- Checking for module 'flann'
+--   Found flann, version 1.9.1
+-- Found FLANN: /usr/lib/aarch64-linux-gnu/libflann_cpp.so  
+-- The imported target "vtkParseOGLExt" references the file
+   "/usr/bin/vtkParseOGLExt-7.1"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtkRenderingPythonTkWidgets" references the file
+   "/usr/lib/aarch64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtk" references the file
+   "/usr/bin/vtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "pvtk" references the file
+   "/usr/bin/pvtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni2 will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+** WARNING ** io features related to libusb-1.0 will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni2 will be disabled
+-- Found Qhull: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so  
+-- QHULL found (include: /usr/include, lib: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so)
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** apps features related to openni will be disabled
+-- looking for PCL_COMMON
+-- Found PCL_COMMON: /usr/lib/aarch64-linux-gnu/libpcl_common.so  
+-- looking for PCL_KDTREE
+-- Found PCL_KDTREE: /usr/lib/aarch64-linux-gnu/libpcl_kdtree.so  
+-- looking for PCL_OCTREE
+-- Found PCL_OCTREE: /usr/lib/aarch64-linux-gnu/libpcl_octree.so  
+-- looking for PCL_SEARCH
+-- Found PCL_SEARCH: /usr/lib/aarch64-linux-gnu/libpcl_search.so  
+-- looking for PCL_SAMPLE_CONSENSUS
+-- Found PCL_SAMPLE_CONSENSUS: /usr/lib/aarch64-linux-gnu/libpcl_sample_consensus.so  
+-- looking for PCL_FILTERS
+-- Found PCL_FILTERS: /usr/lib/aarch64-linux-gnu/libpcl_filters.so  
+-- looking for PCL_2D
+-- Found PCL_2D: /usr/include/pcl-1.10  
+-- looking for PCL_GEOMETRY
+-- Found PCL_GEOMETRY: /usr/include/pcl-1.10  
+-- looking for PCL_IO
+-- Found PCL_IO: /usr/lib/aarch64-linux-gnu/libpcl_io.so  
+-- looking for PCL_FEATURES
+-- Found PCL_FEATURES: /usr/lib/aarch64-linux-gnu/libpcl_features.so  
+-- looking for PCL_ML
+-- Found PCL_ML: /usr/lib/aarch64-linux-gnu/libpcl_ml.so  
+-- looking for PCL_SEGMENTATION
+-- Found PCL_SEGMENTATION: /usr/lib/aarch64-linux-gnu/libpcl_segmentation.so  
+-- looking for PCL_VISUALIZATION
+-- Found PCL_VISUALIZATION: /usr/lib/aarch64-linux-gnu/libpcl_visualization.so  
+-- looking for PCL_SURFACE
+-- Found PCL_SURFACE: /usr/lib/aarch64-linux-gnu/libpcl_surface.so  
+-- looking for PCL_REGISTRATION
+-- Found PCL_REGISTRATION: /usr/lib/aarch64-linux-gnu/libpcl_registration.so  
+-- looking for PCL_KEYPOINTS
+-- Found PCL_KEYPOINTS: /usr/lib/aarch64-linux-gnu/libpcl_keypoints.so  
+-- looking for PCL_TRACKING
+-- Found PCL_TRACKING: /usr/lib/aarch64-linux-gnu/libpcl_tracking.so  
+-- looking for PCL_RECOGNITION
+-- Found PCL_RECOGNITION: /usr/lib/aarch64-linux-gnu/libpcl_recognition.so  
+-- looking for PCL_STEREO
+-- Found PCL_STEREO: /usr/lib/aarch64-linux-gnu/libpcl_stereo.so  
+-- looking for PCL_APPS
+-- Found PCL_APPS: /usr/lib/aarch64-linux-gnu/libpcl_apps.so  
+-- looking for PCL_IN_HAND_SCANNER
+-- Found PCL_IN_HAND_SCANNER: /usr/include/pcl-1.10  
+-- looking for PCL_POINT_CLOUD_EDITOR
+-- Found PCL_POINT_CLOUD_EDITOR: /usr/include/pcl-1.10  
+-- looking for PCL_OUTOFCORE
+-- Found PCL_OUTOFCORE: /usr/lib/aarch64-linux-gnu/libpcl_outofcore.so  
+-- looking for PCL_PEOPLE
+-- Found PCL_PEOPLE: /usr/lib/aarch64-linux-gnu/libpcl_people.so  
+-- Found PCL: pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_apps;pcl_outofcore;pcl_people;/usr/lib/aarch64-linux-gnu/libboost_system.so;/usr/lib/aarch64-linux-gnu/libboost_filesystem.so;/usr/lib/aarch64-linux-gnu/libboost_date_time.so;/usr/lib/aarch64-linux-gnu/libboost_iostreams.so;/usr/lib/aarch64-linux-gnu/libboost_regex.so;optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;/usr/lib/aarch64-linux-gnu/libfreetype.so;/usr/lib/aarch64-linux-gnu/libz.so;vtkFiltersModeling;vtkImagingSources;vtkInteractionStyle;vtkInteractionWidgets;vtkFiltersHybrid;vtkImagingColor;vtkImagingGeneral;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/aarch64-linux-gnu/libjpeg.so;/usr/lib/aarch64-linux-gnu/libpng.so;/usr/lib/aarch64-linux-gnu/libtiff.so;vtkRenderingAnnotation;vtkRenderingVolume;vtkIOXML;vtkIOCore;vtkIOXMLParser;/usr/lib/aarch64-linux-gnu/libexpat.so;vtkIOGeometry;vtkIOLegacy;vtkIOPLY;vtkRenderingLOD;vtkViewsContext2D;vtkViewsCore;vtkRenderingContextOpenGL2;vtkRenderingOpenGL2;FLANN::FLANN  
+-- +++ processing catkin package: 'occ_grid'
+-- ==> add_subdirectory(occ_grid)
+-- Found Boost: /usr/lib/aarch64-linux-gnu/cmake/Boost-1.71.0/BoostConfig.cmake (found version "1.71.0")  
+-- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+-- Found Boost: /usr/include (found suitable version "1.71.0", minimum required is "1.55.0") found components: system filesystem date_time iostreams regex 
+-- The imported target "vtkParseOGLExt" references the file
+   "/usr/bin/vtkParseOGLExt-7.1"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtkRenderingPythonTkWidgets" references the file
+   "/usr/lib/aarch64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtk" references the file
+   "/usr/bin/vtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "pvtk" references the file
+   "/usr/bin/pvtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni2 will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+** WARNING ** io features related to libusb-1.0 will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni2 will be disabled
+-- QHULL found (include: /usr/include, lib: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so)
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** apps features related to openni will be disabled
+-- looking for PCL_COMMON
+-- looking for PCL_KDTREE
+-- looking for PCL_OCTREE
+-- looking for PCL_SEARCH
+-- looking for PCL_SAMPLE_CONSENSUS
+-- looking for PCL_FILTERS
+-- looking for PCL_2D
+-- looking for PCL_GEOMETRY
+-- looking for PCL_IO
+-- looking for PCL_FEATURES
+-- looking for PCL_ML
+-- looking for PCL_SEGMENTATION
+-- looking for PCL_VISUALIZATION
+-- looking for PCL_SURFACE
+-- looking for PCL_REGISTRATION
+-- looking for PCL_KEYPOINTS
+-- looking for PCL_TRACKING
+-- looking for PCL_RECOGNITION
+-- looking for PCL_STEREO
+-- looking for PCL_APPS
+-- looking for PCL_IN_HAND_SCANNER
+-- looking for PCL_POINT_CLOUD_EDITOR
+-- looking for PCL_OUTOFCORE
+-- looking for PCL_PEOPLE
+-- Found PCL: pcl_common;pcl_kdtree;pcl_octree;pcl_search;pcl_sample_consensus;pcl_filters;pcl_io;pcl_features;pcl_ml;pcl_segmentation;pcl_visualization;pcl_surface;pcl_registration;pcl_keypoints;pcl_tracking;pcl_recognition;pcl_stereo;pcl_apps;pcl_outofcore;pcl_people;/usr/lib/aarch64-linux-gnu/libboost_system.so;/usr/lib/aarch64-linux-gnu/libboost_filesystem.so;/usr/lib/aarch64-linux-gnu/libboost_date_time.so;/usr/lib/aarch64-linux-gnu/libboost_iostreams.so;/usr/lib/aarch64-linux-gnu/libboost_regex.so;optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so;vtkChartsCore;vtkCommonColor;vtkCommonCore;vtksys;vtkCommonDataModel;vtkCommonMath;vtkCommonMisc;vtkCommonSystem;vtkCommonTransforms;vtkCommonExecutionModel;vtkFiltersGeneral;vtkCommonComputationalGeometry;vtkFiltersCore;vtkInfovisCore;vtkFiltersExtraction;vtkFiltersStatistics;vtkImagingFourier;vtkImagingCore;vtkalglib;vtkRenderingContext2D;vtkRenderingCore;vtkFiltersGeometry;vtkFiltersSources;vtkRenderingFreeType;/usr/lib/aarch64-linux-gnu/libfreetype.so;/usr/lib/aarch64-linux-gnu/libz.so;vtkFiltersModeling;vtkImagingSources;vtkInteractionStyle;vtkInteractionWidgets;vtkFiltersHybrid;vtkImagingColor;vtkImagingGeneral;vtkImagingHybrid;vtkIOImage;vtkDICOMParser;vtkmetaio;/usr/lib/aarch64-linux-gnu/libjpeg.so;/usr/lib/aarch64-linux-gnu/libpng.so;/usr/lib/aarch64-linux-gnu/libtiff.so;vtkRenderingAnnotation;vtkRenderingVolume;vtkIOXML;vtkIOCore;vtkIOXMLParser;/usr/lib/aarch64-linux-gnu/libexpat.so;vtkIOGeometry;vtkIOLegacy;vtkIOPLY;vtkRenderingLOD;vtkViewsContext2D;vtkViewsCore;vtkRenderingContextOpenGL2;vtkRenderingOpenGL2;FLANN::FLANN (Required is at least version "1.7") 
+-- +++ processing catkin package: 'path_finder'
+-- ==> add_subdirectory(path_finder)
+-- Eigen found (include: /usr/include/eigen3, version: 3.3.7)
+-- The imported target "vtkParseOGLExt" references the file
+   "/usr/bin/vtkParseOGLExt-7.1"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtkRenderingPythonTkWidgets" references the file
+   "/usr/lib/aarch64-linux-gnu/libvtkRenderingPythonTkWidgets.so"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "vtk" references the file
+   "/usr/bin/vtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- The imported target "pvtk" references the file
+   "/usr/bin/pvtk"
+but this file does not exist.  Possible reasons include:
+* The file was deleted, renamed, or moved to another location.
+* An install or uninstall procedure did not complete successfully.
+* The installation package was faulty and contained
+   "/usr/lib/cmake/vtk-7.1/VTKTargets.cmake"
+but not all the files it references.
+
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** io features related to openni2 will be disabled
+** WARNING ** io features related to pcap will be disabled
+** WARNING ** io features related to png will be disabled
+-- LIBUSB_1_LIBRARY (missing: LIBUSB_1_INCLUDE_DIR) 
+** WARNING ** io features related to libusb-1.0 will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni will be disabled
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI 2 disabled because libusb-1.0 not found.
+** WARNING ** visualization features related to openni2 will be disabled
+-- QHULL found (include: /usr/include, lib: optimized;/usr/lib/aarch64-linux-gnu/libqhull.so;debug;/usr/lib/aarch64-linux-gnu/libqhull.so)
+-- Checking for module 'libusb-1.0'
+--   No package 'libusb-1.0' found
+-- Could NOT find USB_10 (missing: USB_10_LIBRARY USB_10_INCLUDE_DIR) 
+-- OpenNI disabled because libusb-1.0 not found.
+** WARNING ** apps features related to openni will be disabled
+-- looking for PCL_COMMON
+-- looking for PCL_KDTREE
+-- looking for PCL_OCTREE
+-- looking for PCL_SEARCH
+-- looking for PCL_SAMPLE_CONSENSUS
+-- looking for PCL_FILTERS
+-- looking for PCL_2D
+-- looking for PCL_GEOMETRY
+-- looking for PCL_IO
+-- looking for PCL_FEATURES
+-- looking for PCL_ML
+-- looking for PCL_SEGMENTATION
+-- looking for PCL_VISUALIZATION
+-- looking for PCL_SURFACE
+-- looking for PCL_REGISTRATION
+-- looking for PCL_KEYPOINTS
+-- looking for PCL_TRACKING
+-- looking for PCL_RECOGNITION
+-- looking for PCL_STEREO
+-- looking for PCL_APPS
+-- looking for PCL_IN_HAND_SCANNER
+-- looking for PCL_POINT_CLOUD_EDITOR
+-- looking for PCL_OUTOFCORE
+-- looking for PCL_PEOPLE
+-- Found Boost: /usr/include (found version "1.71.0")  
+-- +++ processing catkin package: 'mockamap'
+-- ==> add_subdirectory(map_gen/mockamap)
+-- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+-- +++ processing catkin package: 'rviz_plugins'
+-- ==> add_subdirectory(rviz_plugins)
+-- Using these message generators: gencpp;geneus;genlisp;gennodejs;genpy
+-- Using Qt5 based on the rviz_QT_VERSION: 5.12.8
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build
+Scanning dependencies of target std_msgs_generate_messages_eus
+Scanning dependencies of target _self_msgs_and_srvs_generate_messages_check_deps_GlbObsRcv
+[  0%] Built target std_msgs_generate_messages_eus
+Scanning dependencies of target _self_msgs_and_srvs_generate_messages_check_deps_input_point
+[  0%] Built target _self_msgs_and_srvs_generate_messages_check_deps_GlbObsRcv
+Scanning dependencies of target _self_msgs_and_srvs_generate_messages_check_deps_output_point
+[  0%] Built target _self_msgs_and_srvs_generate_messages_check_deps_input_point
+Scanning dependencies of target _self_msgs_and_srvs_generate_messages_check_deps_LearningSampler
+[  0%] Built target _self_msgs_and_srvs_generate_messages_check_deps_output_point
+Scanning dependencies of target geometry_msgs_generate_messages_eus
+[  0%] Built target _self_msgs_and_srvs_generate_messages_check_deps_LearningSampler
+[  0%] Built target geometry_msgs_generate_messages_eus
+Scanning dependencies of target geometry_msgs_generate_messages_nodejs
+Scanning dependencies of target std_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target std_msgs_generate_messages_nodejs
+Scanning dependencies of target geometry_msgs_generate_messages_lisp
+Scanning dependencies of target std_msgs_generate_messages_lisp
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target std_msgs_generate_messages_lisp
+Scanning dependencies of target geometry_msgs_generate_messages_py
+Scanning dependencies of target std_msgs_generate_messages_py
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_py
+Scanning dependencies of target geometry_msgs_generate_messages_cpp
+Scanning dependencies of target std_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_cpp
+Scanning dependencies of target pcl_msgs_generate_messages_py
+Scanning dependencies of target rosgraph_msgs_generate_messages_py
+[  0%] Built target pcl_msgs_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_py
+Scanning dependencies of target rosgraph_msgs_generate_messages_eus
+Scanning dependencies of target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+Scanning dependencies of target roscpp_generate_messages_nodejs
+Scanning dependencies of target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_nodejs
+Scanning dependencies of target roscpp_generate_messages_py
+Scanning dependencies of target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_py
+Scanning dependencies of target roscpp_generate_messages_eus
+Scanning dependencies of target roscpp_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_eus
+Scanning dependencies of target pcl_msgs_generate_messages_cpp
+Scanning dependencies of target roscpp_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target pcl_msgs_generate_messages_cpp
+Scanning dependencies of target sensor_msgs_generate_messages_cpp
+Scanning dependencies of target sensor_msgs_generate_messages_eus
+[  0%] Built target sensor_msgs_generate_messages_eus
+[  0%] Built target sensor_msgs_generate_messages_cpp
+Scanning dependencies of target pcl_msgs_generate_messages_eus
+Scanning dependencies of target pcl_msgs_generate_messages_lisp
+[  0%] Built target pcl_msgs_generate_messages_lisp
+[  0%] Built target pcl_msgs_generate_messages_eus
+Scanning dependencies of target sensor_msgs_generate_messages_nodejs
+Scanning dependencies of target sensor_msgs_generate_messages_lisp
+[  0%] Built target sensor_msgs_generate_messages_nodejs
+[  0%] Built target sensor_msgs_generate_messages_lisp
+Scanning dependencies of target pcl_msgs_generate_messages_nodejs
+Scanning dependencies of target sensor_msgs_generate_messages_py
+[  0%] Built target sensor_msgs_generate_messages_py
+[  0%] Built target pcl_msgs_generate_messages_nodejs
+Scanning dependencies of target tf_generate_messages_cpp
+[  0%] Built target tf_generate_messages_cpp
+Scanning dependencies of target std_srvs_generate_messages_eus
+[  0%] Built target std_srvs_generate_messages_eus
+Scanning dependencies of target std_srvs_generate_messages_lisp
+[  0%] Built target std_srvs_generate_messages_lisp
+Scanning dependencies of target std_srvs_generate_messages_py
+[  0%] Built target std_srvs_generate_messages_py
+Scanning dependencies of target std_srvs_generate_messages_nodejs
+[  0%] Built target std_srvs_generate_messages_nodejs
+Scanning dependencies of target std_srvs_generate_messages_cpp
+[  0%] Built target std_srvs_generate_messages_cpp
+Scanning dependencies of target tf2_msgs_generate_messages_py
+[  0%] Built target tf2_msgs_generate_messages_py
+Scanning dependencies of target tf2_msgs_generate_messages_lisp
+[  0%] Built target tf2_msgs_generate_messages_lisp
+Scanning dependencies of target actionlib_msgs_generate_messages_lisp
+[  0%] Built target actionlib_msgs_generate_messages_lisp
+Scanning dependencies of target actionlib_msgs_generate_messages_eus
+Scanning dependencies of target occ_grid
+[  0%] Built target actionlib_msgs_generate_messages_eus
+[  2%] Building CXX object occ_grid/CMakeFiles/occ_grid.dir/src/occ_map.cpp.o
+Scanning dependencies of target actionlib_msgs_generate_messages_nodejs
+[  2%] Built target actionlib_msgs_generate_messages_nodejs
+Scanning dependencies of target actionlib_generate_messages_py
+[  2%] Built target actionlib_generate_messages_py
+[  4%] Building CXX object occ_grid/CMakeFiles/occ_grid.dir/src/raycast.cpp.o
+Scanning dependencies of target actionlib_generate_messages_lisp
+[  4%] Built target actionlib_generate_messages_lisp
+Scanning dependencies of target actionlib_msgs_generate_messages_cpp
+[  4%] Built target actionlib_msgs_generate_messages_cpp
+Scanning dependencies of target actionlib_generate_messages_eus
+[  4%] Built target actionlib_generate_messages_eus
+Scanning dependencies of target nodelet_generate_messages_lisp
+[  4%] Built target nodelet_generate_messages_lisp
+Scanning dependencies of target nodelet_generate_messages_py
+[  4%] Built target nodelet_generate_messages_py
+Scanning dependencies of target bond_generate_messages_lisp
+[  4%] Built target bond_generate_messages_lisp
+Scanning dependencies of target tf_generate_messages_nodejs
+[  4%] Built target tf_generate_messages_nodejs
+Scanning dependencies of target actionlib_generate_messages_nodejs
+[  4%] Built target actionlib_generate_messages_nodejs
+Scanning dependencies of target nodelet_generate_messages_eus
+[  4%] Built target nodelet_generate_messages_eus
+Scanning dependencies of target topic_tools_generate_messages_cpp
+[  4%] Built target topic_tools_generate_messages_cpp
+Scanning dependencies of target pcl_ros_gencfg
+[  4%] Built target pcl_ros_gencfg
+Scanning dependencies of target dynamic_reconfigure_generate_messages_lisp
+[  4%] Built target dynamic_reconfigure_generate_messages_lisp
+Scanning dependencies of target dynamic_reconfigure_generate_messages_py
+[  4%] Built target dynamic_reconfigure_generate_messages_py
+Scanning dependencies of target dynamic_reconfigure_gencfg
+[  4%] Built target dynamic_reconfigure_gencfg
+Scanning dependencies of target nodelet_generate_messages_cpp
+[  4%] Built target nodelet_generate_messages_cpp
+Scanning dependencies of target dynamic_reconfigure_generate_messages_eus
+[  4%] Built target dynamic_reconfigure_generate_messages_eus
+Scanning dependencies of target bond_generate_messages_cpp
+[  4%] Built target bond_generate_messages_cpp
+Scanning dependencies of target bond_generate_messages_eus
+[  4%] Built target bond_generate_messages_eus
+Scanning dependencies of target nodelet_generate_messages_nodejs
+[  4%] Built target nodelet_generate_messages_nodejs
+Scanning dependencies of target bond_generate_messages_nodejs
+[  4%] Built target bond_generate_messages_nodejs
+Scanning dependencies of target tf2_msgs_generate_messages_nodejs
+[  4%] Built target tf2_msgs_generate_messages_nodejs
+Scanning dependencies of target bond_generate_messages_py
+[  4%] Built target bond_generate_messages_py
+Scanning dependencies of target topic_tools_generate_messages_lisp
+[  4%] Built target topic_tools_generate_messages_lisp
+Scanning dependencies of target dynamic_reconfigure_generate_messages_nodejs
+[  4%] Built target dynamic_reconfigure_generate_messages_nodejs
+Scanning dependencies of target nodelet_topic_tools_gencfg
+[  4%] Built target nodelet_topic_tools_gencfg
+Scanning dependencies of target dynamic_reconfigure_generate_messages_cpp
+[  4%] Built target dynamic_reconfigure_generate_messages_cpp
+Scanning dependencies of target tf_generate_messages_lisp
+[  4%] Built target tf_generate_messages_lisp
+Scanning dependencies of target topic_tools_generate_messages_eus
+[  4%] Built target topic_tools_generate_messages_eus
+Scanning dependencies of target tf2_msgs_generate_messages_cpp
+[  4%] Built target tf2_msgs_generate_messages_cpp
+Scanning dependencies of target tf_generate_messages_eus
+[  4%] Built target tf_generate_messages_eus
+Scanning dependencies of target topic_tools_generate_messages_py
+[  4%] Built target topic_tools_generate_messages_py
+Scanning dependencies of target tf_generate_messages_py
+[  4%] Built target tf_generate_messages_py
+Scanning dependencies of target tf2_msgs_generate_messages_eus
+[  4%] Built target tf2_msgs_generate_messages_eus
+Scanning dependencies of target topic_tools_generate_messages_nodejs
+[  4%] Built target topic_tools_generate_messages_nodejs
+Scanning dependencies of target actionlib_msgs_generate_messages_py
+[  4%] Built target actionlib_msgs_generate_messages_py
+Scanning dependencies of target actionlib_generate_messages_cpp
+[  4%] Built target actionlib_generate_messages_cpp
+[  6%] Generating src/moc_goal_tool.cpp
+Scanning dependencies of target rviz_plugins
+[  9%] Building CXX object rviz_plugins/CMakeFiles/rviz_plugins.dir/src/pose_tool.cpp.o
+[ 11%] Building CXX object rviz_plugins/CMakeFiles/rviz_plugins.dir/src/goal_tool.cpp.o
+[ 13%] Linking CXX shared library /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/libocc_grid.so
+[ 16%] Building CXX object rviz_plugins/CMakeFiles/rviz_plugins.dir/src/moc_goal_tool.cpp.o
+[ 16%] Built target occ_grid
+Scanning dependencies of target self_msgs_and_srvs_generate_messages_eus
+[ 18%] Generating EusLisp code from self_msgs_and_srvs/input_point.msg
+[ 20%] Generating EusLisp code from self_msgs_and_srvs/output_point.msg
+[ 23%] Generating EusLisp code from self_msgs_and_srvs/GlbObsRcv.srv
+[ 25%] Generating EusLisp code from self_msgs_and_srvs/LearningSampler.srv
+[ 27%] Generating EusLisp manifest code for self_msgs_and_srvs
+[ 27%] Built target self_msgs_and_srvs_generate_messages_eus
+Scanning dependencies of target self_msgs_and_srvs_generate_messages_nodejs
+[ 30%] Generating Javascript code from self_msgs_and_srvs/input_point.msg
+[ 32%] Generating Javascript code from self_msgs_and_srvs/output_point.msg
+[ 34%] Generating Javascript code from self_msgs_and_srvs/GlbObsRcv.srv
+[ 37%] Generating Javascript code from self_msgs_and_srvs/LearningSampler.srv
+[ 37%] Built target self_msgs_and_srvs_generate_messages_nodejs
+Scanning dependencies of target self_msgs_and_srvs_generate_messages_lisp
+[ 39%] Generating Lisp code from self_msgs_and_srvs/input_point.msg
+[ 41%] Generating Lisp code from self_msgs_and_srvs/output_point.msg
+[ 44%] Generating Lisp code from self_msgs_and_srvs/GlbObsRcv.srv
+[ 46%] Generating Lisp code from self_msgs_and_srvs/LearningSampler.srv
+[ 46%] Built target self_msgs_and_srvs_generate_messages_lisp
+Scanning dependencies of target self_msgs_and_srvs_generate_messages_py
+[ 48%] Generating Python from MSG self_msgs_and_srvs/input_point
+[ 51%] Generating Python from MSG self_msgs_and_srvs/output_point
+[ 53%] Generating Python code from SRV self_msgs_and_srvs/GlbObsRcv
+[ 55%] Generating Python code from SRV self_msgs_and_srvs/LearningSampler
+[ 58%] Generating Python msg __init__.py for self_msgs_and_srvs
+[ 60%] Generating Python srv __init__.py for self_msgs_and_srvs
+[ 62%] Linking CXX shared library /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/librviz_plugins.so
+[ 62%] Built target self_msgs_and_srvs_generate_messages_py
+Scanning dependencies of target self_msgs_and_srvs_generate_messages_cpp
+[ 65%] Generating C++ code from self_msgs_and_srvs/input_point.msg
+[ 67%] Generating C++ code from self_msgs_and_srvs/output_point.msg
+[ 69%] Generating C++ code from self_msgs_and_srvs/GlbObsRcv.srv
+[ 69%] Built target rviz_plugins
+Scanning dependencies of target path_finder
+[ 72%] Building CXX object path_finder/CMakeFiles/path_finder.dir/src/test_planner.cpp.o
+[ 74%] Generating C++ code from self_msgs_and_srvs/LearningSampler.srv
+[ 74%] Built target self_msgs_and_srvs_generate_messages_cpp
+[ 76%] Building C object path_finder/CMakeFiles/path_finder.dir/src/kdtree.c.o
+cc1: warning: command line option ‘-std=c++14’ is valid for C++/ObjC++ but not for C
+Scanning dependencies of target self_msgs_and_srvs_generate_messages
+[ 76%] Built target self_msgs_and_srvs_generate_messages
+Scanning dependencies of target random_forest
+[ 79%] Building CXX object map_gen/map_generator/CMakeFiles/random_forest.dir/src/random_forest_sensing.cpp.o
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp: In function ‘void RandomMapGenerate()’:
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp:68:38: warning: variable ‘rand_x’ set but not used [-Wunused-but-set-variable]
+   68 |    uniform_real_distribution<double> rand_x = uniform_real_distribution<double>(_x_l, _x_h);
+      |                                      ^~~~~~
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp:69:38: warning: variable ‘rand_y’ set but not used [-Wunused-but-set-variable]
+   69 |    uniform_real_distribution<double> rand_y = uniform_real_distribution<double>(_y_l, _y_h);
+      |                                      ^~~~~~
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp:73:38: warning: variable ‘rand_x_circle’ set but not used [-Wunused-but-set-variable]
+   73 |    uniform_real_distribution<double> rand_x_circle = uniform_real_distribution<double>(_x_l + 1.0, _x_h - 1.0);
+      |                                      ^~~~~~~~~~~~~
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp:74:38: warning: variable ‘rand_y_circle’ set but not used [-Wunused-but-set-variable]
+   74 |    uniform_real_distribution<double> rand_y_circle = uniform_real_distribution<double>(_y_l + 1.0, _y_h - 1.0);
+      |                                      ^~~~~~~~~~~~~
+/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src/map_gen/map_generator/src/random_forest_sensing.cpp:85:28: warning: unused variable ‘base4’ [-Wunused-variable]
+   85 |    int base2(2), base3(3), base4(4); //Halton base
+      |                            ^~~~~
+[ 81%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/map_generator/random_forest
+[ 81%] Built target random_forest
+Scanning dependencies of target example_map_publisher
+[ 83%] Building CXX object map_gen/map_generator/CMakeFiles/example_map_publisher.dir/src/example_map_publisher.cpp.o
+[ 86%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/map_generator/example_map_publisher
+[ 86%] Built target example_map_publisher
+Scanning dependencies of target mockamap_node
+[ 88%] Building CXX object map_gen/mockamap/CMakeFiles/mockamap_node.dir/src/ces_randommap.cpp.o
+[ 90%] Building CXX object map_gen/mockamap/CMakeFiles/mockamap_node.dir/src/maps.cpp.o
+[ 93%] Building CXX object map_gen/mockamap/CMakeFiles/mockamap_node.dir/src/mockamap.cpp.o
+[ 95%] Building CXX object map_gen/mockamap/CMakeFiles/mockamap_node.dir/src/perlinnoise.cpp.o
+[ 97%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/mockamap/mockamap_node
+[ 97%] Built target mockamap_node
+[100%] Linking CXX executable /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel/lib/path_finder/path_finder
+[100%] Built target path_finder
+Base path: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main
+Source space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src
+Build space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build
+Devel space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel
+Install space: /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/install
+####
+#### Running command: "cmake /tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/src -DCATKIN_DEVEL_PREFIX=/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/devel -DCMAKE_INSTALL_PREFIX=/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/install -G Unix Makefiles" in "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build"
+####
+####
+#### Running command: "make -j2" in "/tmp/dacn-gcr-benchmark-20261008/sampling-based-path-finding-main/build"
+####

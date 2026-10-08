@@ -1,0 +1,150 @@
+{
+  "map": {
+    "boundary": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        20.0,
+        0.0
+      ],
+      [
+        20.0,
+        1.0
+      ],
+      [
+        11.0,
+        1.0
+      ],
+      [
+        11.0,
+        19.0
+      ],
+      [
+        20.0,
+        19.0
+      ],
+      [
+        20.0,
+        20.0
+      ],
+      [
+        0.0,
+        20.0
+      ],
+      [
+        0.0,
+        19.0
+      ],
+      [
+        9.0,
+        19.0
+      ],
+      [
+        9.0,
+        1.0
+      ],
+      [
+        0.0,
+        1.0
+      ]
+    ],
+    "obstacles": [
+      [
+        [
+          10.0,
+          2.0
+        ],
+        [
+          9.4,
+          3.2
+        ],
+        [
+          10.200000000000001,
+          4.0
+        ],
+        [
+          10.600000000000001,
+          2.6
+        ]
+      ],
+      [
+        [
+          5.800000000000001,
+          19.200000000000003
+        ],
+        [
+          5.800000000000001,
+          19.6
+        ],
+        [
+          6.6000000000000005,
+          19.6
+        ],
+        [
+          7.0,
+          19.200000000000003
+        ]
+      ],
+      [
+        [
+          3.2,
+          0.6000000000000001
+        ],
+        [
+          4.2,
+          0.6000000000000001
+        ],
+        [
+          3.0,
+          0.2
+        ]
+      ],
+      [
+        [
+          9.600000000000001,
+          13.0
+        ],
+        [
+          10.200000000000001,
+          12.200000000000001
+        ],
+        [
+          10.200000000000001,
+          11.0
+        ],
+        [
+          9.4,
+          10.8
+        ]
+      ]
+    ],
+    "robot_radius": 0.1,
+    "safety_margin": 0.05,
+    "start": [
+      19.850000000000005,
+      19.850000000000005
+    ],
+    "goal": [
+      0.15000000000000002,
+      0.15000000000000002
+    ]
+  },
+  "provenance": {
+    "source": "/Users/nguyen/BK/SEM7/DACN/GCR-Dataset/narrow/narrow.poly",
+    "source_sha256": "6f8450daeb171f9221a077fd959185673554840cd4f71aefcdab3d5f75b7c4dc",
+    "unit_assumption": "simulation metres; physical dataset units unspecified",
+    "long_side_m": 20,
+    "source_to_m_scale": 0.2,
+    "source_origin": [
+      0.0,
+      0.0
+    ],
+    "endpoint_policy": "far-apart pair in largest safe 8-neighbour lattice component",
+    "safe_grid_components": 1,
+    "legacy_decomposition_error": "Could not decompose the map boundary; check for invalid or repeated vertices",
+    "decomposition_backend": "constrained_delaunay_plus_repository_convex_merge",
+    "coverage_error_area": 6.661338147750939e-16
+  }
+}

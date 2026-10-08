@@ -1,0 +1,12 @@
+{
+  "recorded_runs": 720,
+  "successful_paths_checked": 536,
+  "failed_planning_runs": 184,
+  "infrastructure_errors": 0,
+  "max_path_length_rounding_error_m": 4.998342060957839e-05,
+  "clearance_m": 0.15,
+  "all_paths_planar": true,
+  "whole_segments_safe": true,
+  "cpp_test_cases": 24,
+  "cpp_test_failures": 0
+}

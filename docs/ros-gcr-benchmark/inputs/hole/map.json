@@ -1,0 +1,103 @@
+{
+  "map": {
+    "boundary": [
+      [
+        14.375,
+        0.0
+      ],
+      [
+        14.375,
+        20.0
+      ],
+      [
+        0.0,
+        20.0
+      ],
+      [
+        0.0,
+        0.0
+      ]
+    ],
+    "obstacles": [
+      [
+        [
+          1.875,
+          1.875
+        ],
+        [
+          1.875,
+          4.375
+        ],
+        [
+          4.375,
+          4.375
+        ],
+        [
+          4.375,
+          1.875
+        ]
+      ],
+      [
+        [
+          8.75,
+          12.5
+        ],
+        [
+          8.75,
+          15.0
+        ],
+        [
+          11.25,
+          15.0
+        ],
+        [
+          11.25,
+          12.5
+        ]
+      ],
+      [
+        [
+          4.75,
+          8.1875
+        ],
+        [
+          7.0625,
+          10.0
+        ],
+        [
+          8.5625,
+          7.875
+        ],
+        [
+          6.375,
+          6.25
+        ]
+      ]
+    ],
+    "robot_radius": 0.1,
+    "safety_margin": 0.05,
+    "start": [
+      14.150000000000002,
+      19.850000000000005
+    ],
+    "goal": [
+      0.15000000000000002,
+      0.15000000000000002
+    ]
+  },
+  "provenance": {
+    "source": "/Users/nguyen/BK/SEM7/DACN/GCR-Dataset/hole/hole.poly",
+    "source_sha256": "1b5b2ae7564aa59f094b8c7d1dd7303448583134353979c5bd03c303e78d0031",
+    "unit_assumption": "simulation metres; physical dataset units unspecified",
+    "long_side_m": 20,
+    "source_to_m_scale": 0.0625,
+    "source_origin": [
+      230.0,
+      100.0
+    ],
+    "endpoint_policy": "far-apart pair in largest safe 8-neighbour lattice component",
+    "safe_grid_components": 1,
+    "decomposition_backend": "repository_acd",
+    "coverage_error_area": 0.0
+  }
+}
