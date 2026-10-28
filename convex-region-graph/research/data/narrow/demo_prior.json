@@ -1,0 +1,92 @@
+{
+  "provider_metadata": {
+    "provider": "openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "nvidia/nemotron-3.5-super-vl:free",
+    "temperature": 0.0
+  },
+  "start_region": "C4",
+  "goal_region": "C5",
+  "region_scores": [
+    {
+      "id": "C0",
+      "score": 0.25,
+      "reason": "Goal-side dead-end cluster; area 2.18, mean_clearance 0.277, centroid_clearance 0.462, degree 2, safe_conductance 0.733; connects only to C6 and C11, not on the C4-to-C5 route."
+    },
+    {
+      "id": "C1",
+      "score": 0.45,
+      "reason": "Degree-3 hub but poor clearance; area 5.12, mean_clearance 0.162, centroid_clearance 0.173, compactness 20.19, aspect_ratio 1377.5; elongated shape and low clearance reduce priority."
+    },
+    {
+      "id": "C2",
+      "score": 0.5,
+      "reason": "Alternative path hub; area 5.84, mean_clearance 0.654, centroid_clearance 0.795, conductance 0.882, safe_conductance 0.846; farther from goal and requires detour via C1/C8 or C13."
+    },
+    {
+      "id": "C3",
+      "score": 0.15,
+      "reason": "Dead-end cluster off start C4; area 4.06, mean_clearance 0.294, centroid_clearance 0.457, degree 2, safe_conductance 0.846; connects only to C9 and C10 which loop back to C4, causing detours."
+    },
+    {
+      "id": "C4",
+      "score": 0.9,
+      "reason": "Start region; area 10.36, mean_clearance 0.307, centroid_clearance 0.418, degree 3, safe_conductance 0.590; only exit to goal-side bridge is via C14 (safe width 1.7), while C9/C10 lead to dead-end cluster."
+    },
+    {
+      "id": "C5",
+      "score": 0.95,
+      "reason": "Goal region; area 13.62, mean_clearance 0.295, centroid_clearance 0.482, degree 3, safe_conductance 0.653; direct safe portals from C12 (width 2.0/safe 1.7), C6, and C11 make it the sampling target."
+    },
+    {
+      "id": "C6",
+      "score": 0.3,
+      "reason": "Adjacent to goal C5 but side branch; area 2.0, mean_clearance 0.119, centroid_clearance 0.147 (below required_clearance 0.15), degree 2, safe_conductance 0.412; low clearance and off the direct path."
+    },
+    {
+      "id": "C7",
+      "score": 0.35,
+      "reason": "Small connector between C1 and C12; area 0.9, mean_clearance 0.251, centroid_clearance 0.447, compactness 2.20, safe_conductance 0.611; limited area restricts sampling."
+    },
+    {
+      "id": "C8",
+      "score": 0.4,
+      "reason": "Connector between C14 and C1; area 1.26 small, mean_clearance 0.229, centroid_clearance 0.333, conductance 0.866, safe_conductance 0.829; high aspect_ratio 617.5 indicates narrow detour."
+    },
+    {
+      "id": "C9",
+      "score": 0.1,
+      "reason": "Dead-end off start with very low clearance; area 1.02, mean_clearance 0.061, centroid_clearance 0.075, compactness 25.32, aspect_ratio 1467.0; small area and clearance below required 0.15."
+    },
+    {
+      "id": "C10",
+      "score": 0.1,
+      "reason": "Dead-end off start with low clearance; area 4.16, mean_clearance 0.127, centroid_clearance 0.138, compactness 30.64, aspect_ratio 1933.9; clearance below required 0.15 and loops back to C4."
+    },
+    {
+      "id": "C11",
+      "score": 0.2,
+      "reason": "Adjacent to goal C5 but very poor clearance; area 2.0, mean_clearance 0.065, centroid_clearance 0.067, compactness 63.69, aspect_ratio 10150.4; narrow and low clearance make it a low priority."
+    },
+    {
+      "id": "C12",
+      "score": 0.75,
+      "reason": "Direct predecessor to goal C5; area 1.6 small but compactness 1.74, mean_clearance 0.420, centroid_clearance 0.508, degree 3, safe_conductance 0.704; safe portal to C5 width 1.7."
+    },
+    {
+      "id": "C13",
+      "score": 0.6,
+      "reason": "Alternative connector to C15; area 1.4, mean_clearance 0.550, centroid_clearance 0.667, conductance 0.913, safe_conductance 0.878; small area and off the shortest C4-C14-C15-C12-C5 route."
+    },
+    {
+      "id": "C14",
+      "score": 0.85,
+      "reason": "On the direct C4-to-C5 bridge; area 8.36, mean_clearance 0.604, centroid_clearance 0.980, conductance 0.937, safe_conductance 0.880; connects C4 to C15 and C8."
+    },
+    {
+      "id": "C15",
+      "score": 0.8,
+      "reason": "On the direct path to C5; area 9.04, mean_clearance 0.262, degree 3, safe_conductance 0.443; connects C14 to C12 (portal safe width 1.35) and C13."
+    }
+  ]
+}

@@ -29,6 +29,10 @@ class DuplicateEdgeWeightWarning(UserWarning):
     """Emitted when an identical repeated LLM edge-weight record is ignored."""
 
 
+class ReasoningRequiredError(LLMProviderError):
+    """The selected endpoint rejected a request that disabled reasoning."""
+
+
 class _RetryableOpenRouterError(Exception):
     """Internal signal carrying the final user-facing transport error."""
 
@@ -434,6 +438,13 @@ class OpenRouterWeightProvider(LLMWeightProvider):
                 f"to reset; free services have restricted quotas.{suffix}"
             )
         lowered_detail = compact_detail.lower()
+        if status in (400, 422) and "reasoning" in lowered_detail and (
+            "reasoning is mandatory" in lowered_detail or "reasoning cannot be disabled" in lowered_detail
+        ):
+            return ReasoningRequiredError(
+                f"OpenRouter endpoint requires reasoning (HTTP {status}). "
+                f"Use reasoning effort minimal or low instead of none.{suffix}"
+            )
         if status in (400, 422) and "response_format" in lowered_detail and any(
             word in lowered_detail for word in ("unsupported", "not support", "invalid")
         ):

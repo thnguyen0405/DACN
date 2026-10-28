@@ -58,3 +58,27 @@ TEST(MapGeometry, CorridorNarrowerThanDiameterIsBlocked) {
   m.clearance=.3;
   EXPECT_FALSE(m.valid({2.5,2.65}));       // 0.5 m gap < 2 * 0.3 m
 }
+
+TEST(MapGeometry, BoundaryTangentObstacleKeepsCollisionChecks) {
+  auto m=room();
+  m.obstacles={{{0,5},{2,4},{2,6}}};
+  EXPECT_NO_THROW(m.validateGeometry());
+  EXPECT_FALSE(m.valid({0,5}));
+  EXPECT_FALSE(m.valid({1,5}));
+  EXPECT_FALSE(m.segmentValid({1,3},{1,7}));
+  EXPECT_TRUE(m.segmentValid({3,3},{3,7}));
+  // Edge contact is also contained; it must not create a passage along a wall.
+  m.obstacles={{{0,4},{2,4},{2,6},{0,6}}};
+  EXPECT_NO_THROW(m.validateGeometry());
+  EXPECT_FALSE(m.segmentValid({0,3},{0,7}));
+  m.obstacles={{{-1,4},{2,4},{2,6},{-1,6}}};
+  EXPECT_THROW(m.validateGeometry(),std::runtime_error);
+}
+
+TEST(MapGeometry, RejectObstacleEdgeLeavingConcaveBoundary) {
+  MapGeometry2D m;
+  m.boundary={{0,0},{6,0},{6,6},{4,6},{4,2},{2,2},{2,6},{0,6}};
+  m.obstacles={{{1,4},{5,4},{3,1}}};
+  for(auto p:m.obstacles.front()) EXPECT_TRUE(MapGeometry2D::inside(p,m.boundary));
+  EXPECT_THROW(m.validateGeometry(),std::runtime_error);
+}

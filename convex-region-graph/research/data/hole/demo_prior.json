@@ -1,0 +1,57 @@
+{
+  "provider_metadata": {
+    "provider": "openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "temperature": 0.0
+  },
+  "start_region": "C4",
+  "goal_region": "C5",
+  "region_scores": [
+    {
+      "id": "C0",
+      "score": 0.7,
+      "reason": "Good mean_clearance 1.85, safe_conductance 0.78, connects to C1, C7, C8; alternative routes."
+    },
+    {
+      "id": "C1",
+      "score": 0.7,
+      "reason": "Good mean_clearance 1.71, safe_conductance 0.81, connects to C0, C2, C3; but not on shortest path."
+    },
+    {
+      "id": "C2",
+      "score": 0.4,
+      "reason": "Low mean_clearance 0.87, high aspect_ratio 29.13, only degree 2; connects C1 and C4 but not on shortest path."
+    },
+    {
+      "id": "C3",
+      "score": 0.95,
+      "reason": "High mean_clearance 2.26, safe_conductance 0.80, large safe portal to C6 (safe_traversability 21.00) and to C4 (12.74); on shortest path."
+    },
+    {
+      "id": "C4",
+      "score": 0.9,
+      "reason": "Start region; moderate mean_clearance 1.30, safe_conductance 0.47, connects to C3 (high safe_traversability 12.74) and C2."
+    },
+    {
+      "id": "C5",
+      "score": 0.9,
+      "reason": "Goal region; despite low mean_clearance 0.55 and high aspect_ratio 102, it is the target and has a wide safe portal to C6 (safe_traversability 8.50)."
+    },
+    {
+      "id": "C6",
+      "score": 0.95,
+      "reason": "High safe_conductance 0.97, large safe portals to C3 (21.00) and C5 (8.50); mean_clearance 1.69; on shortest path."
+    },
+    {
+      "id": "C7",
+      "score": 0.4,
+      "reason": "Low mean_clearance 0.84, narrow safe portals (max safe_traversability 3.78), degree 2; connects C0 and C6 but detour."
+    },
+    {
+      "id": "C8",
+      "score": 0.3,
+      "reason": "Low mean_clearance 0.53, high aspect_ratio 46.53, narrow safe portal to C5 (safe_traversability 1.24); dead-end alternative."
+    }
+  ]
+}

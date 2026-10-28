@@ -1,6 +1,10 @@
 #ifndef MAP_GEOMETRY_2D_H
 #define MAP_GEOMETRY_2D_H
 #include <boost/property_tree/json_parser.hpp>
+#include <boost/geometry/algorithms/correct.hpp>
+#include <boost/geometry/algorithms/covered_by.hpp>
+#include <boost/geometry/geometries/point_xy.hpp>
+#include <boost/geometry/geometries/polygon.hpp>
 #include <algorithm>
 #include <cmath>
 #include <limits>
@@ -91,12 +95,26 @@ struct MapGeometry2D {
       if(segmentDistance(a[i],a[(i+1)%a.size()],b[j],b[(j+1)%b.size()])<1e-10) return true;
     return false;
   }
+  static bool coveredByBoundary(const Polygon &obstacle,const Polygon &outer) {
+    using BoostPoint=boost::geometry::model::d2::point_xy<double>;
+    using BoostPolygon=boost::geometry::model::polygon<BoostPoint>;
+    auto convert=[](const Polygon &ring) {
+      BoostPolygon result;
+      for(const auto &p:ring) result.outer().emplace_back(p.first,p.second);
+      boost::geometry::correct(result);
+      return result;
+    };
+    // Satellite free-space polygons can have holes tangent to their outer
+    // ring. Allow boundary contact, but check the whole obstacle (not just
+    // vertices: an edge can leave a concave boundary between inside vertices).
+    return boost::geometry::covered_by(convert(obstacle),convert(outer));
+  }
   void validateGeometry() const {
     validatePolygon(boundary);
     for(size_t i=0;i<obstacles.size();++i) {
       const auto &p=obstacles[i];validatePolygon(p);
-      if(!inside(p.front(),boundary) || ringsTouch(p,boundary))
-        throw std::runtime_error("Obstacle must be strictly inside boundary");
+      if(!coveredByBoundary(p,boundary))
+        throw std::runtime_error("Obstacle extends outside boundary");
       for(size_t j=0;j<i;++j)
         if(ringsTouch(p,obstacles[j]) || inside(p.front(),obstacles[j]) || inside(obstacles[j].front(),p))
           throw std::runtime_error("Obstacles must not overlap or touch");

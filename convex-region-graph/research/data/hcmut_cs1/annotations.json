@@ -1,0 +1,657 @@
+{
+  "schema": "satellite-annotations/v1",
+  "image": {
+    "name": "image.png",
+    "width": 2664,
+    "height": 1728,
+    "sha256": "7ff4953a42015efc04aa53d351193c6ec0fd433803c27fac1fea961cb8a31417"
+  },
+  "coordinate_units": "m",
+  "calibration": {
+    "points_px": [],
+    "distance_m": null,
+    "source": "Chua co so do san HCMUT co so 1 duoc xac minh. Ban nay xuat pixel, khong gan gia tri met.",
+    "basis": "map_measurement",
+    "relative_uncertainty": null
+  },
+  "geometry_px": {
+    "boundary": [
+      [
+        89.1151,
+        0.0
+      ],
+      [
+        2254.8809,
+        0.0
+      ],
+      [
+        2450.664,
+        202.6583
+      ],
+      [
+        1924.075,
+        995.7279
+      ],
+      [
+        1728.2919,
+        1215.95
+      ],
+      [
+        1073.4313,
+        1726.6489
+      ],
+      [
+        530.6396,
+        1726.6489
+      ],
+      [
+        337.557,
+        1256.4816
+      ],
+      [
+        199.8338,
+        749.8358
+      ]
+    ],
+    "walkable": [],
+    "obstacles": [
+      [
+        [
+          105.3178,
+          0.0
+        ],
+        [
+          172.8292,
+          185.0946
+        ],
+        [
+          275.4465,
+          144.5629
+        ],
+        [
+          232.2392,
+          0.0
+        ]
+      ],
+      [
+        [
+          291.6493,
+          0.0
+        ],
+        [
+          311.9027,
+          186.4457
+        ],
+        [
+          661.6118,
+          86.4676
+        ],
+        [
+          662.962,
+          0.0
+        ]
+      ],
+      [
+        [
+          388.8657,
+          382.3487
+        ],
+        [
+          557.6442,
+          294.5301
+        ],
+        [
+          475.2803,
+          152.6693
+        ],
+        [
+          311.9027,
+          240.4879
+        ]
+      ],
+      [
+        [
+          565.7456,
+          209.4136
+        ],
+        [
+          614.3538,
+          187.7967
+        ],
+        [
+          656.2108,
+          259.4027
+        ],
+        [
+          718.3213,
+          225.6263
+        ],
+        [
+          642.7086,
+          94.5739
+        ],
+        [
+          514.4369,
+          141.8608
+        ]
+      ],
+      [
+        [
+          753.4273,
+          408.0188
+        ],
+        [
+          850.6437,
+          363.4339
+        ],
+        [
+          764.2291,
+          201.3073
+        ],
+        [
+          671.0634,
+          248.5942
+        ]
+      ],
+      [
+        [
+          548.1926,
+          533.6669
+        ],
+        [
+          633.257,
+          487.731
+        ],
+        [
+          556.294,
+          339.1149
+        ],
+        [
+          473.9301,
+          382.3487
+        ]
+      ],
+      [
+        [
+          668.3629,
+          516.1032
+        ],
+        [
+          1155.7952,
+          275.6153
+        ],
+        [
+          1104.4866,
+          172.9351
+        ],
+        [
+          617.0542,
+          412.0719
+        ]
+      ],
+      [
+        [
+          810.1368,
+          0.0
+        ],
+        [
+          918.1551,
+          179.6904
+        ],
+        [
+          1158.4957,
+          59.4464
+        ],
+        [
+          987.0167,
+          0.0
+        ]
+      ],
+      [
+        [
+          1149.0441,
+          245.8921
+        ],
+        [
+          1273.2651,
+          185.0946
+        ],
+        [
+          1223.3066,
+          89.1697
+        ],
+        [
+          1099.0857,
+          143.2119
+        ]
+      ],
+      [
+        [
+          1344.8272,
+          0.0
+        ],
+        [
+          1396.1358,
+          125.6482
+        ],
+        [
+          1440.6934,
+          104.0313
+        ],
+        [
+          1482.5504,
+          181.0414
+        ],
+        [
+          1710.739,
+          71.6059
+        ],
+        [
+          1659.4303,
+          0.0
+        ]
+      ],
+      [
+        [
+          1768.7988,
+          0.0
+        ],
+        [
+          1867.3654,
+          244.541
+        ],
+        [
+          2206.2727,
+          81.0633
+        ],
+        [
+          2161.7152,
+          0.0
+        ]
+      ],
+      [
+        [
+          2029.3928,
+          358.0297
+        ],
+        [
+          2295.3877,
+          222.9242
+        ],
+        [
+          2198.1713,
+          126.9992
+        ],
+        [
+          1961.8814,
+          245.8921
+        ]
+      ],
+      [
+        [
+          1716.1399,
+          447.1994
+        ],
+        [
+          1914.6234,
+          359.3808
+        ],
+        [
+          1849.8125,
+          243.19
+        ],
+        [
+          1652.6792,
+          329.6575
+        ]
+      ],
+      [
+        [
+          1610.8221,
+          607.975
+        ],
+        [
+          1701.2874,
+          566.0923
+        ],
+        [
+          1566.2646,
+          343.1681
+        ],
+        [
+          1479.85,
+          383.6998
+        ]
+      ],
+      [
+        [
+          1410.9883,
+          706.602
+        ],
+        [
+          1579.7669,
+          622.8366
+        ],
+        [
+          1471.7486,
+          414.774
+        ],
+        [
+          1305.6706,
+          498.5395
+        ]
+      ],
+      [
+        [
+          1776.9002,
+          571.4965
+        ],
+        [
+          2059.0978,
+          430.9867
+        ],
+        [
+          2002.3882,
+          340.466
+        ],
+        [
+          1728.2919,
+          475.5715
+        ]
+      ],
+      [
+        [
+          1859.2641,
+          668.7725
+        ],
+        [
+          2095.554,
+          549.8796
+        ],
+        [
+          2044.2453,
+          459.3589
+        ],
+        [
+          1807.9554,
+          574.1986
+        ]
+      ],
+      [
+        [
+          1616.223,
+          793.0696
+        ],
+        [
+          1762.0476,
+          729.57
+        ],
+        [
+          1695.8865,
+          606.6239
+        ],
+        [
+          1556.813,
+          668.7725
+        ]
+      ],
+      [
+        [
+          1841.7111,
+          833.6013
+        ],
+        [
+          1944.3284,
+          775.5059
+        ],
+        [
+          1883.5682,
+          682.283
+        ],
+        [
+          1782.3011,
+          734.9742
+        ]
+      ],
+      [
+        [
+          752.077,
+          767.3995
+        ],
+        [
+          1049.1272,
+          625.5387
+        ],
+        [
+          993.7679,
+          524.2095
+        ],
+        [
+          702.1186,
+          662.0172
+        ]
+      ],
+      [
+        [
+          349.7091,
+          983.5684
+        ],
+        [
+          426.6721,
+          943.0367
+        ],
+        [
+          355.11,
+          798.4738
+        ],
+        [
+          271.3958,
+          837.6544
+        ]
+      ],
+      [
+        [
+          444.225,
+          1142.993
+        ],
+        [
+          841.1921,
+          941.6857
+        ],
+        [
+          768.2798,
+          814.6865
+        ],
+        [
+          379.4141,
+          1005.1853
+        ]
+      ],
+      [
+        [
+          615.704,
+          1418.6083
+        ],
+        [
+          972.1642,
+          1242.9711
+        ],
+        [
+          930.3071,
+          1167.312
+        ],
+        [
+          573.8469,
+          1341.5981
+        ]
+      ],
+      [
+        [
+          758.8282,
+          1690.1704
+        ],
+        [
+          819.5884,
+          1652.3409
+        ],
+        [
+          680.515,
+          1390.2361
+        ],
+        [
+          619.7547,
+          1418.6083
+        ]
+      ],
+      [
+        [
+          1065.33,
+          1529.3948
+        ],
+        [
+          1130.1409,
+          1494.2674
+        ],
+        [
+          1007.2701,
+          1261.8858
+        ],
+        [
+          943.8094,
+          1295.6622
+        ]
+      ],
+      [
+        [
+          1128.7907,
+          1601.0008
+        ],
+        [
+          1084.2331,
+          1523.9906
+        ],
+        [
+          819.5884,
+          1653.6919
+        ],
+        [
+          865.4962,
+          1726.6489
+        ]
+      ],
+      [
+        [
+          1127.4404,
+          1372.6724
+        ],
+        [
+          1474.4491,
+          1205.1415
+        ],
+        [
+          1431.2418,
+          1126.7803
+        ],
+        [
+          1086.9336,
+          1294.3112
+        ]
+      ],
+      [
+        [
+          1186.8505,
+          1478.0547
+        ],
+        [
+          1514.9559,
+          1317.2791
+        ],
+        [
+          1474.4491,
+          1245.6732
+        ],
+        [
+          1146.3436,
+          1405.0977
+        ]
+      ]
+    ]
+  },
+  "planning_px": {
+    "start": [
+      392.9164,
+      1221.3542
+    ],
+    "goal": [
+      1907.8723,
+      910.6114
+    ]
+  },
+  "robot": {
+    "radius_m": 0.1,
+    "safety_margin_m": 0.05,
+    "radius_px": 0,
+    "safety_margin_px": 0
+  },
+  "review": {
+    "geometry_confirmed": true,
+    "reviewer": "assistant visual digitization; approximate building envelopes",
+    "user_confirmation_pending": true
+  },
+  "obstacle_labels": [
+    "B01 - khoi nha sat mep anh phia Tay Bac",
+    "B02 - khoi nha ngang phia Tay Bac",
+    "B03 - khoi nha mai sang phia Tay",
+    "B04 - day nha phia Tay B6",
+    "B05 - day nha giua B6",
+    "B06 - day nha doc phia Nam B6",
+    "B07 - B6 / day nha dai",
+    "B08 - B5 / khoi nha phia Bac",
+    "B09 - day nha can B5",
+    "B10 - khoi co khi bi cat boi mep anh",
+    "B11 - xuong thuc tap Dien tu",
+    "B12 - khoi Quan ly Cong nghiep B10",
+    "B13 - khoi nha phia Nam xuong",
+    "B14 - khoi nha can Hoi truong A5",
+    "B15 - Hoi truong A5",
+    "B16 - khoi Moi truong",
+    "B17 - day nha phia Dong",
+    "B18 - Thu vien A2",
+    "B19 - khoi nha nho can cong 2",
+    "B20 - Khoa KH va KT May tinh A3",
+    "B21 - day nha sat bai do xe so 2",
+    "B22 - Khoa Dien Dien tu B3",
+    "B23 - khoi nha phia Nam / canh Bac",
+    "B24 - khoi nha phia Nam / canh Tay",
+    "B25 - khoi nha phia Nam / canh Dong",
+    "B26 - khoi nha phia Nam / canh Nam",
+    "B27 - khoi Ky thuat Hoa hoc / day Bac",
+    "B28 - khoi Ky thuat Hoa hoc / day Nam"
+  ],
+  "endpoint_labels": {
+    "start": "Cổng 1",
+    "goal": "Cổng 2"
+  },
+  "scene_model": {
+    "mode": "campus_minus_buildings",
+    "obstacles": "28 manually traced visible building/roof blocks; approximate envelopes, not surveyed footprints",
+    "free_space": "All remaining space inside the visible campus crop is free by modelling assumption, including grass and trees.",
+    "boundary": "Approximate visible campus perimeter; upper part is clipped by the image, not the full campus boundary.",
+    "start": "Gate 1 near the school name label, approximate position inside campus",
+    "goal": "Gate 2, approximate position inside campus",
+    "status": "draft_for_visual_review",
+    "not_modelled": [
+      "trees",
+      "lawns",
+      "fences inside campus",
+      "parked vehicles",
+      "stairs",
+      "one-way restrictions"
+    ]
+  },
+  "notes": "User requested buildings as obstacles, start gate 1 and goal gate 2. Manual scene preset only; the generic module does not automatically detect buildings.",
+  "export_settings": {
+    "scale_mode": "simulation",
+    "long_side_m": 20
+  }
+}

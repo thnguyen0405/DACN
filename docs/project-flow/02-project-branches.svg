@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1540" viewBox="0 0 2400 1540">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#153e32" stroke-width="1.8"/></marker></defs>
+<rect width="2400" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="65" y="65" font-size="39" text-anchor="start" fill="#153e32" font-weight="700">02  |  CÁC NHÁNH KHÁC VÀ THỬ NGHIỆM CỦA DỰ ÁN</text>
+<text x="65" y="108" font-size="24" text-anchor="start" fill="#566477" font-weight="400">Các chế độ lấy mẫu là lựa chọn thay thế nhau; cập nhật điểm động chạy trong RRT Python riêng</text>
+<text x="65" y="172" font-size="22" text-anchor="start" fill="#5145bd" font-weight="700">A. CÁC CHẾ ĐỘ LẤY MẪU TRONG ROS/C++</text>
+<rect x="85.0" y="220.0" width="470" height="130" rx="13" fill="#e8f1ff" stroke="#e8f1ff" stroke-width="2"/>
+<text x="320" y="266.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Baseline: guidance_mode = none</text>
+<text x="320" y="298.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Không cần LLM / prior</text>
+<text x="320" y="325.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Sampler gốc của planner</text>
+<rect x="85.0" y="430.0" width="470" height="130" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="320" y="476.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Điểm vùng hợp lệ</text>
+<text x="320" y="508.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">LLM thật / heuristic / mock</text>
+<text x="320" y="535.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Ghi rõ nguồn điểm</text>
+<rect x="700.0" y="430.0" width="480" height="130" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="940" y="476.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">region_prior</text>
+<text x="940" y="508.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Chọn vùng theo trọng số</text>
+<text x="940" y="535.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Lấy điểm đều theo diện tích</text>
+<rect x="85.0" y="690.0" width="470" height="130" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="320" y="736.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Chi phí các cạnh hiện có</text>
+<text x="320" y="768.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">LLM hoặc heuristic hình học</text>
+<text x="320" y="795.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Kiểm tra ID và miền giá trị</text>
+<rect x="700.0" y="690.0" width="480" height="130" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="940" y="736.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Dijkstra trên GCR</text>
+<text x="940" y="768.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Tối thiểu tổng edge cost</text>
+<text x="940" y="795.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Xuất chuỗi vùng start → goal</text>
+<rect x="1295.0" y="615.0" width="430" height="120" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1510" y="656.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">sequence_guided</text>
+<text x="1510" y="688.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Vùng theo chuỗi + portal</text>
+<text x="1510" y="715.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Trộn lấy mẫu toàn cục</text>
+<rect x="1295.0" y="805.0" width="430" height="110" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1510" y="854.5" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">corridor</text>
+<text x="1510" y="886.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Lấy mẫu trong hợp vùng tuyến</text>
+<rect x="1910.0" y="420.0" width="420" height="150" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="2120" y="462.5" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Vòng lặp planner C++</text>
+<text x="2120" y="494.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Lấy mẫu → mở rộng cây</text>
+<text x="2120" y="521.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Kiểm tra va chạm → cập nhật</text>
+<text x="2120" y="548.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Xuất RViz + metrics</text>
+<path d="M 555 285 L 2120 285 L 2120 420" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 555 495 L 700 495" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1180 495 L 1910 495" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 555 755 L 700 755" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1180 755 L 1230 755 L 1230 675 L 1295 675" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1230 755 L 1230 860 L 1295 860" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1725 675 L 1830 675 L 1830 540 L 1910 540" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1725 860 L 2290 860 L 2290 570" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="320" y="620" font-size="22" text-anchor="middle" fill="#576577" font-weight="400">Nhánh chọn tuyến dùng edge cost</text>
+<text x="1510" y="765" font-size="20" text-anchor="middle" fill="#576577" font-weight="400">Demo hỗn hợp: 80% guided / 20% global</text>
+<text x="65" y="963" font-size="22" text-anchor="start" fill="#5145bd" font-weight="700">B. CẬP NHẬT ĐIỂM ĐỘNG — NGHIÊN CỨU PYTHON, CHƯA TÍCH HỢP ROS</text>
+<rect x="80.0" y="1020.0" width="420" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="290" y="1071.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">RRT Python đang chạy</text>
+<text x="290" y="1103.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Điểm ban đầu: llm_prior.json</text>
+<text x="290" y="1130.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Theo dõi vòng lặp, nút, vùng</text>
+<polygon points="865,990.0 1040.0,1090 865,1190.0 690.0,1090" fill="#eaa5f6"/>
+<text x="865" y="1069.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">Đến lúc</text>
+<text x="865" y="1100.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">chấm lại?</text>
+<text x="865" y="1131.0" font-size="20" text-anchor="middle" fill="#153e32" font-weight="400">Còn lượt gọi</text>
+<rect x="1190.0" y="1020.0" width="480" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1430" y="1071.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Gọi lại LLM</text>
+<text x="1430" y="1103.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Graph + vùng đã thăm + số nút</text>
+<text x="1430" y="1130.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Điểm hiện tại + nghiệm tốt nhất</text>
+<rect x="1835.0" y="1020.0" width="470" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="2070" y="1071.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Áp dụng điểm mới</text>
+<text x="2070" y="1103.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Dùng cho mẫu tiếp theo</text>
+<text x="2070" y="1130.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Lỗi → giữ nguyên điểm cũ</text>
+<path d="M 500 1090 L 690 1090" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1040 1090 L 1190 1090" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1092.0" y="1044" width="46" height="31" rx="5" fill="white"/>
+<text x="1115" y="1067" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Có</text>
+<path d="M 1670 1090 L 1835 1090" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 865 1190 L 865 1245 L 290 1245 L 290 1160" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="524.0" y="1222" width="82" height="31" rx="5" fill="white"/>
+<text x="565" y="1245" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Không</text>
+<path d="M 2070 1160 L 2070 1300 L 105 1300 L 105 1160" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1369.0" y="1277" width="322" height="31" rx="5" fill="white"/>
+<text x="1530" y="1300" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Tiếp tục trên cây hiện có</text>
+<rect x="65" y="1350" width="1120" height="155" rx="16" fill="#f4f6fb"/>
+<text x="89" y="1387" font-size="25" text-anchor="start" fill="#153e32" font-weight="700">TRIGGER MẶC ĐỊNH</text>
+<text x="89" y="1423" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Chọn một: mỗi 250 vòng lặp HOẶC thêm nút vào vùng mới.</text>
+<text x="89" y="1453" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Cooldown 100 vòng; tối đa 2 lần gọi thêm (kể cả lần lỗi).</text>
+<text x="89" y="1483" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Decay nếu bật: giảm điểm sau mỗi 20 nút trong vùng; không gọi LLM.</text>
+<rect x="1215" y="1350" width="1120" height="155" rx="16" fill="#eef8f1"/>
+<text x="1239" y="1387" font-size="25" text-anchor="start" fill="#153e32" font-weight="700">ĐÁNH GIÁ KẾT QUẢ</text>
+<text x="1239" y="1423" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Nhiều map × seed × planner × chế độ, cùng ngân sách.</text>
+<text x="1239" y="1453" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Success rate, thời gian nghiệm đầu, chiều dài, va chạm, chi phí API.</text>
+<text x="1239" y="1483" font-size="23" text-anchor="start" fill="#465368" font-weight="400">reference.json: đường ngắn nhất trên lưới; không phải tối ưu liên tục.</text>
+</g></svg>

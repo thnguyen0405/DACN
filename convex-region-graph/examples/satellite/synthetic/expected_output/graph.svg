@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="650" viewBox="0 0 1800 650">
+<rect width="100%" height="100%" fill="#f8fafc"/>
+<defs><marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="#64748b"/></marker></defs>
+<line x1="600.0" y1="28" x2="600.0" y2="622" stroke="#cbd5e1"/>
+<line x1="1200.0" y1="28" x2="1200.0" y2="622" stroke="#cbd5e1"/>
+<text x="300.0" y="30" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700">Input map</text>
+<text x="900.0" y="30" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700">ACD convex regions</text>
+<text x="1500.0" y="30" text-anchor="middle" font-family="Arial" font-size="22" font-weight="700">Graph</text>
+<polygon points="55.00,570.00 545.00,570.00 545.00,80.00 55.00,80.00" fill="#dbeafe" stroke="#0f172a" stroke-width="3"/>
+<polygon points="251.00,276.00 251.00,374.00 349.00,374.00 349.00,276.00" fill="#334155" stroke="#0f172a" stroke-width="3"/>
+<circle cx="104.00" cy="521.00" r="9" fill="#16a34a" stroke="white" stroke-width="3"/>
+<text x="117.00" y="526.00" fill="#16a34a" font-family="Arial" font-size="15" font-weight="700">start</text>
+<circle cx="496.00" cy="129.00" r="9" fill="#dc2626" stroke="white" stroke-width="3"/>
+<text x="509.00" y="134.00" fill="#dc2626" font-family="Arial" font-size="15" font-weight="700">goal</text>
+<polygon points="655.00,570.00 851.00,374.00 851.00,276.00 655.00,80.00" fill="#ef767a" fill-opacity="0.48" stroke="#334155" stroke-width="2"/>
+<circle cx="731.22" cy="325.00" r="18" fill="#0f172a"/>
+<text x="731.22" y="330.00" text-anchor="middle" fill="white" font-family="Arial" font-size="13">C0</text>
+<polygon points="655.00,570.00 1145.00,570.00 949.00,374.00 851.00,374.00" fill="#56c271" fill-opacity="0.48" stroke="#334155" stroke-width="2"/>
+<circle cx="900.00" cy="493.78" r="18" fill="#0f172a"/>
+<text x="900.00" y="498.78" text-anchor="middle" fill="white" font-family="Arial" font-size="13">C1</text>
+<polygon points="655.00,80.00 851.00,276.00 949.00,276.00 1145.00,80.00" fill="#5b9cf0" fill-opacity="0.48" stroke="#334155" stroke-width="2"/>
+<circle cx="900.00" cy="156.22" r="18" fill="#0f172a"/>
+<text x="900.00" y="161.22" text-anchor="middle" fill="white" font-family="Arial" font-size="13">C2</text>
+<polygon points="949.00,374.00 1145.00,570.00 1145.00,80.00 949.00,276.00" fill="#ac72d6" fill-opacity="0.48" stroke="#334155" stroke-width="2"/>
+<circle cx="1068.78" cy="325.00" r="18" fill="#0f172a"/>
+<text x="1068.78" y="330.00" text-anchor="middle" fill="white" font-family="Arial" font-size="13">C3</text>
+<line x1="1344.66" y1="344.09" x2="1480.91" y2="480.34" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1486.56" y1="474.69" x2="1350.31" y2="338.44" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1350.31" y1="311.56" x2="1486.56" y2="175.31" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1480.91" y1="169.66" x2="1344.66" y2="305.91" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1519.09" y1="480.34" x2="1655.34" y2="344.09" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1649.69" y1="338.44" x2="1513.44" y2="474.69" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1513.44" y1="175.31" x2="1649.69" y2="311.56" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<line x1="1655.34" y1="305.91" x2="1519.09" y2="169.66" stroke="#64748b" stroke-width="1.8" marker-end="url(#arrow)"/>
+<circle cx="1331.22" cy="325.00" r="22" fill="#ef767a" stroke="#334155" stroke-width="2"/>
+<text x="1331.22" y="330.00" text-anchor="middle" fill="#0f172a" font-family="Arial" font-size="14" font-weight="700">C0</text>
+<circle cx="1500.00" cy="493.78" r="22" fill="#56c271" stroke="#334155" stroke-width="2"/>
+<text x="1500.00" y="498.78" text-anchor="middle" fill="#0f172a" font-family="Arial" font-size="14" font-weight="700">C1</text>
+<circle cx="1500.00" cy="156.22" r="22" fill="#5b9cf0" stroke="#334155" stroke-width="2"/>
+<text x="1500.00" y="161.22" text-anchor="middle" fill="#0f172a" font-family="Arial" font-size="14" font-weight="700">C2</text>
+<circle cx="1668.78" cy="325.00" r="22" fill="#ac72d6" stroke="#334155" stroke-width="2"/>
+<text x="1668.78" y="330.00" text-anchor="middle" fill="#0f172a" font-family="Arial" font-size="14" font-weight="700">C3</text>
+<text x="900.0" y="636" text-anchor="middle" font-family="Arial" font-size="13" fill="#475569">4 regions · 4 bidirectional connections · safe_portal: 4</text>
+</svg>

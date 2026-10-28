@@ -1,0 +1,1029 @@
+{
+  "start_region": "C17",
+  "goal_region": "C144",
+  "region_scores": [
+    {
+      "id": "C0",
+      "score": 0.15,
+      "reason": "Very low mean clearance (0.038) and extreme aspect ratio (237) indicate a tight, elongated dead-end; poor start-to-goal progress."
+    },
+    {
+      "id": "C1",
+      "score": 0.45,
+      "reason": "High connectivity (safe_degree 2) and moderate clearance (0.135) provide a viable corridor, though elongated (aspect ratio 161)."
+    },
+    {
+      "id": "C2",
+      "score": 0.3,
+      "reason": "Small area (0.21) and low mean clearance (0.123) limit utility; aspect ratio 9.9 is manageable but offers little progress."
+    },
+    {
+      "id": "C3",
+      "score": 0.85,
+      "reason": "Large area (4.18), high mean clearance (0.596), and degree 3 with safe_conductance 0.92 make it a central hub."
+    },
+    {
+      "id": "C4",
+      "score": 0.55,
+      "reason": "Good connectivity (safe_degree 3) and moderate clearance (0.26) support traversal despite small area (0.27)."
+    },
+    {
+      "id": "C5",
+      "score": 0.2,
+      "reason": "Low mean clearance (0.096) and degree 1 restrict movement; dead-end near start region."
+    },
+    {
+      "id": "C6",
+      "score": 0.4,
+      "reason": "Elongated (aspect ratio 123) with low clearance (0.112); connects C7 and C11 but offers limited progress."
+    },
+    {
+      "id": "C7",
+      "score": 0.6,
+      "reason": "Moderate clearance (0.213) and safe_degree 2; acts as a junction between C6 and C10."
+    },
+    {
+      "id": "C8",
+      "score": 0.65,
+      "reason": "Safe_conductance 0.62 and clearance 0.251 support movement; aspect ratio 23 is acceptable for a connector."
+    },
+    {
+      "id": "C9",
+      "score": 0.25,
+      "reason": "Very low mean clearance (0.073) and high aspect ratio (31) make it a narrow, risky passage."
+    },
+    {
+      "id": "C10",
+      "score": 0.9,
+      "reason": "High mean clearance (0.854), large area (2.38), and safe_conductance 0.89; key node near start."
+    },
+    {
+      "id": "C11",
+      "score": 0.5,
+      "reason": "Elongated (aspect ratio 47) with clearance 0.219; connects C6 and C12 but is a bottleneck."
+    },
+    {
+      "id": "C12",
+      "score": 0.7,
+      "reason": "Safe_conductance 0.81 and clearance 0.296; bridges C11 to C14/C15 with decent width."
+    },
+    {
+      "id": "C13",
+      "score": 0.35,
+      "reason": "Low mean clearance (0.084) and small area (0.32); limited utility despite degree 2."
+    },
+    {
+      "id": "C14",
+      "score": 0.3,
+      "reason": "Very low mean clearance (0.071) and safe_conductance 0.22; tight bottleneck to C25."
+    },
+    {
+      "id": "C15",
+      "score": 0.75,
+      "reason": "Good clearance (0.287) and safe_conductance 0.60; direct link from C12 to start region C17."
+    },
+    {
+      "id": "C16",
+      "score": 0.88,
+      "reason": "High mean clearance (0.836), large area (2.56), and safe_conductance 0.89; central hub near start."
+    },
+    {
+      "id": "C17",
+      "score": 0.95,
+      "reason": "Start region: high clearance (0.607), safe_conductance 0.835, and degree 3; critical for initial sampling."
+    },
+    {
+      "id": "C18",
+      "score": 0.45,
+      "reason": "Moderate clearance (0.178) and safe_conductance 0.49; connects C16 to C19 but is narrow."
+    },
+    {
+      "id": "C19",
+      "score": 0.3,
+      "reason": "Low mean clearance (0.086) and small area (0.27); tight passage with limited alternatives."
+    },
+    {
+      "id": "C20",
+      "score": 0.2,
+      "reason": "Extremely low mean clearance (0.035) and huge aspect ratio (708); nearly impassable sliver."
+    },
+    {
+      "id": "C21",
+      "score": 0.7,
+      "reason": "Large area (3.57), clearance 0.416, and safe_conductance 0.50; connects C23 and C31."
+    },
+    {
+      "id": "C22",
+      "score": 0.8,
+      "reason": "High clearance (0.722) and safe_conductance 0.75; key link between C28 and C39."
+    },
+    {
+      "id": "C23",
+      "score": 0.65,
+      "reason": "Moderate clearance (0.412) and safe_conductance 0.76; connects start region C17 to C21."
+    },
+    {
+      "id": "C24",
+      "score": 0.25,
+      "reason": "Low mean clearance (0.084) and small area (0.11); minor connector between C27 and C30."
+    },
+    {
+      "id": "C25",
+      "score": 0.35,
+      "reason": "Low clearance (0.090) and high aspect ratio (153); narrow corridor from C14 to C44."
+    },
+    {
+      "id": "C26",
+      "score": 0.3,
+      "reason": "Low mean clearance (0.083) and small area (0.13); tight link between C19 and C32."
+    },
+    {
+      "id": "C27",
+      "score": 0.4,
+      "reason": "Low clearance (0.105) and safe_conductance 0.34; connects C24 to C33 but is restrictive."
+    },
+    {
+      "id": "C28",
+      "score": 0.92,
+      "reason": "High mean clearance (0.868), large area (2.35), and safe_conductance 0.88; major hub."
+    },
+    {
+      "id": "C29",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.007) and absurd aspect ratio (23440); virtually unusable."
+    },
+    {
+      "id": "C30",
+      "score": 0.15,
+      "reason": "Very low clearance (0.022) and extreme aspect ratio (4123); degenerate sliver."
+    },
+    {
+      "id": "C31",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.458) but safe_degree drops to 2; connects C21 to C40."
+    },
+    {
+      "id": "C32",
+      "score": 0.6,
+      "reason": "Safe_conductance 0.62 and clearance 0.243; connects C26, C33, and C35."
+    },
+    {
+      "id": "C33",
+      "score": 0.7,
+      "reason": "Good clearance (0.254) and safe_conductance 0.64; junction between C27, C32, and C36."
+    },
+    {
+      "id": "C34",
+      "score": 0.25,
+      "reason": "Very low mean clearance (0.047) and safe_conductance 0.30; tight passage to C35/C43."
+    },
+    {
+      "id": "C35",
+      "score": 0.75,
+      "reason": "Clearance 0.311 and safe_conductance 0.72; connects C32, C34, and C45."
+    },
+    {
+      "id": "C36",
+      "score": 0.3,
+      "reason": "Low clearance (0.091) and safe_degree 1; dead-end off C33."
+    },
+    {
+      "id": "C37",
+      "score": 0.4,
+      "reason": "Low clearance (0.096) and safe_conductance 0.36; connects C42 to C43."
+    },
+    {
+      "id": "C38",
+      "score": 0.85,
+      "reason": "Large area (3.76), clearance 0.501, and safe_conductance 0.56; direct link from start C17."
+    },
+    {
+      "id": "C39",
+      "score": 0.8,
+      "reason": "High clearance (0.494) and safe_conductance 0.79; connects C22 to C44."
+    },
+    {
+      "id": "C40",
+      "score": 0.7,
+      "reason": "Large area (2.40), clearance 0.388, and safe_conductance 0.56; links C31 to C50."
+    },
+    {
+      "id": "C41",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.004) and huge aspect ratio (2285); degenerate passage."
+    },
+    {
+      "id": "C42",
+      "score": 0.78,
+      "reason": "Good clearance (0.404) and safe_conductance 0.77; connects C28, C37, and C54."
+    },
+    {
+      "id": "C43",
+      "score": 0.25,
+      "reason": "Very low clearance (0.042) and safe_conductance 0.22; narrow link between C34 and C37."
+    },
+    {
+      "id": "C44",
+      "score": 0.82,
+      "reason": "Safe_conductance 0.86 and clearance 0.227; major connector between C25, C39, and C60."
+    },
+    {
+      "id": "C45",
+      "score": 0.6,
+      "reason": "Moderate clearance (0.206) and safe_conductance 0.52; connects C35 to C47."
+    },
+    {
+      "id": "C46",
+      "score": 0.2,
+      "reason": "Low clearance (0.052) and safe_degree drops to 1; dead-end off C49."
+    },
+    {
+      "id": "C47",
+      "score": 0.35,
+      "reason": "Low clearance (0.045) and safe_degree 1; minor dead-end off C45."
+    },
+    {
+      "id": "C48",
+      "score": 0.4,
+      "reason": "Moderate clearance (0.154) but safe_degree 1; dead-end connected only to C51."
+    },
+    {
+      "id": "C49",
+      "score": 0.55,
+      "reason": "Clearance 0.161 and safe_conductance 0.65; connects C46 to C51."
+    },
+    {
+      "id": "C50",
+      "score": 0.5,
+      "reason": "Low clearance (0.091) and safe_conductance 0.40; connects C40 to C57."
+    },
+    {
+      "id": "C51",
+      "score": 0.78,
+      "reason": "High clearance (0.450), large area (0.93), and safe_conductance 0.80; hub connecting C48, C49, and C58."
+    },
+    {
+      "id": "C52",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.009) and absurd aspect ratio (15035); degenerate sliver."
+    },
+    {
+      "id": "C53",
+      "score": 0.82,
+      "reason": "Large area (3.44), clearance 0.510, and safe_conductance 0.58; major link from C38 to C74."
+    },
+    {
+      "id": "C54",
+      "score": 0.65,
+      "reason": "Moderate clearance (0.311) and safe_conductance 0.51; connects C42 to C64."
+    },
+    {
+      "id": "C55",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.003) and huge aspect ratio (5092); degenerate passage."
+    },
+    {
+      "id": "C56",
+      "score": 0.75,
+      "reason": "Good clearance (0.469) and safe_conductance 0.61; connects C61 to C65."
+    },
+    {
+      "id": "C57",
+      "score": 0.45,
+      "reason": "Low clearance (0.105) and safe_conductance 0.42; connects C50 and C55."
+    },
+    {
+      "id": "C58",
+      "score": 0.7,
+      "reason": "Clearance 0.313 and safe_conductance 0.51; connects C51 to C59."
+    },
+    {
+      "id": "C59",
+      "score": 0.65,
+      "reason": "Good clearance (0.292) and safe_conductance 0.56; links C58 to C66."
+    },
+    {
+      "id": "C60",
+      "score": 0.4,
+      "reason": "Low clearance (0.130) and safe_conductance 0.44; narrow passage from C44 to C62."
+    },
+    {
+      "id": "C61",
+      "score": 0.72,
+      "reason": "Safe_conductance 0.84 and clearance 0.098; connects C52, C56, and C68."
+    },
+    {
+      "id": "C62",
+      "score": 0.72,
+      "reason": "Clearance 0.428 and safe_conductance 0.75; connects C60 to C78."
+    },
+    {
+      "id": "C63",
+      "score": 0.15,
+      "reason": "Very low clearance (0.013) and extreme aspect ratio (69269); degenerate sliver."
+    },
+    {
+      "id": "C64",
+      "score": 0.6,
+      "reason": "Moderate clearance (0.331) and safe_conductance 0.47; connects C54 to C86."
+    },
+    {
+      "id": "C65",
+      "score": 0.72,
+      "reason": "Good clearance (0.392) and safe_conductance 0.64; connects C56, C63, and C65."
+    },
+    {
+      "id": "C66",
+      "score": 0.55,
+      "reason": "Low clearance (0.168) and safe_conductance 0.42; connects C59 to C72."
+    },
+    {
+      "id": "C67",
+      "score": 0.3,
+      "reason": "Very low clearance (0.062) and safe_conductance 0.37; tight passage between C68 and C70."
+    },
+    {
+      "id": "C68",
+      "score": 0.35,
+      "reason": "Low clearance (0.071) and safe_conductance 0.17; narrow bottleneck."
+    },
+    {
+      "id": "C69",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.010) and huge aspect ratio (8493); degenerate sliver."
+    },
+    {
+      "id": "C70",
+      "score": 0.65,
+      "reason": "Moderate clearance (0.169) and safe_conductance 0.74; connects C67, C75, and C85."
+    },
+    {
+      "id": "C71",
+      "score": 0.25,
+      "reason": "Low clearance (0.142) and safe_conductance 0.16; dead-end connected only to C91."
+    },
+    {
+      "id": "C72",
+      "score": 0.6,
+      "reason": "Clearance 0.198 and safe_conductance 0.75; connects C66 to C73."
+    },
+    {
+      "id": "C73",
+      "score": 0.45,
+      "reason": "Low clearance (0.114) and safe_conductance 0.39; connects C72 to C88."
+    },
+    {
+      "id": "C74",
+      "score": 0.95,
+      "reason": "Very large area (4.18), exceptional clearance (0.983), and safe_conductance 0.92; major hub."
+    },
+    {
+      "id": "C75",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.122) and safe_conductance 0.53; connects C70 to C76."
+    },
+    {
+      "id": "C76",
+      "score": 0.45,
+      "reason": "Low clearance (0.118) and safe_conductance 0.39; connects C75 to C82."
+    },
+    {
+      "id": "C77",
+      "score": 0.1,
+      "reason": "Extremely low clearance (0.011) and huge aspect ratio (261); degenerate passage."
+    },
+    {
+      "id": "C78",
+      "score": 0.98,
+      "reason": "Largest area (8.07), outstanding clearance (1.461), and safe_conductance 0.93; primary hub."
+    },
+    {
+      "id": "C79",
+      "score": 0.4,
+      "reason": "Low clearance (0.102) and safe_conductance 0.36; connects C77 to C84."
+    },
+    {
+      "id": "C80",
+      "score": 0.75,
+      "reason": "Good clearance (0.613) and safe_conductance 0.74; connects C86 to C95."
+    },
+    {
+      "id": "C81",
+      "score": 0.1,
+      "reason": "Very low clearance (0.018) and huge aspect ratio (172); degenerate sliver."
+    },
+    {
+      "id": "C82",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.139) and safe_conductance 0.57; connects C76, C87, and C94."
+    },
+    {
+      "id": "C83",
+      "score": 0.1,
+      "reason": "Very low clearance (0.016) and huge aspect ratio (219); degenerate sliver."
+    },
+    {
+      "id": "C84",
+      "score": 0.65,
+      "reason": "Good clearance (0.237) and safe_conductance 0.65; connects C79, C87, and C96."
+    },
+    {
+      "id": "C85",
+      "score": 0.72,
+      "reason": "Large area (2.51), clearance 0.401, and safe_conductance 0.58; connects C70 and C74."
+    },
+    {
+      "id": "C86",
+      "score": 0.9,
+      "reason": "High clearance (0.801), large area (2.63), and safe_conductance 0.88; major hub."
+    },
+    {
+      "id": "C87",
+      "score": 0.4,
+      "reason": "Low clearance (0.121) and safe_conductance 0.34; connects C82 and C84."
+    },
+    {
+      "id": "C88",
+      "score": 0.45,
+      "reason": "Low clearance (0.113) and safe_conductance 0.33; connects C73 to C92."
+    },
+    {
+      "id": "C89",
+      "score": 0.3,
+      "reason": "Low clearance (0.115) and safe_degree 1; dead-end connected only to C92."
+    },
+    {
+      "id": "C90",
+      "score": 0.2,
+      "reason": "Very low clearance (0.073) and safe_degree drops to 1; dead-end off C93."
+    },
+    {
+      "id": "C91",
+      "score": 0.82,
+      "reason": "Large area (1.18), clearance 0.280, and safe_conductance 0.91; key connector to C71, C96, and C105."
+    },
+    {
+      "id": "C92",
+      "score": 0.7,
+      "reason": "Good clearance (0.258) and safe_conductance 0.75; connects C88, C89, and C99."
+    },
+    {
+      "id": "C93",
+      "score": 0.85,
+      "reason": "High clearance (0.635), large area (1.43), and safe_conductance 0.85; major hub."
+    },
+    {
+      "id": "C94",
+      "score": 0.4,
+      "reason": "Low clearance (0.079) and safe_conductance 0.44; connects C82 to C101."
+    },
+    {
+      "id": "C95",
+      "score": 0.78,
+      "reason": "High clearance (0.625), large area (2.39), and safe_conductance 0.66; connects C80 and C97."
+    },
+    {
+      "id": "C96",
+      "score": 0.65,
+      "reason": "Moderate clearance (0.231) and safe_conductance 0.56; connects C84, C91, and C96."
+    },
+    {
+      "id": "C97",
+      "score": 0.92,
+      "reason": "Very large area (5.39), exceptional clearance (1.235), and safe_conductance 0.93; central hub."
+    },
+    {
+      "id": "C98",
+      "score": 0.6,
+      "reason": "Good clearance (0.292) and safe_conductance 0.58; connects C99 and C102."
+    },
+    {
+      "id": "C99",
+      "score": 0.65,
+      "reason": "Good clearance (0.296) and safe_conductance 0.55; connects C92, C98, and C99."
+    },
+    {
+      "id": "C100",
+      "score": 0.85,
+      "reason": "High clearance (0.661), large area (2.09), and safe_conductance 0.87; major hub."
+    },
+    {
+      "id": "C101",
+      "score": 0.4,
+      "reason": "Low clearance (0.078) and safe_conductance 0.43; connects C94 to C108."
+    },
+    {
+      "id": "C102",
+      "score": 0.72,
+      "reason": "Good clearance (0.338) and safe_conductance 0.76; connects C98, C103, and C106."
+    },
+    {
+      "id": "C103",
+      "score": 0.82,
+      "reason": "High clearance (0.651), large area (1.52), and safe_conductance 0.85; major hub."
+    },
+    {
+      "id": "C104",
+      "score": 0.25,
+      "reason": "Very low clearance (0.065) and safe_degree drops to 1; dead-end off C100."
+    },
+    {
+      "id": "C105",
+      "score": 0.45,
+      "reason": "Low clearance (0.128) and safe_conductance 0.46; connects C91 to C116."
+    },
+    {
+      "id": "C106",
+      "score": 0.3,
+      "reason": "Low clearance (0.090) and safe_degree 1; dead-end off C102."
+    },
+    {
+      "id": "C107",
+      "score": 0.88,
+      "reason": "High clearance (0.979), large area (3.03), and safe_conductance 0.90; major hub."
+    },
+    {
+      "id": "C108",
+      "score": 0.35,
+      "reason": "Low clearance (0.060) and safe_conductance 0.37; connects C101 to C116."
+    },
+    {
+      "id": "C109",
+      "score": 0.6,
+      "reason": "Moderate clearance (0.391) and safe_conductance 0.65; connects C103 to C115."
+    },
+    {
+      "id": "C110",
+      "score": 0.35,
+      "reason": "Low clearance (0.075) and safe_conductance 0.34; connects C112 to C117."
+    },
+    {
+      "id": "C111",
+      "score": 0.25,
+      "reason": "Very low clearance (0.051) and safe_degree drops to 1; dead-end off C114."
+    },
+    {
+      "id": "C112",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.257) and safe_conductance 0.59; connects C107, C110, and C112."
+    },
+    {
+      "id": "C113",
+      "score": 0.72,
+      "reason": "Good clearance (0.463) and safe_conductance 0.75; connects C116 and C118."
+    },
+    {
+      "id": "C114",
+      "score": 0.3,
+      "reason": "Low clearance (0.068) and safe_degree drops to 1; dead-end off C111."
+    },
+    {
+      "id": "C115",
+      "score": 0.75,
+      "reason": "Good clearance (0.435) and safe_conductance 0.79; connects C109, C119, and C121."
+    },
+    {
+      "id": "C116",
+      "score": 0.8,
+      "reason": "Large area (1.01), clearance 0.377, and safe_conductance 0.83; key hub near goal path."
+    },
+    {
+      "id": "C117",
+      "score": 0.35,
+      "reason": "Low clearance (0.091) and safe_conductance 0.37; connects C110 to C120."
+    },
+    {
+      "id": "C118",
+      "score": 0.9,
+      "reason": "Large area (4.15), exceptional clearance (1.064), and safe_conductance 0.91; major hub."
+    },
+    {
+      "id": "C119",
+      "score": 0.72,
+      "reason": "Good clearance (0.440) and safe_conductance 0.56; connects C115 to C129."
+    },
+    {
+      "id": "C120",
+      "score": 0.3,
+      "reason": "Low clearance (0.074) and safe_conductance 0.30; connects C117 to C123."
+    },
+    {
+      "id": "C121",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.171) and safe_conductance 0.49; connects C115 to C122."
+    },
+    {
+      "id": "C122",
+      "score": 0.45,
+      "reason": "Low clearance (0.159) and safe_conductance 0.41; connects C121 to C125."
+    },
+    {
+      "id": "C123",
+      "score": 0.3,
+      "reason": "Low clearance (0.073) and safe_conductance 0.24; connects C120 to C126."
+    },
+    {
+      "id": "C124",
+      "score": 0.25,
+      "reason": "Low clearance (0.112) and safe_degree 1; dead-end connected only to C132."
+    },
+    {
+      "id": "C125",
+      "score": 0.5,
+      "reason": "Moderate clearance (0.151) and safe_conductance 0.59; connects C122, C128, and C125."
+    },
+    {
+      "id": "C126",
+      "score": 0.45,
+      "reason": "Good clearance (0.191) and safe_conductance 0.48; connects C123, C128, and C131."
+    },
+    {
+      "id": "C127",
+      "score": 0.88,
+      "reason": "Large area (3.26), high clearance (0.860), and safe_conductance 0.90; major hub."
+    },
+    {
+      "id": "C128",
+      "score": 0.4,
+      "reason": "Low clearance (0.140) and safe_conductance 0.36; connects C125 and C126."
+    },
+    {
+      "id": "C129",
+      "score": 0.72,
+      "reason": "Good clearance (0.423), large area (1.64), and safe_conductance 0.59; connects C119 to C132."
+    },
+    {
+      "id": "C130",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.223) and safe_conductance 0.56; connects C127 to C134."
+    },
+    {
+      "id": "C131",
+      "score": 0.55,
+      "reason": "Moderate clearance (0.199) and safe_conductance 0.46; connects C126 to C135."
+    },
+    {
+      "id": "C132",
+      "score": 0.72,
+      "reason": "Good clearance (0.230) and safe_conductance 0.81; connects C124, C129, and C138."
+    },
+    {
+      "id": "C133",
+      "score": 0.3,
+      "reason": "Low clearance (0.062) and safe_degree drops to 1; dead-end off C143."
+    },
+    {
+      "id": "C134",
+      "score": 0.25,
+      "reason": "Very low clearance (0.040) and safe_degree drops to 1; dead-end off C130."
+    },
+    {
+      "id": "C135",
+      "score": 0.72,
+      "reason": "Good clearance (0.265) and safe_conductance 0.73; connects C131, C136, and C137."
+    },
+    {
+      "id": "C136",
+      "score": 0.5,
+      "reason": "Low clearance (0.101) and safe_conductance 0.61; connects C135 to C140."
+    },
+    {
+      "id": "C137",
+      "score": 0.3,
+      "reason": "Low clearance (0.066) and safe_degree drops to 1; dead-end off C135."
+    },
+    {
+      "id": "C138",
+      "score": 0.25,
+      "reason": "Low clearance (0.043) and safe_degree drops to 1; dead-end off C132."
+    },
+    {
+      "id": "C139",
+      "score": 0.72,
+      "reason": "Large area (1.79), clearance 0.405, and safe_conductance 0.58; connects C127 to goal C144."
+    },
+    {
+      "id": "C140",
+      "score": 0.3,
+      "reason": "Low clearance (0.057) and safe_degree drops to 1; dead-end off C136."
+    },
+    {
+      "id": "C141",
+      "score": 0.25,
+      "reason": "Low clearance (0.038) and safe_degree drops to 1; dead-end off C145."
+    },
+    {
+      "id": "C142",
+      "score": 0.2,
+      "reason": "Very low clearance (0.035) and huge aspect ratio (427); degenerate passage."
+    },
+    {
+      "id": "C143",
+      "score": 0.35,
+      "reason": "Low clearance (0.050) and safe_conductance 0.39; connects C133 to C147."
+    },
+    {
+      "id": "C144",
+      "score": 0.95,
+      "reason": "Goal region: moderate clearance (0.340), safe_conductance 0.64, and direct link from C139."
+    },
+    {
+      "id": "C145",
+      "score": 0.65,
+      "reason": "Good clearance (0.216) and safe_conductance 0.69; connects C141, C147, and C152."
+    },
+    {
+      "id": "C146",
+      "score": 0.3,
+      "reason": "Low clearance (0.060) and safe_degree drops to 1; dead-end off C149."
+    },
+    {
+      "id": "C147",
+      "score": 0.65,
+      "reason": "Good clearance (0.195) and safe_conductance 0.66; connects C143, C145, and C151."
+    },
+    {
+      "id": "C148",
+      "score": 0.25,
+      "reason": "Low clearance (0.039) and safe_degree drops to 1; dead-end off C142."
+    },
+    {
+      "id": "C149",
+      "score": 0.65,
+      "reason": "Moderate clearance (0.285) and safe_conductance 0.71; connects C146 to C150."
+    },
+    {
+      "id": "C150",
+      "score": 0.82,
+      "reason": "Large area (1.03), clearance 0.417, and safe_conductance 0.89; connects goal C144 to C149 and C158."
+    },
+    {
+      "id": "C151",
+      "score": 0.25,
+      "reason": "Low clearance (0.035) and safe_degree drops to 1; dead-end off C147."
+    },
+    {
+      "id": "C152",
+      "score": 0.4,
+      "reason": "Low clearance (0.090) and safe_conductance 0.42; connects C145 to C155."
+    },
+    {
+      "id": "C153",
+      "score": 0.2,
+      "reason": "Very low clearance (0.033) and safe_degree drops to 1; dead-end off C156."
+    },
+    {
+      "id": "C154",
+      "score": 0.35,
+      "reason": "Low clearance (0.068) and safe_degree 1; dead-end connected only to C157."
+    },
+    {
+      "id": "C155",
+      "score": 0.45,
+      "reason": "Low clearance (0.081) and safe_conductance 0.45; connects C152 to C160."
+    },
+    {
+      "id": "C156",
+      "score": 0.45,
+      "reason": "Low clearance (0.184) and safe_conductance 0.47; connects C153 to C157."
+    },
+    {
+      "id": "C157",
+      "score": 0.78,
+      "reason": "Large area (1.28), clearance 0.471, and safe_conductance 0.87; major hub."
+    },
+    {
+      "id": "C158",
+      "score": 0.55,
+      "reason": "Large area (3.54) but low clearance (0.257) and safe_conductance 0.47; connects C150 and C162."
+    },
+    {
+      "id": "C159",
+      "score": 0.3,
+      "reason": "Low clearance (0.116) and safe_degree 1; dead-end connected only to C161."
+    },
+    {
+      "id": "C160",
+      "score": 0.4,
+      "reason": "Low clearance (0.099) and safe_conductance 0.41; connects C155 to C161."
+    },
+    {
+      "id": "C161",
+      "score": 0.72,
+      "reason": "Good clearance (0.286) and safe_conductance 0.78; connects C159, C160, and C163."
+    },
+    {
+      "id": "C162",
+      "score": 0.82,
+      "reason": "Large area (1.68), clearance 0.496, and safe_conductance 0.90; major hub."
+    },
+    {
+      "id": "C163",
+      "score": 0.6,
+      "reason": "Moderate clearance (0.269) and safe_conductance 0.47; connects C161 and C162."
+    }
+  ],
+  "scores": {
+    "C0": 0.15,
+    "C1": 0.45,
+    "C2": 0.3,
+    "C3": 0.85,
+    "C4": 0.55,
+    "C5": 0.2,
+    "C6": 0.4,
+    "C7": 0.6,
+    "C8": 0.65,
+    "C9": 0.25,
+    "C10": 0.9,
+    "C11": 0.5,
+    "C12": 0.7,
+    "C13": 0.35,
+    "C14": 0.3,
+    "C15": 0.75,
+    "C16": 0.88,
+    "C17": 0.95,
+    "C18": 0.45,
+    "C19": 0.3,
+    "C20": 0.2,
+    "C21": 0.7,
+    "C22": 0.8,
+    "C23": 0.65,
+    "C24": 0.25,
+    "C25": 0.35,
+    "C26": 0.3,
+    "C27": 0.4,
+    "C28": 0.92,
+    "C29": 0.1,
+    "C30": 0.15,
+    "C31": 0.55,
+    "C32": 0.6,
+    "C33": 0.7,
+    "C34": 0.25,
+    "C35": 0.75,
+    "C36": 0.3,
+    "C37": 0.4,
+    "C38": 0.85,
+    "C39": 0.8,
+    "C40": 0.7,
+    "C41": 0.1,
+    "C42": 0.78,
+    "C43": 0.25,
+    "C44": 0.82,
+    "C45": 0.6,
+    "C46": 0.2,
+    "C47": 0.35,
+    "C48": 0.4,
+    "C49": 0.55,
+    "C50": 0.5,
+    "C51": 0.78,
+    "C52": 0.1,
+    "C53": 0.82,
+    "C54": 0.65,
+    "C55": 0.1,
+    "C56": 0.75,
+    "C57": 0.45,
+    "C58": 0.7,
+    "C59": 0.65,
+    "C60": 0.4,
+    "C61": 0.72,
+    "C62": 0.72,
+    "C63": 0.15,
+    "C64": 0.6,
+    "C65": 0.72,
+    "C66": 0.55,
+    "C67": 0.3,
+    "C68": 0.35,
+    "C69": 0.1,
+    "C70": 0.65,
+    "C71": 0.25,
+    "C72": 0.6,
+    "C73": 0.45,
+    "C74": 0.95,
+    "C75": 0.55,
+    "C76": 0.45,
+    "C77": 0.1,
+    "C78": 0.98,
+    "C79": 0.4,
+    "C80": 0.75,
+    "C81": 0.1,
+    "C82": 0.55,
+    "C83": 0.1,
+    "C84": 0.65,
+    "C85": 0.72,
+    "C86": 0.9,
+    "C87": 0.4,
+    "C88": 0.45,
+    "C89": 0.3,
+    "C90": 0.2,
+    "C91": 0.82,
+    "C92": 0.7,
+    "C93": 0.85,
+    "C94": 0.4,
+    "C95": 0.78,
+    "C96": 0.65,
+    "C97": 0.92,
+    "C98": 0.6,
+    "C99": 0.65,
+    "C100": 0.85,
+    "C101": 0.4,
+    "C102": 0.72,
+    "C103": 0.82,
+    "C104": 0.25,
+    "C105": 0.45,
+    "C106": 0.3,
+    "C107": 0.88,
+    "C108": 0.35,
+    "C109": 0.6,
+    "C110": 0.35,
+    "C111": 0.25,
+    "C112": 0.55,
+    "C113": 0.72,
+    "C114": 0.3,
+    "C115": 0.75,
+    "C116": 0.8,
+    "C117": 0.35,
+    "C118": 0.9,
+    "C119": 0.72,
+    "C120": 0.3,
+    "C121": 0.55,
+    "C122": 0.45,
+    "C123": 0.3,
+    "C124": 0.25,
+    "C125": 0.5,
+    "C126": 0.45,
+    "C127": 0.88,
+    "C128": 0.4,
+    "C129": 0.72,
+    "C130": 0.55,
+    "C131": 0.55,
+    "C132": 0.72,
+    "C133": 0.3,
+    "C134": 0.25,
+    "C135": 0.72,
+    "C136": 0.5,
+    "C137": 0.3,
+    "C138": 0.25,
+    "C139": 0.72,
+    "C140": 0.3,
+    "C141": 0.25,
+    "C142": 0.2,
+    "C143": 0.35,
+    "C144": 0.95,
+    "C145": 0.65,
+    "C146": 0.3,
+    "C147": 0.65,
+    "C148": 0.25,
+    "C149": 0.65,
+    "C150": 0.82,
+    "C151": 0.25,
+    "C152": 0.4,
+    "C153": 0.2,
+    "C154": 0.35,
+    "C155": 0.45,
+    "C156": 0.45,
+    "C157": 0.78,
+    "C158": 0.55,
+    "C159": 0.3,
+    "C160": 0.4,
+    "C161": 0.72,
+    "C162": 0.82,
+    "C163": 0.6
+  },
+  "metadata": {
+    "source": "live_openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "dots-studio/dots-3-note-preview:free",
+    "reasoning_effort": "none",
+    "latency_seconds": 75.87547483301023,
+    "http_attempts_with_json": 1,
+    "usage_per_attempt": [
+      {
+        "prompt_tokens": 37570,
+        "completion_tokens": 7637,
+        "total_tokens": 45207,
+        "cost": 0,
+        "is_byok": false,
+        "prompt_tokens_details": {
+          "cached_tokens": 0,
+          "cache_write_tokens": 0,
+          "audio_tokens": 0,
+          "video_tokens": 0
+        },
+        "cost_details": {
+          "upstream_inference_cost": 0,
+          "upstream_inference_prompt_cost": 0,
+          "upstream_inference_completions_cost": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 0,
+          "image_tokens": 0,
+          "audio_tokens": 0
+        }
+      }
+    ],
+    "missing_region_ids": [],
+    "runtime_refresh": false,
+    "reported_cost_usd": 0
+  },
+  "graph_sha256": "4bb8dd02af0da17ba057345e115b2dd43daf7530bdd1d44cc0796575ef6d87aa"
+}

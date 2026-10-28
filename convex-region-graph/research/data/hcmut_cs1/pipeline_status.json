@@ -1,0 +1,8 @@
+{
+  "geometry": "complete",
+  "llm": "complete",
+  "sampling_prior": "complete",
+  "start_region": "C17",
+  "goal_region": "C144",
+  "coordinate_mode": "simulation"
+}

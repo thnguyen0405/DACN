@@ -12,3 +12,7 @@ Hướng dẫn ROS, chạy từng planner, phát lại từng bước và giải
 
 Công thức, rubric và dữ liệu huấn luyện:
 [Tiêu chí chấm điểm](../docs/weekly-review/SCORING.md).
+
+Nạp ảnh vệ tinh và polygon/mask, xuất **hai hình tĩnh** và bộ JSON giống các map
+`hole`, `flappy`, rồi chấm LLM và xuất sampling prior bằng CLI:
+[Module ảnh vệ tinh → graph](SATELLITE_README.md). Không cần web server.

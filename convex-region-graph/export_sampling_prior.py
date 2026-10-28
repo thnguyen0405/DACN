@@ -18,6 +18,12 @@ from llm_weight_provider import LLMProviderError
 def build_sampling_prior(
     raw_graph: dict[str, Any], prior: dict[str, Any]
 ) -> tuple[dict[str, Any], list[str]]:
+    # Legacy graphs have implicit metres. Pixel previews must be calibrated or
+    # explicitly normalized to simulation metres before use by the C++ sampler.
+    declared_units = [raw_graph.get("descriptor_metadata", {}).get("length_unit"),
+                      raw_graph.get("provenance", {}).get("units")]
+    if any(unit is not None and unit != "m" for unit in declared_units):
+        raise ValueError("C++ sampling prior requires metre coordinates. Calibrate the image or rebuild with explicit simulation normalization first.")
     graph = prepare_planning_graph(raw_graph)
     start_region, goal_region = prior.get("start_region"), prior.get("goal_region")
     if not isinstance(start_region, str) or not isinstance(goal_region, str):

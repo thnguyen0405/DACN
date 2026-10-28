@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse"><path d="M 1 1 L 9 5 L 1 9" fill="none" stroke="#153e32" stroke-width="1.8"/></marker></defs>
+<rect width="2400" height="100%" fill="white"/>
+<g font-family="Arial, Helvetica, sans-serif">
+<text x="65" y="65" font-size="39" text-anchor="start" fill="#153e32" font-weight="700">01  |  LUỒNG DEMO: GRAPH → LLM → RRT → RVIZ</text>
+<text x="65" y="108" font-size="24" text-anchor="start" fill="#566477" font-weight="400">Chế độ region_prior đang dùng cho hole, narrow, flappy và room · Python chuẩn bị dữ liệu, C++ tìm đường</text>
+<text x="65" y="167" font-size="22" text-anchor="start" fill="#5145bd" font-weight="700">A. CHUẨN BỊ BẢN ĐỒ VÀ GỌI LLM</text>
+<rect x="45.0" y="202.0" width="170" height="96" rx="48.0" fill="#5145bd" stroke="#5145bd" stroke-width="2"/>
+<text x="130" y="258.0" font-size="27" text-anchor="middle" fill="white" font-weight="600">Bắt đầu</text>
+<rect x="280.0" y="187.0" width="330" height="126" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="445" y="231.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Chọn bản đồ</text>
+<text x="445" y="263.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">map.json</text>
+<text x="445" y="290.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">start, goal, robot, vật cản</text>
+<rect x="685.0" y="187.0" width="360" height="126" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="865" y="228.5" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Phân rã không gian trống</text>
+<text x="865" y="260.5" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">thành các vùng lồi</text>
+<text x="865" y="292.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">regions.json</text>
+<rect x="1105.0" y="187.0" width="360" height="126" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1285" y="231.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Dựng GCR có hướng</text>
+<text x="1285" y="263.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Vùng = đỉnh; portal = cạnh</text>
+<text x="1285" y="290.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Thu hẹp / lọc portal</text>
+<rect x="1535.0" y="187.0" width="360" height="126" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1715" y="231.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Tính đặc trưng vùng</text>
+<text x="1715" y="263.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Diện tích, hình dạng, clearance</text>
+<text x="1715" y="290.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Kết nối → graph.json</text>
+<rect x="1980.0" y="187.0" width="340" height="126" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="2150" y="231.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">LLM chấm điểm vùng</text>
+<text x="2150" y="263.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Graph + start/goal + prompt</text>
+<text x="2150" y="290.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Điểm [0,1] và lý do</text>
+<path d="M 215 250 L 280 250" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 610 250 L 685 250" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1045 250 L 1105 250" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1465 250 L 1535 250" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1895 250 L 1980 250" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<text x="65" y="420" font-size="22" text-anchor="start" fill="#5145bd" font-weight="700">B. KIỂM TRA OUTPUT VÀ NẠP PRIOR VÀO C++</text>
+<polygon points="2150,475.0 2300.0,570 2150,665.0 2000.0,570" fill="#eaa5f6"/>
+<text x="2150" y="561.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">Phản hồi</text>
+<text x="2150" y="592.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">hợp lệ?</text>
+<rect x="1540.0" y="500.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1720" y="551.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Xuất prior cho C++</text>
+<text x="1720" y="583.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">demo_prior.json →</text>
+<text x="1720" y="610.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">demo_sampling_prior.json</text>
+<rect x="1105.0" y="500.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1285" y="551.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Khởi tạo planner</text>
+<text x="1285" y="583.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Nạp map, start/goal, prior</text>
+<text x="1285" y="610.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">RRT / RRT* / RRT# / BRRT…</text>
+<rect x="670.0" y="500.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="850" y="551.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Lấy mẫu x_rand</text>
+<text x="850" y="583.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Chọn vùng theo score / Σscore</text>
+<text x="850" y="610.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Lấy điểm đều trong vùng</text>
+<rect x="240.0" y="500.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="420" y="551.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Mở rộng cây</text>
+<text x="420" y="583.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Nearest → Steer</text>
+<text x="420" y="610.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Theo biến thể planner</text>
+<path d="M 2150 313 L 2150 475" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 2000 570 L 1900 570" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1927.0" y="526" width="46" height="31" rx="5" fill="white"/>
+<text x="1950" y="549" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Có</text>
+<path d="M 1540 570 L 1465 570" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1105 570 L 1030 570" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 670 570 L 600 570" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1980.0" y="742.5" width="340" height="105" rx="13" fill="#ffe3e0" stroke="#ffe3e0" stroke-width="2"/>
+<text x="2150" y="789.5" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Dừng và báo lỗi</text>
+<text x="2150" y="821.5" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Sửa dữ liệu / gọi lại thủ công</text>
+<path d="M 2150 665 L 2150 742" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="2162.0" y="687" width="82" height="31" rx="5" fill="white"/>
+<text x="2203" y="710" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Không</text>
+<text x="650" y="875" font-size="22" text-anchor="start" fill="#5145bd" font-weight="700">C. VÒNG LẶP TÌM ĐƯỜNG VÀ KẾT QUẢ</text>
+<polygon points="420,930.0 570.0,1020 420,1110.0 270.0,1020" fill="#eaa5f6"/>
+<text x="420" y="1011.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">Điểm / đoạn</text>
+<text x="420" y="1042.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">không va chạm?</text>
+<rect x="670.0" y="950.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="850" y="1001.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Cập nhật cây và nghiệm</text>
+<text x="850" y="1033.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Thêm nút; nối goal / hai cây</text>
+<text x="850" y="1060.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Rewire nếu planner hỗ trợ</text>
+<polygon points="1285,925.0 1445.0,1020 1285,1115.0 1125.0,1020" fill="#eaa5f6"/>
+<text x="1285" y="999.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">Đạt điều kiện</text>
+<text x="1285" y="1030.0" font-size="26" text-anchor="middle" fill="#153e32" font-weight="600">dừng?</text>
+<text x="1285" y="1061.0" font-size="20" text-anchor="middle" fill="#153e32" font-weight="400">Tùy planner</text>
+<rect x="1540.0" y="950.0" width="360" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="1720" y="1001.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">Trả kết quả</text>
+<text x="1720" y="1033.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Nghiệm tốt nhất đã tìm được</text>
+<text x="1720" y="1060.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">hoặc báo không có nghiệm</text>
+<rect x="1980.0" y="950.0" width="340" height="140" rx="13" fill="#a9edc7" stroke="#a9edc7" stroke-width="2"/>
+<text x="2150" y="1001.0" font-size="27" text-anchor="middle" fill="#153e32" font-weight="600">RViz + [RESULT]</text>
+<text x="2150" y="1033.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Đường đi, cây, vùng</text>
+<text x="2150" y="1060.0" font-size="22" text-anchor="middle" fill="#38584c" font-weight="400">Thời gian, chiều dài, số nút</text>
+<path d="M 420 640 L 420 930" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 570 1020 L 670 1020" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="597.0" y="975" width="46" height="31" rx="5" fill="white"/>
+<text x="620" y="998" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Có</text>
+<path d="M 1030 1020 L 1125 1020" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 1445 1020 L 1540 1020" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="1469.0" y="975" width="46" height="31" rx="5" fill="white"/>
+<text x="1492" y="998" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Có</text>
+<path d="M 1900 1020 L 1980 1020" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M 420 1110 L 420 1170 L 1285 1170 L 1285 1115" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="602.0" y="1147" width="466" height="31" rx="5" fill="white"/>
+<text x="835" y="1170" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Không: bỏ mẫu, vẫn kiểm tra ngân sách</text>
+<path d="M 1285 925 L 1285 740 L 850 740 L 850 640" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="957.0" y="717" width="286" height="31" rx="5" fill="white"/>
+<text x="1100" y="740" font-size="23" text-anchor="middle" fill="#153e32" font-weight="400">Chưa: tiếp tục lấy mẫu</text>
+<rect x="2045.0" y="1157.5" width="210" height="85" rx="42.5" fill="#5145bd" stroke="#5145bd" stroke-width="2"/>
+<text x="2150" y="1208.0" font-size="27" text-anchor="middle" fill="white" font-weight="600">Kết thúc</text>
+<path d="M 2150 1090 L 2150 1157" fill="none" stroke="#153e32" stroke-width="3.2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<rect x="65" y="1255" width="2270" height="112" rx="16" fill="#f4f6fb"/>
+<text x="89" y="1292" font-size="25" text-anchor="start" fill="#153e32" font-weight="700">CÁCH ĐỌC ĐÚNG</text>
+<text x="89" y="1328" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Điểm LLM cố định trong một lượt ROS; demo region_prior không cần Dijkstra. LLM không tạo quỹ đạo hay xác nhận an toàn.</text>
+<text x="89" y="1358" font-size="23" text-anchor="start" fill="#465368" font-weight="400">Điều kiện dừng phụ thuộc planner: đạt nghiệm hoặc hết ngân sách. Informed RRT* có thể lọc mẫu theo miền informed sau nghiệm đầu.</text>
+</g></svg>

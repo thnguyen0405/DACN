@@ -1,0 +1,30 @@
+{
+  "schema": "satellite-geometry-audit/v1",
+  "length_unit": "m",
+  "area_unit": "m^2",
+  "free_area": 143.82956846186664,
+  "regions_area": 143.82956846186676,
+  "coverage_error": 0.0,
+  "overlap_area": 8.526512829121202e-14,
+  "region_count": 164,
+  "directed_edge_count": 336,
+  "start_goal_graph_connected": true,
+  "warnings": [
+    "Geometry is reviewed image tracing, not a surveyed map or verified traversability.",
+    "Uniform scale assumes a top-down image with no perspective or nonuniform resize.",
+    "Mean clearance uses the repository's numerical quadrature; it is not an exact integral.",
+    "Safe portals use the repository's endpoint trimming rule; collision checking remains necessary.",
+    "SIMULATION METRES: normalized like research maps, not measured campus dimensions."
+  ],
+  "free_area_m2": 143.82956846186664,
+  "regions_area_m2": 143.82956846186676,
+  "coverage_error_m2": 0.0,
+  "overlap_area_m2": 8.526512829121202e-14,
+  "rebuilt_vertices": 164,
+  "rebuilt_directed_edges": 336,
+  "endpoint_policy": "preserve annotated start and goal; never relocate",
+  "reference_found": true,
+  "reference_grid_step": 0.1,
+  "coordinate_mode": "simulation",
+  "preparation_seconds": 2.0335037499899045
+}

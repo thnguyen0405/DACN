@@ -1,0 +1,237 @@
+{
+  "provider_metadata": {
+    "provider": "openrouter",
+    "requested_model": "openrouter/free",
+    "resolved_model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+    "temperature": 0.0
+  },
+  "start_region": "C4",
+  "goal_region": "C5",
+  "region_scores": [
+    {
+      "id": "C0",
+      "score": 0.6,
+      "reason": "On Path A to goal; moderate mean_clearance 0.489 and safe_conductance 0.393; portal to goal C5 has safe_traversability 1.374."
+    },
+    {
+      "id": "C1",
+      "score": 0.65,
+      "reason": "On Path A; good mean_clearance 0.601 and safe_conductance 0.693; portals to C0 and C2 have high safe_traversability (2.327, 2.254)."
+    },
+    {
+      "id": "C2",
+      "score": 0.7,
+      "reason": "On Path A; high mean_clearance 0.783, compact shape (aspect_ratio 1.61), portals to C1 and C3 have safe_traversability 2.254 and 1.166."
+    },
+    {
+      "id": "C3",
+      "score": 0.55,
+      "reason": "On Path A; low mean_clearance 0.305 but high safe_conductance 0.756; portal to start C4 has safe_traversability 0.810."
+    },
+    {
+      "id": "C4",
+      "score": 0.9,
+      "reason": "Start region; despite low mean_clearance 0.128 and high aspect_ratio 2022, it connects to C3 (safe_traversability 0.810) and C42 (safe_traversability 1.683) providing two outward paths."
+    },
+    {
+      "id": "C5",
+      "score": 1.0,
+      "reason": "Goal region; good mean_clearance 0.613 and safe_conductance 0.749; connected to C0 (safe_traversability 1.374) and C39 (safe_traversability 2.676)."
+    },
+    {
+      "id": "C6",
+      "score": 0.15,
+      "reason": "Dead end (safe_degree 1) far from start/goal; moderate mean_clearance 0.679 but low safe_conductance 0.393."
+    },
+    {
+      "id": "C7",
+      "score": 0.2,
+      "reason": "Far from start/goal; low mean_clearance 0.397 and safe_conductance 0.439."
+    },
+    {
+      "id": "C8",
+      "score": 0.3,
+      "reason": "High mean_clearance 0.926 and safe_conductance 0.863 with safe_degree 5, but far from start/goal; not on direct paths."
+    },
+    {
+      "id": "C9",
+      "score": 0.2,
+      "reason": "Far from start/goal; good mean_clearance 0.842 but low safe_conductance 0.437."
+    },
+    {
+      "id": "C10",
+      "score": 0.2,
+      "reason": "Far from start/goal; moderate mean_clearance 0.617 and safe_conductance 0.436."
+    },
+    {
+      "id": "C11",
+      "score": 0.25,
+      "reason": "Far from start/goal; good mean_clearance 0.733 and safe_conductance 0.793 with safe_degree 3."
+    },
+    {
+      "id": "C12",
+      "score": 0.15,
+      "reason": "Far from start/goal; low mean_clearance 0.320 and safe_conductance 0.520."
+    },
+    {
+      "id": "C13",
+      "score": 0.2,
+      "reason": "Far from start/goal; good mean_clearance 0.753 but safe_conductance 0.598."
+    },
+    {
+      "id": "C14",
+      "score": 0.2,
+      "reason": "Large area but far from start/goal; high mean_clearance 0.977 but low safe_conductance 0.328."
+    },
+    {
+      "id": "C15",
+      "score": 0.2,
+      "reason": "Far from start/goal; moderate mean_clearance 0.514 and safe_conductance 0.807."
+    },
+    {
+      "id": "C16",
+      "score": 0.1,
+      "reason": "Far from start/goal; very low mean_clearance 0.185 and high aspect_ratio 871."
+    },
+    {
+      "id": "C17",
+      "score": 0.2,
+      "reason": "Far from start/goal; good mean_clearance 0.719 and safe_conductance 0.746."
+    },
+    {
+      "id": "C18",
+      "score": 0.25,
+      "reason": "Hub with high mean_clearance 1.054 and safe_conductance 0.944 (safe_degree 4), but far from start/goal."
+    },
+    {
+      "id": "C19",
+      "score": 0.1,
+      "reason": "Dead end (safe_degree 1) far from start/goal; good mean_clearance 0.780 but low safe_conductance 0.396."
+    },
+    {
+      "id": "C20",
+      "score": 0.2,
+      "reason": "Far from start/goal; moderate mean_clearance 0.704 and safe_conductance 0.520 with safe_degree 3."
+    },
+    {
+      "id": "C21",
+      "score": 0.15,
+      "reason": "Far from start/goal; moderate mean_clearance 0.589 and safe_conductance 0.502."
+    },
+    {
+      "id": "C22",
+      "score": 0.2,
+      "reason": "Far from start/goal; high mean_clearance 0.888 and safe_conductance 0.670."
+    },
+    {
+      "id": "C23",
+      "score": 0.15,
+      "reason": "Low mean_clearance 0.240 and safe_conductance 0.477; far from start/goal."
+    },
+    {
+      "id": "C24",
+      "score": 0.2,
+      "reason": "Far from start/goal; moderate mean_clearance 0.547 and safe_conductance 0.621."
+    },
+    {
+      "id": "C25",
+      "score": 0.25,
+      "reason": "Connects to C8, C11, C24; good mean_clearance 0.731 and high safe_conductance 0.901 but not on main paths."
+    },
+    {
+      "id": "C26",
+      "score": 0.1,
+      "reason": "Very small area 0.78, low mean_clearance 0.271, safe_conductance 0.539."
+    },
+    {
+      "id": "C27",
+      "score": 0.25,
+      "reason": "Good mean_clearance 0.777 and safe_conductance 0.842; connects to C8 and C28 but not on main paths."
+    },
+    {
+      "id": "C28",
+      "score": 0.15,
+      "reason": "Low mean_clearance 0.292 and safe_conductance 0.474; high aspect_ratio 64.2."
+    },
+    {
+      "id": "C29",
+      "score": 0.2,
+      "reason": "Moderate mean_clearance 0.421 and safe_conductance 0.583; connects to C28 and C31."
+    },
+    {
+      "id": "C30",
+      "score": 0.1,
+      "reason": "Very small area 0.4, low mean_clearance 0.218, safe_conductance 0.582."
+    },
+    {
+      "id": "C31",
+      "score": 0.3,
+      "reason": "Central hub with high mean_clearance 0.734, safe_conductance 0.879, safe_degree 4; connects to C29, C30, C37, C38."
+    },
+    {
+      "id": "C32",
+      "score": 0.15,
+      "reason": "Low mean_clearance 0.232 and safe_conductance 0.396; high aspect_ratio 155."
+    },
+    {
+      "id": "C33",
+      "score": 0.2,
+      "reason": "Good mean_clearance 0.642 and safe_conductance 0.852; connects to C32 and C35."
+    },
+    {
+      "id": "C34",
+      "score": 0.2,
+      "reason": "Far from start/goal; moderate mean_clearance 0.680 and safe_conductance 0.501."
+    },
+    {
+      "id": "C35",
+      "score": 0.3,
+      "reason": "Large area 12.34, high mean_clearance 0.914, safe_conductance 0.953, safe_degree 4; but far from start/goal."
+    },
+    {
+      "id": "C36",
+      "score": 0.15,
+      "reason": "Low mean_clearance 0.318 and safe_conductance 0.529; high aspect_ratio 84."
+    },
+    {
+      "id": "C37",
+      "score": 0.25,
+      "reason": "Good mean_clearance 0.749 and safe_conductance 0.808; connects to C31 and C35."
+    },
+    {
+      "id": "C38",
+      "score": 0.4,
+      "reason": "Adjacent to Path B via C39; moderate mean_clearance 0.484, safe_conductance 0.705; portal to C39 safe_traversability 1.232."
+    },
+    {
+      "id": "C39",
+      "score": 0.85,
+      "reason": "On Path B; high mean_clearance 0.812, safe_conductance 0.849; portal to goal C5 has safe_traversability 2.676, to C41 5.152."
+    },
+    {
+      "id": "C40",
+      "score": 0.2,
+      "reason": "Small area 1.06, low mean_clearance 0.320, safe_conductance 0.521; connects to C36 and C41."
+    },
+    {
+      "id": "C41",
+      "score": 0.9,
+      "reason": "On Path B; highest mean_clearance 1.170, high safe_conductance 0.797, safe_degree 4; portal to C39 has safe_traversability 5.152."
+    },
+    {
+      "id": "C42",
+      "score": 0.8,
+      "reason": "On Path B; high safe_conductance 0.870 and safe_degree 3; portal to start C4 has safe_traversability 1.683, to C41 1.997."
+    },
+    {
+      "id": "C43",
+      "score": 0.35,
+      "reason": "Alternative route from C42; good mean_clearance 0.919, safe_conductance 0.588; portal to C42 safe_traversability 1.720."
+    },
+    {
+      "id": "C44",
+      "score": 0.3,
+      "reason": "Connects C41 and C43; moderate mean_clearance 0.528, safe_conductance 0.387."
+    }
+  ]
+}

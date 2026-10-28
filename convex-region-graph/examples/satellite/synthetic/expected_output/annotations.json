@@ -1,0 +1,83 @@
+{
+  "schema": "satellite-annotations/v1",
+  "image": {
+    "name": "image.png",
+    "width": 500,
+    "height": 500,
+    "sha256": "c5a51c64d16eed7ddc75726e492f0d8215a16815deadde70d1abf69a18bb4881"
+  },
+  "calibration": {
+    "points_px": [
+      [
+        0,
+        0
+      ],
+      [
+        500,
+        0
+      ]
+    ],
+    "distance_m": 10,
+    "source": "Synthetic test fixture: 500 pixel image side defined as 10 m; not a real site",
+    "basis": "assumed",
+    "relative_uncertainty": null
+  },
+  "geometry_px": {
+    "boundary": [
+      [
+        0,
+        0
+      ],
+      [
+        500,
+        0
+      ],
+      [
+        500,
+        500
+      ],
+      [
+        0,
+        500
+      ]
+    ],
+    "walkable": [],
+    "obstacles": [
+      [
+        [
+          200,
+          200
+        ],
+        [
+          300,
+          200
+        ],
+        [
+          300,
+          300
+        ],
+        [
+          200,
+          300
+        ]
+      ]
+    ]
+  },
+  "planning_px": {
+    "start": [
+      50,
+      450
+    ],
+    "goal": [
+      450,
+      50
+    ]
+  },
+  "robot": {
+    "radius_m": 0.25,
+    "safety_margin_m": 0.1
+  },
+  "review": {
+    "geometry_confirmed": true
+  }
+}

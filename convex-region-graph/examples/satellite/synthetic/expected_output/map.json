@@ -1,0 +1,96 @@
+{
+  "map": {
+    "boundary": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        10.0,
+        0.0
+      ],
+      [
+        10.0,
+        10.0
+      ],
+      [
+        0.0,
+        10.0
+      ]
+    ],
+    "obstacles": [
+      [
+        [
+          4.0,
+          6.0
+        ],
+        [
+          4.0,
+          4.0
+        ],
+        [
+          6.0,
+          4.0
+        ],
+        [
+          6.0,
+          6.0
+        ]
+      ]
+    ],
+    "start": [
+      1.0,
+      1.0
+    ],
+    "goal": [
+      9.0,
+      9.0
+    ],
+    "robot_radius": 0.25,
+    "safety_margin": 0.1
+  },
+  "provenance": {
+    "schema": "satellite-to-graph/v1",
+    "image": {
+      "name": "image.png",
+      "width": 500,
+      "height": 500,
+      "sha256": "c5a51c64d16eed7ddc75726e492f0d8215a16815deadde70d1abf69a18bb4881"
+    },
+    "calibration": {
+      "points_px": [
+        [
+          0,
+          0
+        ],
+        [
+          500,
+          0
+        ]
+      ],
+      "distance_m": 10,
+      "source": "Synthetic test fixture: 500 pixel image side defined as 10 m; not a real site",
+      "basis": "assumed",
+      "relative_uncertainty": null,
+      "pixel_distance": 500.0,
+      "metres_per_pixel": 0.02,
+      "status": "estimated"
+    },
+    "units": "m",
+    "coordinate_transform": {
+      "origin": "image bottom-left",
+      "x": "u * metres_per_pixel",
+      "y": "(image_height - v) * metres_per_pixel"
+    },
+    "geometry_reviewed": true,
+    "physical_accuracy": "not_independently_verified",
+    "decomposition": "constrained_delaunay_plus_convex_merge",
+    "warnings": [
+      "Geometry is user-reviewed image tracing, not a surveyed map or verified traversability.",
+      "Uniform scale assumes a top-down image with no perspective or nonuniform resize.",
+      "Mean clearance uses the repository's numerical quadrature; it is not an exact integral.",
+      "Safe portals use the repository's endpoint trimming rule; collision checking remains necessary.",
+      "Metric scale is estimated/assumed; exported measurements inherit that uncertainty."
+    ]
+  }
+}

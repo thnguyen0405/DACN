@@ -6,18 +6,21 @@ import sys
 import time
 from pathlib import Path
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from llm_weight_provider import OpenRouterWeightProvider, graph_prompt_data, load_dotenv
+from llm_weight_provider import OpenRouterWeightProvider, ReasoningRequiredError, graph_prompt_data, load_dotenv
 from llm_region_prior import validate_region_scores
 from graph_utils import prepare_planning_graph
 
 
 class StudyProvider(OpenRouterWeightProvider):
-    def __init__(self, graph, output_dir, env_file, model="openrouter/free", timeout=90):
+    def __init__(self, graph, output_dir, env_file, model="openrouter/free", timeout=90, reasoning_effort="low"):
         if model!='openrouter/free' and not model.endswith(':free'):raise ValueError('Study accepts only explicitly selected free models')
         load_dotenv(Path(env_file))
         os.environ.setdefault('SSL_CERT_FILE','/etc/ssl/cert.pem')
         self.graph=prepare_planning_graph(graph);self.directory=Path(output_dir);self.directory.mkdir(parents=True,exist_ok=True)
         self.call_index=0;self.raw=[]
+        self.reasoning_effort=reasoning_effort
+        self.requested_reasoning_effort=reasoning_effort
+        self.reasoning_fallbacks=[]
         super().__init__(Path(__file__).parents[1]/'prompts/region_prior_prompt.txt',model=model,
                          base_url='https://openrouter.ai/api/v1',timeout=timeout,max_tokens=12288,
                          debug_response_path=self.directory/'openrouter_invalid_response.txt')
@@ -25,9 +28,20 @@ class StudyProvider(OpenRouterWeightProvider):
     def _request_http_json(self,request):
         import urllib.request
         body=json.loads(request.data)
-        body['reasoning']={'effort':'low','exclude':True}
-        request=urllib.request.Request(request.full_url,data=json.dumps(body).encode(),headers=dict(request.header_items()),method='POST')
-        payload=super()._request_http_json(request)
+        def configured_request():
+            body['reasoning']={'effort':self.reasoning_effort,'exclude':True}
+            return urllib.request.Request(request.full_url,data=json.dumps(body).encode(),headers=dict(request.header_items()),method='POST')
+        try:
+            payload=super()._request_http_json(configured_request())
+        except ReasoningRequiredError:
+            if self.reasoning_effort != 'none':
+                raise
+            # A 400/422 rejection produced no scores. Retry this compatibility
+            # error once, retaining the explicitly chosen model and token cap.
+            self.reasoning_effort='low'
+            self.reasoning_fallbacks.append({'from':'none','to':'low','reason':'endpoint_requires_reasoning'})
+            print('Model yêu cầu reasoning: tự thử lại một lần với reasoning-effort low.',flush=True)
+            payload=super()._request_http_json(configured_request())
         self.raw.append(payload)
         return payload
 
@@ -53,6 +67,9 @@ class StudyProvider(OpenRouterWeightProvider):
             result,model=self._get_model_json(prompt)
             scores,missing=validate_region_scores(result,self.graph)
             metadata={'source':'live_openrouter','requested_model':self.model,'resolved_model':model,
+                'reasoning_effort':self.reasoning_effort,
+                'requested_reasoning_effort':self.requested_reasoning_effort,
+                'reasoning_fallbacks':list(self.reasoning_fallbacks),
                 'latency_seconds':time.perf_counter()-begin,'http_attempts_with_json':len(self.raw),
                 'usage_per_attempt':[r.get('usage') for r in self.raw],
                 'missing_region_ids':missing,'runtime_refresh':runtime is not None}

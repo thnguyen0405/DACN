@@ -1,0 +1,17 @@
+{
+  "schema": "satellite-geometry-audit/v1",
+  "free_area_m2": 96.0,
+  "regions_area_m2": 96.0,
+  "coverage_error_m2": 0.0,
+  "overlap_area_m2": 0.0,
+  "region_count": 4,
+  "directed_edge_count": 8,
+  "start_goal_graph_connected": true,
+  "warnings": [
+    "Geometry is user-reviewed image tracing, not a surveyed map or verified traversability.",
+    "Uniform scale assumes a top-down image with no perspective or nonuniform resize.",
+    "Mean clearance uses the repository's numerical quadrature; it is not an exact integral.",
+    "Safe portals use the repository's endpoint trimming rule; collision checking remains necessary.",
+    "Metric scale is estimated/assumed; exported measurements inherit that uncertainty."
+  ]
+}

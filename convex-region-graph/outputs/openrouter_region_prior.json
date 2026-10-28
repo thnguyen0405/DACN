@@ -2,7 +2,7 @@
   "provider_metadata": {
     "provider": "openrouter",
     "requested_model": "openrouter/free",
-    "resolved_model": "nvidia/nemotron-3-super-120b-a12b:free",
+    "resolved_model": "qwen/qwen3.8-27b:free",
     "temperature": 0.0
   },
   "start_region": "C0",
@@ -10,78 +10,78 @@
   "region_scores": [
     {
       "id": "C0",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.92,
+      "reason": "start anchor; area 20.0, start [1,1] assigned to C0, mean_clearance 0.879, safe_degree 2, safe_conductance 0.387, and wide safe portal width 6.611 to C6."
     },
     {
       "id": "C1",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.52,
+      "reason": "start alternative; degree 3, safe_conductance 0.677, area 6.25, but mean_clearance 0.546 and centroid [3.07,1.02] moves away from goal y=9."
     },
     {
       "id": "C2",
-      "score": 0.676,
-      "reason": "centroid shows good progress toward goal, mean_clearance 1.051, safe_conductance 0.790"
+      "score": 0.55,
+      "reason": "lower-route connector; area 7.75, mean_clearance 1.051, safe_conductance 0.790, centroid [11.67,1.67] is closer to goal than C3/C4 but still south detour."
     },
     {
       "id": "C3",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.44,
+      "reason": "elongated aspect_ratio 147.15 and compactness 8.178 lower value, but safe_conductance 0.822 and safe portal width 6.559 to C2 keep it usable."
     },
     {
       "id": "C4",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.42,
+      "reason": "mean_clearance 0.298 and aspect_ratio 194.02/compactness 10.267 lower value, but area 8.0 and safe portal width 8.455 to C3 provide a lower-route link."
     },
     {
       "id": "C5",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.38,
+      "reason": "small area 2.25, mean_clearance 0.447, and narrow safe portal width 1.462 to C1 lower value, though safe portal width 3.643 to C6 gives an alternate link."
     },
     {
       "id": "C6",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.82,
+      "reason": "start neighbor; area 7.75, mean_clearance 1.159, safe_degree 3, safe_conductance 0.833, centroid [4.18,4.80] moves toward goal, safe portal widths 6.611 to C0 and 8.952 to C7."
     },
     {
       "id": "C7",
-      "score": 0.683,
-      "reason": "centroid shows moderate progress toward goal, mean_clearance 1.700, safe_conductance 0.833"
+      "score": 0.84,
+      "reason": "direct connector; area 11.875, mean_clearance 1.700, safe_conductance 0.833, centroid [5.0,5.83] progresses from C6 to C9, safe portal width 9.524 to C9."
     },
     {
       "id": "C8",
-      "score": 0.696,
-      "reason": "centroid shows good progress toward goal, mean_clearance 1.038, safe_conductance 0.828"
+      "score": 0.6,
+      "reason": "tiny area 0.375 and aspect_ratio 9707 lower intrinsic value, but mean_clearance 1.038, safe_conductance 0.828, and safe portal width 8.146 to C9 support connector role."
     },
     {
       "id": "C9",
-      "score": 0.796,
-      "reason": "centroid shows strong progress toward goal, mean_clearance 1.572, safe_conductance 0.937"
+      "score": 0.93,
+      "reason": "central hub; area 21.5, degree 4, safe_degree 4, safe_conductance 0.937, mean_clearance 1.572, centroid [9.25,4.99] reduces goal distance."
     },
     {
       "id": "C10",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.48,
+      "reason": "goal neighbor; area 6.5, but mean_clearance 0.272, safe_conductance 0.302, safe portal width 1.636 to C14, and safe_traversability 0.446 lower priority."
     },
     {
       "id": "C11",
       "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "reason": "east alternative; area 7.5, compactness 2.231, mean_clearance 0.897, safe_conductance 0.710, but centroid [14.33,3.33] is a detour and C10 has mean_clearance 0.272."
     },
     {
       "id": "C12",
-      "score": 0.806,
-      "reason": "centroid shows strong progress toward goal, mean_clearance 1.715, safe_conductance 0.900"
+      "score": 0.86,
+      "reason": "near goal; area 9.0, mean_clearance 1.715, safe_conductance 0.900, centroid [8.0,7.17] close to goal, safe portal width 11.9 to C13."
     },
     {
       "id": "C13",
-      "score": 0.752,
-      "reason": "centroid shows good progress toward goal, mean_clearance 1.281, safe_conductance 0.856"
+      "score": 0.88,
+      "reason": "near goal; area 12.75, mean_clearance 1.281, safe_conductance 0.856, centroid [8.90,8.06] close to goal, safe portal width 13.047 to C14."
     },
     {
       "id": "C14",
-      "score": 0.5,
-      "reason": "Fallback score for a region omitted by the LLM."
+      "score": 0.95,
+      "reason": "goal region; area 17.5, goal [15,9] assigned to C14, mean_clearance 0.587, safe_degree 2, safe_conductance 0.440."
     }
   ]
 }

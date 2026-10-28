@@ -17,3 +17,10 @@ __pycache__/
 # Provider diagnostic payloads, regardless of command working directory
 **/openrouter_invalid_response*.txt
 .venv-research/
+.venv-satellite/
+
+# Local presentation builds, API traces and repeated demo runs
+.slide-build/
+/output/
+**/llm_calls/
+convex-region-graph/research/data/hcmut_demo_*/
