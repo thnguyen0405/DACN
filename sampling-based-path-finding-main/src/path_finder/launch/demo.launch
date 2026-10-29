@@ -1,6 +1,14 @@
 <launch>
   <arg name="map_file" default="$(find path_finder)/../../../convex-region-graph/example_map.json"/>
   <arg name="sampling_prior_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json"/>
+  <arg name="density_decay_enabled" default="false"/>
+  <arg name="density_decay_update_interval" default="100"/>
+  <arg name="density_decay_lambda" default="0.4"/>
+  <arg name="density_decay_protected_lambda" default="0.1"/>
+  <arg name="density_decay_rho_ref" default="2.0"/>
+  <arg name="density_decay_min_score" default="0.05"/>
+  <arg name="density_decay_log_file" default=""/>
+  <arg name="density_decay_protected_region_ids" default="[]"/>
   <arg name="planner" default="all"/>
   <arg name="guidance_mode" default="region_prior"/>
   <arg name="step_mode" default="false"/>
@@ -17,6 +25,14 @@
   <include file="$(find path_finder)/launch/test_planners.launch">
     <arg name="map_file" value="$(arg map_file)"/>
     <arg name="sampling_prior_file" value="$(arg sampling_prior_file)"/>
+    <arg name="density_decay_enabled" value="$(arg density_decay_enabled)"/>
+    <arg name="density_decay_update_interval" value="$(arg density_decay_update_interval)"/>
+    <arg name="density_decay_lambda" value="$(arg density_decay_lambda)"/>
+    <arg name="density_decay_protected_lambda" value="$(arg density_decay_protected_lambda)"/>
+    <arg name="density_decay_rho_ref" value="$(arg density_decay_rho_ref)"/>
+    <arg name="density_decay_min_score" value="$(arg density_decay_min_score)"/>
+    <arg name="density_decay_log_file" value="$(arg density_decay_log_file)"/>
+    <arg name="density_decay_protected_region_ids" value="$(arg density_decay_protected_region_ids)"/>
     <arg name="planner" value="$(arg planner)"/>
     <arg name="guidance_mode" value="$(arg guidance_mode)"/>
     <arg name="step_mode" value="$(arg step_mode)"/>

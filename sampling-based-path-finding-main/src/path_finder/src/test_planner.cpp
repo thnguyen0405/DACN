@@ -33,6 +33,10 @@ OF SUCH DAMAGE.
 
 #include <stdexcept>
 #include <string>
+#include <fstream>
+#include <iomanip>
+#include <set>
+#include <sstream>
 
 class TesterPathFinder
 {
@@ -60,6 +64,69 @@ private:
     path_plan::ConvexCorridor corridor_;
     path_plan::ConvexSamplingPrior sampling_prior_;
     path_plan::SequenceSamplingStrategy sequence_strategy_;
+
+    static std::string csvField(const std::string &value)
+    {
+        std::string quoted = "\"";
+        for (char c : value) { if (c == '"') quoted += '"'; quoted += c; }
+        return quoted + '"';
+    }
+
+    void configureDensityDecay()
+    {
+        BiasSampler::DensityDecayConfig config;
+        nh_.param("density_decay_enabled", config.enabled, false);
+        int interval = 100;
+        nh_.param("density_decay_update_interval", interval, 100);
+        if (interval <= 0) throw std::runtime_error("density_decay_update_interval must be positive");
+        config.update_interval = static_cast<std::size_t>(interval);
+        nh_.param("density_decay_lambda", config.lambda, 0.4);
+        nh_.param("density_decay_protected_lambda", config.protected_lambda, 0.1);
+        nh_.param("density_decay_rho_ref", config.rho_ref, 2.0);
+        nh_.param("density_decay_min_score", config.min_score, 0.05);
+        std::vector<std::string> protected_ids;
+        nh_.getParam("density_decay_protected_region_ids", protected_ids);
+        config.protected_region_ids.insert(protected_ids.begin(), protected_ids.end());
+        config.protected_region_ids.insert(sampling_prior_.goal_region);
+        for (const auto &id : config.protected_region_ids)
+        {
+            bool known = false;
+            for (const auto &region : sampling_prior_.regions) known |= region.id == id;
+            if (!known) throw std::runtime_error("Unknown protected region ID: " + id);
+        }
+
+        std::string log_path;
+        nh_.param<std::string>("density_decay_log_file", log_path, "");
+        std::shared_ptr<std::ofstream> csv;
+        if (config.enabled && !log_path.empty())
+        {
+            std::ifstream old(log_path);
+            const bool needs_header = !old.good() || old.peek() == std::char_traits<char>::eof();
+            csv = std::make_shared<std::ofstream>(log_path, std::ios::app);
+            if (!*csv) throw std::runtime_error("Cannot open density-decay CSV: " + log_path);
+            *csv << std::setprecision(17);
+            if (needs_header) *csv << "planner,iteration,nodes_added,region_id,region_nodes,area,density,base_score,adjusted_score,probability_before,probability_after\n";
+        }
+        auto configure = [&](const std::string &name, auto &planner) {
+            if (!planner) return;
+            planner->setDensityDecayConfig(config);
+            if (config.enabled) planner->setDensityDecayLogger([name, csv](const BiasSampler::DensityDecayRecord &r) {
+                std::ostringstream line;
+                line << std::setprecision(17) << TesterPathFinder::csvField(name) << ',' << r.iteration << ',' << r.nodes_added
+                     << ',' << TesterPathFinder::csvField(r.region_id) << ',' << r.region_nodes << ',' << r.area << ',' << r.density
+                     << ',' << r.base_score << ',' << r.adjusted_score << ',' << r.probability_before
+                     << ',' << r.probability_after;
+                ROS_INFO_STREAM("[DensityDecay] " << line.str());
+                if (csv) { *csv << line.str() << '\n'; csv->flush(); }
+            });
+        };
+        configure("rrt", rrt_ptr_);
+        configure("rrt_star", rrt_star_ptr_);
+        configure("rrt_sharp", rrt_sharp_ptr_);
+        configure("brrt", brrt_ptr_);
+        configure("brrt_star", brrt_star_ptr_);
+        configure("informed_rrt_star", informed_rrt_star_ptr_);
+    }
 
     void configureGuidance()
     {
@@ -102,6 +169,7 @@ private:
             rrt_sharp_ptr_->setRegionPrior(sampling_prior_.regions);
             brrt_ptr_->setRegionPrior(sampling_prior_.regions);
             brrt_star_ptr_->setRegionPrior(sampling_prior_.regions);
+            configureDensityDecay();
             ROS_INFO_STREAM("[Guidance] Region-prior mode enabled from " << sampling_prior_file);
             for (const auto &region : sampling_prior_.regions)
             {

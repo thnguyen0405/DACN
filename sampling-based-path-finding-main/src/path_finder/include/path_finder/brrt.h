@@ -65,6 +65,7 @@ namespace path_plan
     bool plan(const Eigen::Vector3d &s, const Eigen::Vector3d &g)
     {
       reset();
+      sampler_.beginDensityDecayRun(g);
       last_iterations_ = 0;
       last_planning_time_ = 0.0;
       sampler_.setGuidanceZ(s.z());
@@ -145,6 +146,16 @@ namespace path_plan
       sampler_.setRegionPrior(regions);
     }
 
+    void setDensityDecayConfig(const BiasSampler::DensityDecayConfig &config)
+    {
+      sampler_.setDensityDecayConfig(config);
+    }
+
+    void setDensityDecayLogger(BiasSampler::DensityDecayLogger logger)
+    {
+      sampler_.setDensityDecayLogger(std::move(logger));
+    }
+
     void setSequenceGuidance(const SequenceSamplingStrategy &strategy)
     {
       sampler_.setSequenceGuidance(strategy);
@@ -213,6 +224,7 @@ namespace path_plan
       PlannerTrace::instance().record("add_node", parent->x, state);
       new_node_ptr->cost_from_start = cost_from_start;
       new_node_ptr->cost_from_parent = cost_from_parent;
+      sampler_.recordAddedNode(state, last_iterations_);
       return new_node_ptr;
     }
 

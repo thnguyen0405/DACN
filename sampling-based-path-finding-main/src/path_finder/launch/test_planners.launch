@@ -18,6 +18,14 @@
 <arg name="guidance_mode" default="none" />
   <arg name="corridor_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
   <arg name="sampling_prior_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_prior.json" />
+  <arg name="density_decay_enabled" default="false" />
+  <arg name="density_decay_update_interval" default="100" />
+  <arg name="density_decay_lambda" default="0.4" />
+  <arg name="density_decay_protected_lambda" default="0.1" />
+  <arg name="density_decay_rho_ref" default="2.0" />
+  <arg name="density_decay_min_score" default="0.05" />
+  <arg name="density_decay_log_file" default="" />
+  <arg name="density_decay_protected_region_ids" default="[]" />
   <arg name="sequence_strategy_file" default="$(find path_finder)/../../../convex-region-graph/outputs/sampling_corridor.json" />
   <arg name="initial_start_x" default="1.0" />
   <arg name="initial_start_y" default="1.0" />
@@ -59,6 +67,14 @@
     <param name="guidance_mode" value="$(arg guidance_mode)" type="str"/>
     <param name="corridor_file" value="$(arg corridor_file)" type="str"/>
     <param name="sampling_prior_file" value="$(arg sampling_prior_file)" type="str"/>
+    <param name="density_decay_enabled" value="$(arg density_decay_enabled)" type="bool"/>
+    <param name="density_decay_update_interval" value="$(arg density_decay_update_interval)" type="int"/>
+    <param name="density_decay_lambda" value="$(arg density_decay_lambda)" type="double"/>
+    <param name="density_decay_protected_lambda" value="$(arg density_decay_protected_lambda)" type="double"/>
+    <param name="density_decay_rho_ref" value="$(arg density_decay_rho_ref)" type="double"/>
+    <param name="density_decay_min_score" value="$(arg density_decay_min_score)" type="double"/>
+    <param name="density_decay_log_file" value="$(arg density_decay_log_file)" type="str"/>
+    <rosparam param="density_decay_protected_region_ids" subst_value="true">$(arg density_decay_protected_region_ids)</rosparam>
     <param name="sequence_strategy_file" value="$(arg sequence_strategy_file)" type="str"/>
     <param name="initial_start_x" value="$(arg initial_start_x)" type="double"/>
     <param name="initial_start_y" value="$(arg initial_start_y)" type="double"/>

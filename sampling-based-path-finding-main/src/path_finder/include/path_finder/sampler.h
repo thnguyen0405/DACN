@@ -27,16 +27,38 @@ OF SUCH DAMAGE.
 #include <algorithm>
 #include <cmath>
 #include <cstdint>
+#include <functional>
 #include <limits>
 #include <random>
 #include <set>
 #include <stdexcept>
 #include <string>
+#include <utility>
 #include <vector>
 
 class BiasSampler
 {
 public:
+  struct DensityDecayConfig
+  {
+    bool enabled = false;
+    std::size_t update_interval = 100;
+    double lambda = 0.4;
+    double protected_lambda = 0.1;
+    double rho_ref = 2.0;
+    double min_score = 0.05;
+    std::set<std::string> protected_region_ids;
+  };
+
+  struct DensityDecayRecord
+  {
+    std::size_t iteration, nodes_added, region_nodes;
+    std::string region_id;
+    double area, density, base_score, adjusted_score, probability_before, probability_after;
+  };
+
+  using DensityDecayLogger = std::function<void(const DensityDecayRecord &)>;
+
   BiasSampler()
   {
     std::random_device rd;
@@ -255,6 +277,9 @@ public:
       PriorRegion prepared;
       prepared.id = region.id;
       prepared.polygon = region.polygon;
+      prepared.base_score = region.score;
+      prepared.adjusted_score = region.score;
+      prepared.node_count = 0;
       prepared.total_area = 0.0;
       const Eigen::Vector2d &anchor = region.polygon[0];
       for (std::size_t i = 1; i + 1 < region.polygon.size(); ++i)
@@ -266,7 +291,8 @@ public:
         prepared.total_area += area;
         prepared.cumulative_areas.push_back(prepared.total_area);
       }
-      if (prepared.triangles.empty() || prepared.total_area <= kGeometryEpsilon)
+      if (prepared.triangles.empty() || !std::isfinite(prepared.total_area) ||
+          prepared.total_area <= kGeometryEpsilon)
         throw std::invalid_argument("Region-prior polygon '" + region.id +
                                     "' has no positive-area triangles");
       prepared_regions.push_back(prepared);
@@ -278,6 +304,7 @@ public:
       throw std::invalid_argument("Region prior must contain at least one positive score");
     prior_region_distribution_ =
         std::discrete_distribution<std::size_t>(scores.begin(), scores.end());
+    nodes_added_this_run_ = 0;
     corridor_sampling_ = false;
     sequence_guided_sampling_ = false;
     corridor_regions_.clear();
@@ -293,7 +320,75 @@ public:
     sequence_guided_sampling_ = false;
     prior_regions_.clear();
     prior_region_distribution_ = std::discrete_distribution<std::size_t>();
+    nodes_added_this_run_ = 0;
   }
+
+  void setDensityDecayConfig(const DensityDecayConfig &config)
+  {
+    if (config.update_interval == 0 || !std::isfinite(config.lambda) || config.lambda < 0.0 ||
+        !std::isfinite(config.protected_lambda) || config.protected_lambda < 0.0 ||
+        !std::isfinite(config.rho_ref) || config.rho_ref <= 0.0 ||
+        !std::isfinite(config.min_score) || config.min_score <= 0.0 || config.min_score > 1.0)
+      throw std::invalid_argument("Invalid density-decay configuration");
+    density_config_ = config;
+    resetDensityDecay();
+  }
+
+  void setDensityDecayLogger(DensityDecayLogger logger) { density_logger_ = std::move(logger); }
+
+  // Start each plan with the original distribution. The actual goal may differ
+  // from the goal recorded in the prior file, so protect every containing region.
+  void beginDensityDecayRun(const Eigen::Vector3d &goal)
+  {
+    resetDensityDecay();
+    if (!density_config_.enabled || !region_prior_sampling_ || sequence_guided_sampling_) return;
+    for (const auto &region : prior_regions_)
+      if (pointInConvexPolygon(goal.head<2>(), region.polygon))
+        protected_this_run_.insert(region.id);
+  }
+
+  void resetDensityDecay()
+  {
+    nodes_added_this_run_ = 0;
+    protected_this_run_ = density_config_.protected_region_ids;
+    std::vector<double> scores;
+    for (auto &region : prior_regions_)
+    {
+      region.node_count = 0;
+      region.adjusted_score = region.base_score;
+      scores.push_back(region.base_score);
+    }
+    if (!scores.empty())
+      prior_region_distribution_ = std::discrete_distribution<std::size_t>(scores.begin(), scores.end());
+  }
+
+  // Call only after insertion into a tree. An outside node still advances the
+  // epoch, but is not assigned to any region. Shared boundaries go to the
+  // lexicographically smallest region ID, independent of JSON ordering.
+  void recordAddedNode(const Eigen::Vector3d &state, std::size_t iteration)
+  {
+    if (!density_config_.enabled || !region_prior_sampling_ || sequence_guided_sampling_) return;
+    if (!state.allFinite()) return;
+    ++nodes_added_this_run_;
+    PriorRegion *selected = nullptr;
+    for (auto &region : prior_regions_)
+      if (pointInConvexPolygon(state.head<2>(), region.polygon) &&
+          (!selected || region.id < selected->id))
+        selected = &region;
+    if (selected) ++selected->node_count;
+    if (nodes_added_this_run_ % density_config_.update_interval == 0)
+      updateDensityDecay(iteration);
+  }
+
+  std::size_t densityNodesAdded() const { return nodes_added_this_run_; }
+  std::size_t regionNodeCount(const std::string &id) const
+  {
+    for (const auto &region : prior_regions_) if (region.id == id) return region.node_count;
+    throw std::out_of_range("Unknown region-prior id '" + id + "'");
+  }
+  double regionBaseScore(const std::string &id) const { return regionById(id).base_score; }
+  double regionAdjustedScore(const std::string &id) const { return regionById(id).adjusted_score; }
+  std::vector<double> regionProbabilities() const { return prior_region_distribution_.probabilities(); }
 
   bool regionPriorSamplingEnabled() const
   {
@@ -495,7 +590,41 @@ private:
     std::vector<Triangle2D> triangles;
     std::vector<double> cumulative_areas;
     double total_area;
+    double base_score, adjusted_score;
+    std::size_t node_count;
   };
+
+  const PriorRegion &regionById(const std::string &id) const
+  {
+    for (const auto &region : prior_regions_) if (region.id == id) return region;
+    throw std::out_of_range("Unknown region-prior id '" + id + "'");
+  }
+
+  void updateDensityDecay(std::size_t iteration)
+  {
+    const auto before = prior_region_distribution_.probabilities();
+    std::vector<double> scores;
+    scores.reserve(prior_regions_.size());
+    for (auto &region : prior_regions_)
+    {
+      const double density = static_cast<double>(region.node_count) / region.total_area;
+      const double penalty = protected_this_run_.count(region.id)
+          ? density_config_.protected_lambda : density_config_.lambda;
+      region.adjusted_score = std::max(density_config_.min_score,
+          region.base_score - penalty * density / (density + density_config_.rho_ref));
+      scores.push_back(region.adjusted_score);
+    }
+    prior_region_distribution_ = std::discrete_distribution<std::size_t>(scores.begin(), scores.end());
+    if (!density_logger_) return;
+    const auto after = prior_region_distribution_.probabilities();
+    for (std::size_t i = 0; i < prior_regions_.size(); ++i)
+    {
+      const auto &region = prior_regions_[i];
+      density_logger_({iteration, nodes_added_this_run_, region.node_count, region.id,
+          region.total_area, static_cast<double>(region.node_count) / region.total_area,
+          region.base_score, region.adjusted_score, before[i], after[i]});
+    }
+  }
 
   static constexpr double kGeometryEpsilon = 1e-12;
 
@@ -620,6 +749,10 @@ private:
   bool region_prior_sampling_;
   std::vector<PriorRegion> prior_regions_;
   std::discrete_distribution<std::size_t> prior_region_distribution_;
+  DensityDecayConfig density_config_;
+  DensityDecayLogger density_logger_;
+  std::set<std::string> protected_this_run_;
+  std::size_t nodes_added_this_run_ = 0;
   bool sequence_guided_sampling_;
   double sequence_guided_probability_ = 0.8;
   double sequence_portal_probability_ = 0.2;
