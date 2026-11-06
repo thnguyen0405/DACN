@@ -11,8 +11,52 @@
   ],
   "policy": "original graph retained as source data, not used as robot-safe graph; recomputed from .poly",
   "original_graph_sha256": "ca3e0560d41ee0305507b5a0dadeb0fc0a518fe67622e592f438bba9335af28a",
-  "rebuilt_vertices": 45,
-  "rebuilt_directed_edges": 104,
+  "rebuilt_vertices": 35,
+  "rebuilt_directed_edges": 86,
   "safe_grid_components": 1,
-  "preparation_seconds": 2.6661945000087144
+  "preparation_seconds": 2.6661945000087144,
+  "decomposition_backend": "acd2d_reference_import",
+  "triangulation": false,
+  "coverage_error_area": 0.0,
+  "overlap_area": 0.0,
+  "decomposition_source": {
+    "backend": "acd2d_reference_import",
+    "execution": "recorded_partition_import",
+    "source_filename": "flappy.poly-ACD.graph.json",
+    "source_sha256": "ca3e0560d41ee0305507b5a0dadeb0fc0a518fe67622e592f438bba9335af28a",
+    "reference_path": "research/data/flappy/acd2d_reference.json",
+    "reference_sha256": "750f100d9dac8996333177328beadb15f018038023ea3749bec748ca6e01db52",
+    "source_parameters": "not recorded in the supplied export",
+    "region_count": 35,
+    "region_ids_preserved": true,
+    "convexity": "strict",
+    "triangulation": false,
+    "coordinate_transform": {
+      "type": "bounding_box_affine",
+      "source_bounds": [
+        0.0,
+        0.0,
+        1.4122,
+        1.4122
+      ],
+      "target_bounds": [
+        0.0,
+        0.0,
+        20.0,
+        20.0
+      ],
+      "scale_x": 14.1622999575131,
+      "scale_y": 14.1622999575131
+    },
+    "rounding_repair": {
+      "coordinate_decimal_places": 4,
+      "maximum_vertex_displacement": 0.0009466520304247622,
+      "allowed_vertex_displacement": 0.003540574989378276,
+      "coverage_error_area": 0.0,
+      "overlap_area": 0.0
+    }
+  },
+  "coordinate_decimal_places": 4,
+  "maximum_vertex_displacement": 0.0009466520304247622,
+  "allowed_vertex_displacement": 0.003540574989378276
 }

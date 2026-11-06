@@ -143,8 +143,11 @@
     ],
     "endpoint_policy": "far-apart pair in largest safe 8-neighbour lattice component",
     "safe_grid_components": 1,
-    "legacy_decomposition_error": "Could not decompose the map boundary; check for invalid or repeated vertices",
-    "decomposition_backend": "constrained_delaunay_plus_repository_convex_merge",
+    "decomposition_backend": "acd2d_reference_import",
     "coverage_error_area": 6.661338147750939e-16
+  },
+  "acd2d_reference": {
+    "path": "research/data/narrow/acd2d_reference.json",
+    "sha256": "4b58a461b6b56dc6ff79ed61a26f030e1299948e2c5ac927b7def40e3a4c2542"
   }
 }

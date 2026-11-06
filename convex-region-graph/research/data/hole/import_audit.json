@@ -14,5 +14,49 @@
   "rebuilt_vertices": 9,
   "rebuilt_directed_edges": 22,
   "safe_grid_components": 1,
-  "preparation_seconds": 1.7697413749992847
+  "preparation_seconds": 1.7697413749992847,
+  "decomposition_backend": "acd2d_reference_import",
+  "triangulation": false,
+  "coverage_error_area": 3.128590725808909e-36,
+  "overlap_area": 0.0,
+  "decomposition_source": {
+    "backend": "acd2d_reference_import",
+    "execution": "recorded_partition_import",
+    "source_filename": "hole.poly-ACD.graph.json",
+    "source_sha256": "d2abf42a308d8a0518e77530b07fa7fdeaf0b0fc8e3411e7e93fda001dc5e2c6",
+    "reference_path": "research/data/hole/acd2d_reference.json",
+    "reference_sha256": "635b0edefbea1f3fc86fe0c756f3d984209ceac65d2cbd2993c21852a9a91459",
+    "source_parameters": "not recorded in the supplied export",
+    "region_count": 9,
+    "region_ids_preserved": true,
+    "convexity": "strict",
+    "triangulation": false,
+    "coordinate_transform": {
+      "type": "bounding_box_affine",
+      "source_bounds": [
+        1.1673,
+        0.5075,
+        2.3345,
+        2.1315
+      ],
+      "target_bounds": [
+        0.0,
+        0.0,
+        14.375,
+        20.0
+      ],
+      "scale_x": 12.31579849211789,
+      "scale_y": 12.31527093596059
+    },
+    "rounding_repair": {
+      "coordinate_decimal_places": 4,
+      "maximum_vertex_displacement": 0.0009134404521449603,
+      "allowed_vertex_displacement": 0.0030789496230294727,
+      "coverage_error_area": 3.128590725808909e-36,
+      "overlap_area": 0.0
+    }
+  },
+  "coordinate_decimal_places": 4,
+  "maximum_vertex_displacement": 0.0009134404521449603,
+  "allowed_vertex_displacement": 0.0030789496230294727
 }

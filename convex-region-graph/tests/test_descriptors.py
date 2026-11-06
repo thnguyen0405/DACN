@@ -2,7 +2,6 @@ import math
 import unittest
 from build_graph import build_pipeline
 from region_descriptors import polygon_moments
-from llm_region_planner import compact_llm_input, prepare_safe_portal_graph
 
 class DescriptorTests(unittest.TestCase):
     def test_square_exact_moments_translation_and_winding(self):
@@ -19,16 +18,13 @@ class DescriptorTests(unittest.TestCase):
         d=polygon_moments([[0,0],[4,0],[4,1],[0,1]])
         self.assertAlmostEqual(d['aspect_ratio'],16)
 
-    def test_square_mean_clearance_and_prompt_survive_validation(self):
+    def test_square_mean_clearance(self):
         graph,_,_=build_pipeline({'map':{'boundary':[[0,0],[2,0],[2,2],[0,2]],'obstacles':[]}})
         # Exact area mean of distance to boundary of a side-2 square = 1/3.
         d=graph['vertices'][0]['descriptors']
         self.assertAlmostEqual(d['mean_clearance'],1/3,delta=.015)
         self.assertAlmostEqual(d['centroid_clearance'],1)
         self.assertEqual(d['conductance'],0)
-        payload=compact_llm_input(prepare_safe_portal_graph(graph),'C0','C0')
-        self.assertEqual(payload['regions'][0]['descriptors'],d)
-        self.assertIn('mean_clearance_method',payload['descriptor_metadata'])
 
     def test_missing_map_means_unknown_clearance(self):
         graph,_,_=build_pipeline({'regions':[

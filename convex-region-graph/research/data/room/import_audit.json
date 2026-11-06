@@ -11,8 +11,52 @@
   ],
   "policy": "original graph retained as source data, not used as robot-safe graph; recomputed from .poly",
   "original_graph_sha256": "2590ed7dcc669e1da2258d27e25a4f9c37bf1a5b1c1b65238f3a1554987c9a36",
-  "rebuilt_vertices": 104,
-  "rebuilt_directed_edges": 238,
+  "rebuilt_vertices": 83,
+  "rebuilt_directed_edges": 206,
   "safe_grid_components": 1,
-  "preparation_seconds": 7.49841691700567
+  "preparation_seconds": 7.49841691700567,
+  "decomposition_backend": "acd2d_reference_import",
+  "triangulation": false,
+  "coverage_error_area": 1.389329878380697e-15,
+  "overlap_area": 5.684341886080802e-14,
+  "decomposition_source": {
+    "backend": "acd2d_reference_import",
+    "execution": "recorded_partition_import",
+    "source_filename": "room.poly-ACD.graph.json",
+    "source_sha256": "2590ed7dcc669e1da2258d27e25a4f9c37bf1a5b1c1b65238f3a1554987c9a36",
+    "reference_path": "research/data/room/acd2d_reference.json",
+    "reference_sha256": "bd19ca05c28b3e877593181c1fdcd4b8743325f016c8e46a36e5b4ecd785cb4b",
+    "source_parameters": "not recorded in the supplied export",
+    "region_count": 83,
+    "region_ids_preserved": true,
+    "convexity": "strict",
+    "triangulation": false,
+    "coordinate_transform": {
+      "type": "bounding_box_affine",
+      "source_bounds": [
+        0.285,
+        0.2036,
+        1.8728,
+        1.3842
+      ],
+      "target_bounds": [
+        0.0,
+        0.0,
+        20.0,
+        14.87179487179487
+      ],
+      "scale_x": 12.596044841919637,
+      "scale_y": 12.596810834994807
+    },
+    "rounding_repair": {
+      "coordinate_decimal_places": 4,
+      "maximum_vertex_displacement": 0.0010627857948786556,
+      "allowed_vertex_displacement": 0.003149202708748702,
+      "coverage_error_area": 1.389329878380697e-15,
+      "overlap_area": 5.684341886080802e-14
+    }
+  },
+  "coordinate_decimal_places": 4,
+  "maximum_vertex_displacement": 0.0010627857948786556,
+  "allowed_vertex_displacement": 0.003149202708748702
 }

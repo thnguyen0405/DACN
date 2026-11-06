@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Decompose a 2D map into convex regions and build their adjacency graph.
 
-The implementation intentionally uses only the Python standard library so the
-demo is easy to run on a clean machine.
+Decomposition uses Shapely polygon cuts driven by convex-hull concavity.
+No triangulation stage is used.
 """
 
 from __future__ import annotations
@@ -84,7 +84,7 @@ def segments_intersect(a: Point, b: Point, c: Point, d: Point, tol: float) -> bo
         (c3 > tol and c4 < -tol) or (c3 < -tol and c4 > tol)
         #check if the two segments straddle each other
     ):
-        #A va B nam 2 phia khac nhau C va D
+        #The segment endpoints lie on opposite sides.
         return True
     return any(
         (
@@ -143,17 +143,8 @@ def normalize_map_polygon(raw: Iterable[Iterable[float]], tol: float) -> Polygon
     return poly
 
 
-def point_in_triangle(point: Point, a: Point, b: Point, c: Point, tol: float) -> bool:
-    """Return True when a point is inside or on a CCW triangle."""
-    return (
-        cross(a, b, point) >= -tol
-        and cross(b, c, point) >= -tol
-        and cross(c, a, point) >= -tol
-    )
 
 
-def same_point(a: Point, b: Point, tol: float) -> bool:
-    return distance(a, b) <= tol
 
 
 def point_in_polygon(point: Point, poly: Polygon, tol: float) -> bool:
@@ -173,128 +164,12 @@ def point_in_polygon(point: Point, poly: Polygon, tol: float) -> bool:
     return inside
 
 
-def rings_intersect(a: Polygon, b: Polygon, tol: float) -> bool:
-    return any(segments_intersect(a1, a2, b1, b2, tol) for a1, a2 in edges(a) for b1, b2 in edges(b))
 
 
-def bridge_is_visible(
-    hole_point: Point,
-    outer_point: Point,
-    combined: Polygon,
-    obstacles: list[Polygon],
-    outer_boundary: Polygon,
-    tol: float,
-) -> bool:
-    """Check whether a bridge stays entirely inside navigable free space."""
-    if same_point(hole_point, outer_point, tol):
-        return False
-
-    for ring in [combined, *obstacles]:
-        for a, b in edges(ring):
-            if not segments_intersect(hole_point, outer_point, a, b, tol):
-                continue
-            if collinear_overlap_length(hole_point, outer_point, a, b, tol) > tol:
-                return False
-            touches_bridge_endpoint = any(
-                same_point(left, right, tol)
-                for left in (hole_point, outer_point)
-                for right in (a, b)
-            )
-            if not touches_bridge_endpoint:
-                return False
-
-    for fraction in (0.1, 0.25, 0.5, 0.75, 0.9):
-        sample = (
-            hole_point[0] + fraction * (outer_point[0] - hole_point[0]),
-            hole_point[1] + fraction * (outer_point[1] - hole_point[1]),
-        )
-        if not point_in_polygon(sample, outer_boundary, tol):
-            return False
-        if any(point_in_polygon(sample, obstacle, tol) for obstacle in obstacles):
-            return False
-    return True
 
 
-def connect_holes_to_boundary(
-    outer_boundary: Polygon,
-    obstacles: list[Polygon],
-    tol: float,
-) -> Polygon:
-    """Convert a polygon with holes into a weakly simple ring using visibility bridges."""
-    combined = outer_boundary[:]
-    outer_candidates = outer_boundary[:]
-
-    for obstacle in obstacles:
-        best: tuple[float, Point, Point] | None = None
-        for hole_point in obstacle:
-            for outer_point in outer_candidates:
-                if not bridge_is_visible(
-                    hole_point,
-                    outer_point,
-                    combined,
-                    obstacles,
-                    outer_boundary,
-                    tol,
-                ):
-                    continue
-                candidate = (distance(hole_point, outer_point), hole_point, outer_point)
-                if best is None or candidate[0] < best[0]:
-                    best = candidate
-
-        if best is None:
-            raise ValueError("Could not find a collision-free bridge from an obstacle to the map boundary")
-
-        _, hole_point, outer_point = best
-        outer_index = next(i for i, point in enumerate(combined) if same_point(point, outer_point, tol))
-        hole_index = next(i for i, point in enumerate(obstacle) if same_point(point, hole_point, tol))
-        ordered_hole = obstacle[hole_index:] + obstacle[:hole_index]
-        combined = (
-            combined[: outer_index + 1]
-            + ordered_hole
-            + [hole_point, outer_point]
-            + combined[outer_index + 1 :]
-        )
-    return combined
 
 
-def triangulate_polygon(poly: Polygon, tol: float) -> list[Polygon]:
-    """Triangulate a simple CCW polygon with the ear-clipping algorithm."""
-    if len(poly) == 3:
-        return [poly[:]]
-
-    remaining = poly[:]
-    triangles: list[Polygon] = []
-    guard = 0
-    while len(remaining) > 3:
-        ear_found = False
-        for i, current in enumerate(remaining):
-            previous = remaining[i - 1]
-            following = remaining[(i + 1) % len(remaining)]
-            if cross(previous, current, following) <= tol:
-                continue
-
-            triangle = [previous, current, following]
-            excluded_indices = {i - 1 if i > 0 else len(remaining) - 1, i, (i + 1) % len(remaining)}
-            contains_vertex = any(
-                point_in_triangle(point, previous, current, following, tol)
-                for j, point in enumerate(remaining)
-                if j not in excluded_indices
-                and not any(same_point(point, vertex, tol) for vertex in triangle)
-            )
-            if contains_vertex:
-                continue
-
-            triangles.append(triangle)
-            remaining.pop(i)
-            ear_found = True
-            break
-
-        guard += 1
-        if not ear_found or guard > len(poly) * len(poly):
-            raise ValueError("Could not decompose the map boundary; check for invalid or repeated vertices")
-
-    triangles.append(remaining)
-    return triangles
 
 
 def convex_hull(points: Iterable[Point], tol: float) -> Polygon:
@@ -352,26 +227,23 @@ def approximate_convex_decomposition(
     obstacles_raw: Iterable[Iterable[Iterable[float]]] | None = None,
     tol: float = 1e-9,
 ) -> list[Polygon]:
-    """Decompose a map boundary minus polygon obstacles into convex polygons."""
+    """Run concavity-driven ACD cuts followed by exact convex coalescing."""
+    from acd import decompose_free_space
+    from shapely.geometry import Polygon as ShapePolygon
+    from shapely.ops import unary_union
+
     boundary = normalize_map_polygon(raw, tol)
-    obstacles = [normalize_map_polygon(raw_obstacle, tol) for raw_obstacle in (obstacles_raw or [])]
-    for obstacle in obstacles:
-        if not all(point_in_polygon(point, boundary, tol) for point in obstacle) or rings_intersect(
-            obstacle, boundary, tol
-        ):
-            raise ValueError("Every obstacle must be fully inside the map boundary")
-        obstacle.reverse()  # Holes must be clockwise while the outer boundary is CCW.
-
-    for i, obstacle in enumerate(obstacles):
-        for other in obstacles[i + 1 :]:
-            if rings_intersect(obstacle, other, tol) or point_in_polygon(obstacle[0], other, tol) or point_in_polygon(other[0], obstacle, tol):
-                raise ValueError("Obstacles must not overlap or touch each other")
-
-    if not obstacles and is_convex(boundary, tol):
-        return [boundary]
-    free_space_ring = connect_holes_to_boundary(boundary, obstacles, tol) if obstacles else boundary
-    triangles = triangulate_polygon(free_space_ring, tol)
-    return merge_convex_regions(triangles, tol)
+    obstacles = [normalize_map_polygon(ring, tol) for ring in (obstacles_raw or [])]
+    shell = ShapePolygon(boundary)
+    shapes = [ShapePolygon(ring) for ring in obstacles]
+    if any(not shell.covers(shape) for shape in shapes):
+        raise ValueError("Every obstacle must be inside the map boundary")
+    for i, shape in enumerate(shapes):
+        if any(shape.intersection(other).area > tol for other in shapes[i+1:]):
+            raise ValueError("Obstacles must not overlap each other")
+    free = shell.difference(unary_union(shapes))
+    pieces = decompose_free_space(free, tol)
+    return merge_convex_regions(pieces, tol)
 
 
 def collinear_overlap_length(a: Point, b: Point, c: Point, d: Point, tol: float) -> float:
@@ -597,18 +469,20 @@ def regions_from_map(data: dict, tol: float = 1e-9) -> tuple[dict, dict]:
         validate_robot_state(start, "start", boundary, obstacles, required_clearance, tol)
         validate_robot_state(goal, "goal", boundary, obstacles, required_clearance, tol)
 
-    pieces = approximate_convex_decomposition(boundary, obstacles_raw, tol)
-    regions = [
-        {
-            "id": f"C{i}",
-            "polygon": [[x, y] for x, y in polygon],
-            "centroid": [round(value, 8) for value in centroid(polygon)],
-        }
-        for i, polygon in enumerate(pieces)
-    ]
-    return {
-        "regions": regions
-    }, {
+    if "acd2d_reference" in data:
+        from acd2d_reference import import_partition
+        regions_data = import_partition(data)
+    else:
+        pieces = approximate_convex_decomposition(boundary, obstacles_raw, tol)
+        regions_data = {"regions": [
+            {
+                "id": f"C{i}",
+                "polygon": [[x, y] for x, y in polygon],
+                "centroid": [round(value, 8) for value in centroid(polygon)],
+            }
+            for i, polygon in enumerate(pieces)
+        ]}
+    return regions_data, {
         "boundary": boundary,
         "obstacles": obstacles,
         "planning": {
@@ -632,6 +506,20 @@ def build_pipeline(data: dict, tol: float = 1e-9) -> tuple[dict, dict, dict | No
         )
         graph["pipeline"] = "map -> ACD -> convex regions -> graph"
         graph["planning"] = map_geometry["planning"]
+        graph["decomposition"] = regions_data.get("decomposition", {
+            "backend": "acd_reflex_cuts_convex_merge", "triangulation": False,
+            "convexity": "strict", "numerical_tolerance": tol})
+        if graph["decomposition"]["backend"] == "acd2d_reference_import":
+            graph["pipeline"] = "recorded ACD2D partition -> restored convex regions -> graph"
+        for role in ("start", "goal"):
+            point = graph["planning"].get(role)
+            if point is not None:
+                matching = [v["id"] for v in graph["vertices"]
+                            if point_in_polygon(tuple(point), [tuple(p) for p in v["polygon"]], tol)]
+                if not matching:
+                    raise ValueError(f"No region contains {role}")
+                graph["planning"][role + "_region"] = matching[0]
+                graph["planning"][role + "_regions"] = matching
         from region_descriptors import enrich_graph
         enrich_graph(graph, map_geometry)
         return graph, regions_data, map_geometry
@@ -828,7 +716,11 @@ def main() -> None:
             json.dumps(regions_data, indent=2, ensure_ascii=False) + "\n",
             encoding="utf-8",
         )
-        print(f"ACD created {len(regions_data['regions'])} convex regions")
+        if graph["decomposition"]["backend"] == "acd2d_reference_import":
+            print(f"Imported recorded ACD2D partition: {len(regions_data['regions'])} convex regions")
+            print(f"Reference: {graph['decomposition']['source_filename']}")
+        else:
+            print(f"Python ACD created {len(regions_data['regions'])} convex regions")
     print(f"Built {len(graph['vertices'])} vertices and {len(graph['directed_edges'])} directed edges")
     print(f"Connected components: {graph['connected_components']}")
     if map_geometry is not None:

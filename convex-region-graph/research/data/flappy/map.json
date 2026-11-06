@@ -287,7 +287,11 @@
     ],
     "endpoint_policy": "far-apart pair in largest safe 8-neighbour lattice component",
     "safe_grid_components": 1,
-    "decomposition_backend": "repository_acd",
+    "decomposition_backend": "acd2d_reference_import",
     "coverage_error_area": 0.0
+  },
+  "acd2d_reference": {
+    "path": "research/data/flappy/acd2d_reference.json",
+    "sha256": "750f100d9dac8996333177328beadb15f018038023ea3749bec748ca6e01db52"
   }
 }

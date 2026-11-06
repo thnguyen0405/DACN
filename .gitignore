@@ -1,26 +1,9 @@
-
-# macOS
 .DS_Store
-
-# Environment variables and secrets
 .env
 .env.*
-!.env.example
-
-# Python environments and generated files
 .venv/
 venv/
 __pycache__/
 *.py[cod]
 .ipynb_checkpoints/
-
-# Provider diagnostic payloads, regardless of command working directory
-**/openrouter_invalid_response*.txt
-.venv-research/
-.venv-satellite/
-
-# Local presentation builds, API traces and repeated demo runs
-.slide-build/
-/output/
-**/llm_calls/
-convex-region-graph/research/data/hcmut_demo_*/
+convex-region-graph/outputs/

@@ -11,8 +11,52 @@
   ],
   "policy": "original graph retained as source data, not used as robot-safe graph; recomputed from .poly",
   "original_graph_sha256": "d0533555a7f6caa93f38a9d564c9b5231823003190fe7d1201ee069723c846bf",
-  "rebuilt_vertices": 16,
-  "rebuilt_directed_edges": 38,
+  "rebuilt_vertices": 18,
+  "rebuilt_directed_edges": 40,
   "safe_grid_components": 1,
-  "preparation_seconds": 0.5234329169907141
+  "preparation_seconds": 0.5234329169907141,
+  "decomposition_backend": "acd2d_reference_import",
+  "triangulation": false,
+  "coverage_error_area": 4.0258207439115493e-16,
+  "overlap_area": 0.0,
+  "decomposition_source": {
+    "backend": "acd2d_reference_import",
+    "execution": "recorded_partition_import",
+    "source_filename": "narrow.poly-ACD.graph.json",
+    "source_sha256": "d0533555a7f6caa93f38a9d564c9b5231823003190fe7d1201ee069723c846bf",
+    "reference_path": "research/data/narrow/acd2d_reference.json",
+    "reference_sha256": "4b58a461b6b56dc6ff79ed61a26f030e1299948e2c5ac927b7def40e3a4c2542",
+    "source_parameters": "not recorded in the supplied export",
+    "region_count": 18,
+    "region_ids_preserved": true,
+    "convexity": "strict",
+    "triangulation": false,
+    "coordinate_transform": {
+      "type": "bounding_box_affine",
+      "source_bounds": [
+        0.0,
+        0.0,
+        1.4142,
+        1.4142
+      ],
+      "target_bounds": [
+        0.0,
+        0.0,
+        20.0,
+        20.0
+      ],
+      "scale_x": 14.142271248762553,
+      "scale_y": 14.142271248762553
+    },
+    "rounding_repair": {
+      "coordinate_decimal_places": 4,
+      "maximum_vertex_displacement": 0.0008202517324278959,
+      "allowed_vertex_displacement": 0.003535567812190638,
+      "coverage_error_area": 4.0258207439115493e-16,
+      "overlap_area": 0.0
+    }
+  },
+  "coordinate_decimal_places": 4,
+  "maximum_vertex_displacement": 0.0008202517324278959,
+  "allowed_vertex_displacement": 0.003535567812190638
 }
