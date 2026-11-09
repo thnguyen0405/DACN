@@ -1,6 +1,6 @@
 # Convex Region Graph
 
-A Python research project for turning 2D polygon maps into a graph of convex free-space regions and evaluating their local geometric suitability with a small language model through Ollama.
+A Python research project for turning 2D polygon maps into a graph of convex free-space regions and evaluating their start-goal query priority with a small language model through Ollama.
 
 The project combines geometry processing, graph construction, numerical descriptors, and prompt-based scoring. It produces inspectable JSON files and SVG visualizations for studying region connectivity and preparing inputs for motion-planning experiments.
 
@@ -8,7 +8,7 @@ The project combines geometry processing, graph construction, numerical descript
 
 Each convex region becomes a graph vertex. Regions sharing a usable boundary segment are connected through a **portal**, represented by two directed edges. Robot radius and safety margin determine the clearance used to trim portals and validate start/goal positions.
 
-The geometry stage computes measurable features such as clearance, shape, connectivity, and portal width. The scoring stage sends those features to a local model, which returns an integer score from **0 to 10** with a short explanation.
+The geometry stage computes clearance, shape, connectivity, and portal width. The scoring stage now prepares k best region sequences and class-1 structural labels, then asks a local model for **query-specific priority** scores from 0 to 10. This differs from the preserved legacy local-geometry scores. See [query scoring details](convex-region-graph/QUERY_SCORING.md).
 
 The current workflow prepares graphs and scores. It does not generate robot trajectories or train model weights.
 
@@ -36,13 +36,13 @@ flowchart TD
     F --> G["Build adjacency and trim portals for robot clearance"]
     G --> H["Compute descriptors and assign start/goal regions"]
     H --> I["Export regions.json, graph.json, graph.svg"]
-    J["Prepared research/data/<map>/graph.json"] --> K["Select one map and extract numerical features"]
-    L["scoring_prompt.txt"] --> M["Local Ollama model"]
+    J["Prepared research/data/<map>/graph.json"] --> K["Compute k sequences, structural features and class-1 labels"]
+    L["query_scoring_prompt.txt + class-1 configuration"] --> M["Local Ollama model"]
     K --> M
-    M --> N["outputs/<map>/scores.json"]
+    M --> N["outputs/<map>/query_priority_scores.json"]
 ```
 
-**The two commands currently use separate file paths:** graph building writes to `outputs/<map>/`, while scoring reads the prepared `research/data/<map>/graph.json`. Rebuilding a graph does not automatically switch the scorer to the new output.
+**The two commands currently use separate file paths:** graph building writes to `outputs/<map>/`, while scoring reads the prepared `research/data/<map>/graph.json`. Use `--graph outputs/<map>/graph.json` to score a rebuilt graph explicitly.
 
 ## Prepared maps
 
@@ -76,14 +76,16 @@ Original ACD2D implementation: [jmlien/acd2d](https://github.com/jmlien/acd2d).
 ```text
 DACN-main/
 ├── README.md                         # Project overview and shared setup
-├── README_LOCAL.md                   # Owner-specific paths and commands
 ├── convex-region-graph/
 │   ├── build_graph.py                # Geometry pipeline, graph export, SVG
 │   ├── acd.py                        # Python concavity-driven polygon cuts
 │   ├── acd2d_reference.py            # Recorded partition import and repair
 │   ├── region_descriptors.py         # Region and edge feature calculation
 │   ├── score_maps.py                 # Selected-map scoring through Ollama
-│   ├── scoring_prompt.txt            # Scoring definitions and rubric
+│   ├── prepare_scoring_data.py        # k sequences and class-1 memberships
+│   ├── structural_scoring_config.json # Provisional label rules and thresholds
+│   ├── query_scoring_prompt.txt       # Query-priority rubric and open decisions
+│   ├── scoring_prompt.txt             # Preserved legacy local-geometry prompt
 │   ├── requirements.txt              # NumPy and Shapely dependencies
 │   ├── research/data/                # Prepared inputs and reference graphs
 │   │   ├── hole/
@@ -116,8 +118,6 @@ python -m pip install -r requirements.txt
 ```
 
 Run all commands below from `convex-region-graph/`. In later terminal sessions, enter that directory and run `source .venv/bin/activate`.
-
-For this project's owner, [README_LOCAL.md](README_LOCAL.md) contains the full local paths.
 
 ### 1. Select and view a map
 
@@ -168,10 +168,11 @@ The scorer sends requests to `http://localhost:11434/api/chat`. It uses Python's
 
 ### 4. Score one map
 
-Review `scoring_prompt.txt` to adjust the scoring rubric, then run:
+Review `structural_scoring_config.json` and `query_scoring_prompt.txt`. Prepare data without model calls, then score:
 
 ```bash
-python score_maps.py --map "$MAP"
+python score_maps.py --map "$MAP" --prepare-only
+python score_maps.py --map "$MAP" --resume
 ```
 
 For example, to score only Room:
@@ -180,9 +181,9 @@ For example, to score only Room:
 python score_maps.py --map room
 ```
 
-Run these commands in a normal terminal, not inside Ollama's `>>>` chat prompt. Chat instructions pasted into an interactive Ollama session are not used by this script; it reads `scoring_prompt.txt` for each run.
+Run these commands in a normal terminal, not inside Ollama's `>>>` chat prompt. Chat instructions pasted into an interactive Ollama session are not used by this script; it reads `query_scoring_prompt.txt` for each run.
 
-The script evaluates regions and unique undirected connections sequentially. It reuses each edge score for the reverse direction. Results are saved after the selected map finishes, replacing any previous `outputs/<map>/scores.json`.
+The script writes `query_labeled_data.json`, then evaluates regions and unique undirected connections. Scores are checkpointed after each item in `query_priority_scores.json`; `--resume` continues compatible runs. Legacy `scores.json` is not overwritten. Missing inscribed geometry is recorded explicitly; labels are never inferred by the LLM. See [the new pipeline contract](convex-region-graph/QUERY_SCORING.md).
 
 ## Inputs and outputs
 
@@ -207,7 +208,9 @@ The optional top-level `acd2d_reference` object selects a recorded partition. Th
 | `outputs/<map>/regions.json` | Regions exported by graph building |
 | `outputs/<map>/graph.json` | Generated vertices, directed edges, components, planning data, and descriptors |
 | `outputs/<map>/graph.svg` | Generated map, region, and graph visualization |
-| `outputs/<map>/scores.json` | Selected map name, model name, region scores, and edge scores |
+| `outputs/<map>/scores.json` | Preserved legacy local-geometric-suitability scores |
+| `outputs/<map>/query_labeled_data.json` | Sequences, numeric features, class-1 memberships/labels, configuration and provenance |
+| `outputs/<map>/query_priority_scores.json` | New query-specific region/connection priority scores and checkpoint metadata |
 
 ### Geometric features
 
@@ -231,11 +234,11 @@ Each scored region or edge contains a status, an integer score from 0 to 10, and
   "id": "C0",
   "status": "scored",
   "score": 7,
-  "reason": "Good clearance and usable connections, with moderate elongation."
+  "reason": "The region participates in the supplied start-goal routes; unavailable shape labels limit this assessment."
 }
 ```
 
-Other statuses are `insufficient_data` and `infeasible`, with a null score. Higher scores indicate more favorable local geometry. They do not measure progress toward the goal or the probability of successful traversal.
+For new query-priority results, the other status is `insufficient_data`, with a null score. Higher scores indicate greater priority for the supplied start-goal query. They are exploratory judgments, not probabilities or feasibility certificates; no region/connection is removed based on score. Legacy local-geometry files retain their original semantics and may also contain `infeasible`.
 
 ## Testing
 
@@ -245,7 +248,7 @@ From `convex-region-graph/`:
 python -m unittest discover -v
 ```
 
-Tests cover geometry relationships, portal filtering, decomposition coverage, recorded partition integrity, and descriptor calculations. The geometry tests do not require a running Ollama server and do not evaluate model scoring quality.
+Tests cover geometry relationships, portal filtering, decomposition coverage, recorded partition integrity, and descriptor calculations. Tests also cover structural preparation, top-k paths, graph labels, mocked scoring and checkpoints. They do not require a running Ollama server and do not evaluate model scoring quality.
 
 ## Troubleshooting
 
@@ -255,8 +258,8 @@ Tests cover geometry relationships, portal filtering, decomposition coverage, re
 | Python dependency import errors | Activate `convex-region-graph/.venv` and install `requirements.txt` with the same interpreter. |
 | Ollama connection refused | Start the Ollama app, or run `ollama serve` in a separate terminal if using the CLI without the app. |
 | Model not found | Compare `ollama list` with the `MODEL` setting in `score_maps.py`. |
-| `insufficient_data` score | Check the input graph's descriptors and the requirements in `scoring_prompt.txt`. |
-| Rebuilt graph changes are absent from scores | The scorer reads `research/data/<map>/graph.json`, not `outputs/<map>/graph.json`. |
+| `insufficient_data` score | Check the input graph's descriptors and the missing-feature report and `query_scoring_prompt.txt`. |
+| Rebuilt graph changes are absent from scores | Pass `--graph outputs/<map>/graph.json`; bundled graphs remain the default. |
 | Reference checksum or geometry mismatch | Restore the matching reference/map pair, or intentionally use the Python decomposition backend. |
 
 ## Current scope and limitations
@@ -265,6 +268,7 @@ Tests cover geometry relationships, portal filtering, decomposition coverage, re
 - Region/edge scores are experimental judgments, not calibrated probabilities or collision-free guarantees.
 - Portal endpoint trimming is a geometric heuristic, not a complete robot configuration-space collision check.
 - The current workflow does not implement S-guide/T-guide, score-driven path planning, or ROS integration.
-- The scoring CLI supports the four bundled maps and currently reads only their prepared graphs.
-- Scores are written when a map finishes; interrupted runs do not save partial results or resume automatically.
+- The scoring CLI supports the four bundled map names and accepts an explicit graph path.
+- Class-1 labels are partial where inscribed-ball/ellipsoid geometry is missing. No class-2, Bayes, Thompson sampling or online LLM-trust learning is implemented.
+- Scoring thresholds/calibration remain provisional and require supervisor agreement. Scores are checkpointed per item.
 - Recorded partitions reproduce supplied layouts through import and bounded coordinate repair. They do not establish reproducibility of the unavailable original ACD2D execution parameters.

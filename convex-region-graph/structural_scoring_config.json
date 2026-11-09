@@ -1,0 +1,32 @@
+{
+  "schema": "structural-scoring-config/v1",
+  "k": 3,
+  "label_rules": {
+    "active_at": 0.5,
+    "very_at": 0.9,
+    "open": {"threshold": 5.0, "softness": 1.0},
+    "corridor": {"threshold": 3.0, "softness": 0.5, "degree": 2},
+    "junction": {"threshold": 0.3, "softness": 0.1, "minimum_degree": 3},
+    "dead_end": {"degree": 1, "exclude_endpoint_regions": true},
+    "pocket": {"rule": "endpoint_free_side_of_bridge_in_endpoint_component"},
+    "narrow": {"threshold": 2.0, "softness": 0.3},
+    "critical": {"threshold": 0.8, "softness": 0.05},
+    "alternative_route": {"rule": "simple_path_edge_disjoint_from_best_sequence"}
+  },
+  "feature_definitions": {
+    "width_normalizer": "robot_radius",
+    "region_width": "maximum_inscribed_ball_radius / robot_radius",
+    "corridor_elongation": "maximum_inscribed_ellipsoid_axis_ratio; not covariance aspect_ratio",
+    "portal_width": "full_dimensional_intersection_inscribed_ball_radius / robot_radius",
+    "sequence_fraction": "occurrences / actual_number_of_returned_sequences",
+    "all_paths_mandatory": "removing this connection disconnects every start-region/goal-region pair",
+    "degree": "number of unique neighbors in the retained undirected connection graph"
+  },
+  "status": "Provisional defaults from Section 6, Tables 8 and 11; not validated scoring thresholds.",
+  "pending_agreement": [
+    "Supervisor approval of structural thresholds and soft-label interpretation",
+    "Acquisition of exact region inradii and inscribed ellipsoid axes",
+    "Definition of portal width membership for 1D shared-boundary portals",
+    "Calibration examples for query-priority integer scores; no additive scoring weights are prescribed"
+  ]
+}
